@@ -1,0 +1,157 @@
+@import "queries";
+
+section {
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.vail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.4;
+}
+
+.bg-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  min-height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.bg-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.bold {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.white {
+  color: white;
+}
+
+.bg-curve {
+  min-width: 100%;
+  max-height: 100%;
+}
+
+.curve {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  @include media("<=mini-desktop") {
+    display: none;
+  }
+}
+
+.img-container {
+  position: relative;
+}
+
+.clickable-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 10;
+}
+
+.line-wv-dashes {
+  background: repeating-linear-gradient(55deg, black, white 1px, white 3px);
+  width: 100%;
+  height: 3px;
+}
+
+@mixin scrollbar($color) {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $color;
+    border-radius: 5px;
+  }
+}
+
+@mixin appDir($ltr_property, $ltr_value, $rtl_property, $rtl_value) {
+  @if $dir == "ltr" {
+    #{$ltr_property}: $ltr_value;
+  }
+  @if $dir == "rtl" {
+    #{$rtl_property}: $rtl_value;
+  }
+}
+
+@mixin box-ratio($ratio) {
+  @if $ratio == "16-9" {
+    padding-top: 56.25%;
+  }
+  @if $ratio == "1-1" {
+    padding-top: 100%;
+  }
+  @if $ratio == "4-3" {
+    padding-top: 75%;
+  }
+  @if $ratio == "8-5" {
+    padding-top: 62.5%;
+  }
+  @if $ratio == "3-2" {
+    padding-top: 66.66%;
+  }
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+@mixin box-shadow($horizontal, $vertical, $blur, $spread, $color) {
+  -webkit-box-shadow: $horizontal $vertical $blur $spread $color;
+  -moz-box-shadow: $horizontal $vertical $blur $spread $color;
+  box-shadow: $horizontal $vertical $blur $spread $color;
+}
+
+@import "form.scss";

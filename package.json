@@ -1,0 +1,18 @@
+{
+  "name": "my-starter-theme",
+  "version": "1.0.0",
+  "description": "my starter theme using scss",
+  "main": "main.js",
+  "scripts": {
+    "css": "node-sass --output-style compressed --include-path scss assets/scss/source.scss assets/css/main.css",
+    "css-rtl": "node-sass --output-style compressed --include-path scss assets/scss/source-rtl.scss assets/css/main-rtl.css",
+    "watch": "nodemon -e scss -x \"npm run css\"",
+    "watch-rtl": "nodemon -e scss -x \"npm run css-rtl\""
+  },
+  "author": "yahia",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^4.13.1",
+    "nodemon": "^1.11.0"
+  }
+}

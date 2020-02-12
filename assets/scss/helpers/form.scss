@@ -1,0 +1,93 @@
+$field-bg: #f0f6f6;
+$field-width: 100%;
+$field-height: 40px;
+$field-padding: 0 10px;
+$field-margin-between-rows: 15px;
+$ta-width: 100%;
+$ta-height: 120px;
+$field-border-radius: 10px;
+$field-border: transparent;
+$field-placeholder-color: #a7abac;
+$submit-bg: #0062a9;
+$submit-txt-color: white;
+$btns-width: 150px;
+$btns-height: inherit;
+$btns-txt-size: 16px;
+
+div.nf-form-cont {
+  position: relative;
+}
+
+div.nf-form-cont *::placeholder,
+div.nf-form-cont select {
+  color: $field-placeholder-color !important;
+  opacity: 1;
+}
+div.nf-form-cont select option {
+  background-color: white;
+}
+
+div.nf-form-cont .nf-field-container {
+  margin-bottom: $field-margin-between-rows;
+}
+
+div.nf-form-cont .nf-field-element input,
+div.nf-form-cont .nf-field-element textarea,
+div.nf-form-cont .nf-field-element select {
+  background-color: $field-bg !important;
+  border-radius: $field-border-radius;
+  border: $field-border;
+  width: $field-width;
+  height: $field-height !important;
+  padding: $field-padding;
+  -webkit-appearance: textfield !important;
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+
+div.nf-form-cont .nf-field-element textarea {
+  width: $ta-width;
+  height: $ta-height !important;
+}
+div.nf-form-cont .textarea-wrap .nf-field-element::after {
+  @include appDir(border-bottom-right-radius, 0!important, border-bottom-left-radius, 0!important);
+}
+
+div.nf-form-cont input[type="button"] {
+  background-color: $submit-bg !important;
+  color: $submit-txt-color;
+  width: $btns-width;
+  height: $btns-height;
+  font-size: $btns-txt-size;
+}
+
+.nf-error.field-wrap .nf-field-element:after {
+  @include appDir(border-top-right-radius, $field-border-radius, border-top-left-radius, $field-border-radius);
+  @include appDir(border-bottom-right-radius, $field-border-radius, border-bottom-left-radius, $field-border-radius);
+  height: $field-height !important;
+  width: $field-height !important;
+  line-height: $field-height !important;
+  top: 0 !important;
+  @include appDir(right, 0!important, left, 0!important);
+  @include appDir(display, inherit, right, unset!important);
+  z-index: 10;
+}
+
+.nf-pass.field-wrap .nf-field-element:after {
+  line-height: $field-height !important;
+  @include appDir(display, inherit, left, 16px);
+  @include appDir(font-weight, inherit, right, unset!important);
+}
+
+.nf-form-content .list-select-wrap .nf-field-element > div,
+.nf-form-content input:not([type="button"]),
+.nf-form-content textarea {
+  background: unset !important;
+  border: unset !important;
+  box-shadow: none !important;
+}
+
+.nf-field-container.el-center {
+    display: flex;
+    justify-content: center;
+}
