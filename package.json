@@ -2,17 +2,28 @@
   "name": "my-starter-theme",
   "version": "1.0.0",
   "description": "my starter theme using scss",
-  "main": "main.js",
   "scripts": {
     "css": "node-sass --output-style compressed --include-path scss assets/scss/source.scss assets/css/main.css",
     "css-rtl": "node-sass --output-style compressed --include-path scss assets/scss/source-rtl.scss assets/css/main-rtl.css",
     "watch": "nodemon -e scss -x \"npm run css\"",
-    "watch-rtl": "nodemon -e scss -x \"npm run css-rtl\""
+    "watch-rtl": "nodemon -e scss -x \"npm run css-rtl\"",
+    "js-build": "babel assets/es --out-dir assets/js",
+    "js-watch": "npm run js-build -- --watch",
+    "start": "npm-run-all --parallel watch js-watch watch-rtl"
   },
   "author": "yahia",
   "license": "ISC",
   "devDependencies": {
     "node-sass": "^4.13.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015-ie": "^6.7.0",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.0.6",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1"
   }
 }
