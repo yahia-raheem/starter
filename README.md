@@ -19,3 +19,6 @@ ver 1.1:
 1) added bootstrap rtl in the starter theme.
 2) added deploy scripts which create minified versions of the css files to include in the theme
 3) maps are now generated with the css for better experience during development
+
+ver 1.1.1:
+1) added a lazy loading script to the theme .. from now on use data-src instead of src and add the class lazy to all images in site
