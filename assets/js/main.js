@@ -1,7 +1,5 @@
 "use strict";
 
-document.addEventListener("DOMContentLoaded", function () {
-  console.log('it works');
-});
+document.addEventListener("DOMContentLoaded", function () {});
 
 $(document).ready(function () {});
