@@ -14,3 +14,8 @@ ver 1.0.1:
 ver 1.0.2:
 1) now bootstrap is imported per module and not in a single bundle to reduce its size and performance print
 2) imported the jquery slim instead of the normal one as a bases but you can always change that if needed
+
+ver 1.1:
+1) added bootstrap rtl in the starter theme.
+2) added deploy scripts which create minified versions of the css files to include in the theme
+3) maps are now generated with the css for better experience during development
