@@ -13,7 +13,7 @@
 
     // Bring the hover, focused, and "active" buttons to the front to overlay
     // the borders properly
-    @include hover {
+    @include hover() {
       z-index: 1;
     }
     &:focus,
@@ -39,18 +39,18 @@
   // Prevent double borders when buttons are next to each other
   > .btn:not(:first-child),
   > .btn-group:not(:first-child) {
-    margin-left: -$btn-border-width;
+    margin-right: -$btn-border-width; //rtl
   }
 
   // Reset rounded corners
   > .btn:not(:last-child):not(.dropdown-toggle),
   > .btn-group:not(:last-child) > .btn {
-    @include border-right-radius(0);
+    @include border-left-radius(0); //rtl
   }
 
   > .btn:not(:first-child),
   > .btn-group:not(:first-child) > .btn {
-    @include border-left-radius(0);
+    @include border-right-radius(0); //rtl
   }
 }
 
@@ -73,11 +73,11 @@
   &::after,
   .dropup &::after,
   .dropright &::after {
-    margin-left: 0;
+    margin-right: 0; //rtl
   }
 
   .dropleft &::before {
-    margin-right: 0;
+    margin-left: 0; //rtl
   }
 }
 

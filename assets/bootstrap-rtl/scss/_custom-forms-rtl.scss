@@ -11,17 +11,20 @@
   position: relative;
   display: block;
   min-height: $font-size-base * $line-height-base;
-  padding-left: $custom-control-gutter + $custom-control-indicator-size;
+  padding-right: $custom-control-gutter + $custom-control-indicator-size; //rtl
 }
 
 .custom-control-inline {
   display: inline-flex;
-  margin-right: $custom-control-spacer-x;
+  margin-left: $custom-control-spacer-x; //rtl
 }
 
 .custom-control-input {
   position: absolute;
+  right: 0; //rtl
   z-index: -1; // Put the input behind the label so it doesn't overlay text
+  width: $custom-control-indicator-size;
+  height: ($font-size-base * $line-height-base + $custom-control-indicator-size) / 2;
   opacity: 0;
 
   &:checked ~ .custom-control-label::before {
@@ -51,6 +54,8 @@
     @include box-shadow($custom-control-indicator-active-box-shadow);
   }
 
+  // Use [disabled] and :disabled to work around https://github.com/twbs/bootstrap/issues/28247
+  &[disabled],
   &:disabled {
     ~ .custom-control-label {
       color: $custom-control-label-disabled-color;
@@ -69,13 +74,15 @@
 .custom-control-label {
   position: relative;
   margin-bottom: 0;
+  color: $custom-control-label-color;
   vertical-align: top;
+  cursor: $custom-control-cursor;
 
   // Background-color and (when enabled) gradient
   &::before {
     position: absolute;
     top: ($font-size-base * $line-height-base - $custom-control-indicator-size) / 2;
-    left: -($custom-control-gutter + $custom-control-indicator-size);
+    right: -($custom-control-gutter + $custom-control-indicator-size); //rtl
     display: block;
     width: $custom-control-indicator-size;
     height: $custom-control-indicator-size;
@@ -90,14 +97,12 @@
   &::after {
     position: absolute;
     top: ($font-size-base * $line-height-base - $custom-control-indicator-size) / 2;
-    left: -($custom-control-gutter + $custom-control-indicator-size);
+    right: -($custom-control-gutter + $custom-control-indicator-size); //rtl
     display: block;
     width: $custom-control-indicator-size;
     height: $custom-control-indicator-size;
     content: "";
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: $custom-control-indicator-bg-size;
+    background: no-repeat 50% / #{$custom-control-indicator-bg-size};
   }
 }
 
@@ -113,7 +118,7 @@
 
   .custom-control-input:checked ~ .custom-control-label {
     &::after {
-      background-image: $custom-checkbox-indicator-icon-checked;
+      background-image: escape-svg($custom-checkbox-indicator-icon-checked);
     }
   }
 
@@ -124,7 +129,7 @@
       @include box-shadow($custom-checkbox-indicator-indeterminate-box-shadow);
     }
     &::after {
-      background-image: $custom-checkbox-indicator-icon-indeterminate;
+      background-image: escape-svg($custom-checkbox-indicator-icon-indeterminate);
     }
   }
 
@@ -144,12 +149,13 @@
 
 .custom-radio {
   .custom-control-label::before {
+    // stylelint-disable-next-line property-blacklist
     border-radius: $custom-radio-indicator-border-radius;
   }
 
   .custom-control-input:checked ~ .custom-control-label {
     &::after {
-      background-image: $custom-radio-indicator-icon-checked;
+      background-image: escape-svg($custom-radio-indicator-icon-checked);
     }
   }
 
@@ -166,22 +172,24 @@
 // Tweak a few things for switches
 
 .custom-switch {
-  padding-left: $custom-switch-width + $custom-control-gutter;
+  padding-right: $custom-switch-width + $custom-control-gutter; //rtl
 
   .custom-control-label {
     &::before {
-      left: -($custom-switch-width + $custom-control-gutter);
+      right: -($custom-switch-width + $custom-control-gutter); //rtl
       width: $custom-switch-width;
       pointer-events: all;
+      // stylelint-disable-next-line property-blacklist
       border-radius: $custom-switch-indicator-border-radius;
     }
 
     &::after {
-      top: calc(#{(($font-size-base * $line-height-base - $custom-control-indicator-size) / 2)} + #{$custom-control-indicator-border-width * 2});
-      left: calc(#{-($custom-switch-width + $custom-control-gutter)} + #{$custom-control-indicator-border-width * 2});
+      top: add(($font-size-base * $line-height-base - $custom-control-indicator-size) / 2, $custom-control-indicator-border-width * 2);
+      right: add(-($custom-switch-width + $custom-control-gutter), $custom-control-indicator-border-width * 2); //rtl
       width: $custom-switch-indicator-size;
       height: $custom-switch-indicator-size;
       background-color: $custom-control-indicator-border-color;
+      // stylelint-disable-next-line property-blacklist
       border-radius: $custom-switch-indicator-border-radius;
       @include transition(transform .15s ease-in-out, $custom-forms-transition);
     }
@@ -190,7 +198,7 @@
   .custom-control-input:checked ~ .custom-control-label {
     &::after {
       background-color: $custom-control-indicator-bg;
-      transform: translateX($custom-switch-width - $custom-control-indicator-size);
+      transform: translateX(- $custom-switch-width + $custom-control-indicator-size); //rtl
     }
   }
 
@@ -212,19 +220,16 @@
   display: inline-block;
   width: 100%;
   height: $custom-select-height;
-  padding: $custom-select-padding-y ($custom-select-padding-x + $custom-select-indicator-padding) $custom-select-padding-y $custom-select-padding-x;
+  padding: $custom-select-padding-y $custom-select-padding-x $custom-select-padding-y ($custom-select-padding-x + $custom-select-indicator-padding); //rtl
+  font-family: $custom-select-font-family;
+  @include font-size($custom-select-font-size);
   font-weight: $custom-select-font-weight;
   line-height: $custom-select-line-height;
   color: $custom-select-color;
   vertical-align: middle;
-  background: $custom-select-background;
-  background-color: $custom-select-bg;
+  background: $custom-select-bg $custom-select-background;
   border: $custom-select-border-width solid $custom-select-border-color;
-  @if $enable-rounded {
-    border-radius: $custom-select-border-radius;
-  } @else {
-    border-radius: 0;
-  }
+  @include border-radius($custom-select-border-radius, 0);
   @include box-shadow($custom-select-box-shadow);
   appearance: none;
 
@@ -251,7 +256,7 @@
   &[multiple],
   &[size]:not([size="1"]) {
     height: auto;
-    padding-right: $custom-select-padding-x;
+    padding-left: $custom-select-padding-x; //rtl
     background-image: none;
   }
 
@@ -262,24 +267,30 @@
 
   // Hides the default caret in IE11
   &::-ms-expand {
-    opacity: 0;
+    display: none;
+  }
+
+  // Remove outline from select box in FF
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 $custom-select-color;
   }
 }
 
 .custom-select-sm {
   height: $custom-select-height-sm;
   padding-top: $custom-select-padding-y-sm;
+  padding-right: $custom-select-padding-x-sm; //rtl
   padding-bottom: $custom-select-padding-y-sm;
-  padding-left: $custom-select-padding-x-sm;
-  font-size: $custom-select-font-size-sm;
+  @include font-size($custom-select-font-size-sm);
 }
 
 .custom-select-lg {
   height: $custom-select-height-lg;
   padding-top: $custom-select-padding-y-lg;
+  padding-right: $custom-select-padding-x-lg; //rtl
   padding-bottom: $custom-select-padding-y-lg;
-  padding-left: $custom-select-padding-x-lg;
-  font-size: $custom-select-font-size-lg;
+  @include font-size($custom-select-font-size-lg);
 }
 
 
@@ -308,6 +319,8 @@
     box-shadow: $custom-file-focus-box-shadow;
   }
 
+  // Use [disabled] and :disabled to work around https://github.com/twbs/bootstrap/issues/28247
+  &[disabled] ~ .custom-file-label,
   &:disabled ~ .custom-file-label {
     background-color: $custom-file-disabled-bg;
   }
@@ -331,6 +344,7 @@
   z-index: 1;
   height: $custom-file-height;
   padding: $custom-file-padding-y $custom-file-padding-x;
+  font-family: $custom-file-font-family;
   font-weight: $custom-file-font-weight;
   line-height: $custom-file-line-height;
   color: $custom-file-color;
@@ -342,18 +356,18 @@
   &::after {
     position: absolute;
     top: 0;
-    right: 0;
     bottom: 0;
+    left: 0; //rtl
     z-index: 3;
     display: block;
     height: $custom-file-height-inner;
     padding: $custom-file-padding-y $custom-file-padding-x;
     line-height: $custom-file-line-height;
     color: $custom-file-button-color;
-    content: "Browse";
+    content: "Browse"; //rtl :this should be localized
     @include gradient-bg($custom-file-button-bg);
-    border-left: inherit;
-    @include border-radius(0 $custom-file-border-radius $custom-file-border-radius 0);
+    border-right: inherit; //rtl
+    @include border-radius($custom-file-border-radius 0 0 $custom-file-border-radius); //rtl
   }
 }
 
@@ -365,7 +379,7 @@
 
 .custom-range {
   width: 100%;
-  height: calc(#{$custom-range-thumb-height} + #{$custom-range-thumb-focus-box-shadow-width * 2});
+  height: add($custom-range-thumb-height, $custom-range-thumb-focus-box-shadow-width * 2);
   padding: 0; // Need to reset padding
   background-color: transparent;
   appearance: none;
@@ -472,7 +486,7 @@
   }
 
   &::-ms-fill-upper {
-    margin-right: 15px; // arbitrary?
+    margin-left: 15px; // arbitrary? //rtl
     background-color: $custom-range-track-bg;
     @include border-radius($custom-range-track-border-radius);
   }

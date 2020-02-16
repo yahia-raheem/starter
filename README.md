@@ -22,3 +22,9 @@ ver 1.1:
 
 ver 1.1.1:
 1) added a lazy loading script to the theme .. from now on use data-src instead of src and add the class lazy to all images in site
+
+ver 1.1.2:
+1) fixed bootstrap rtl not working corretly
+2) added some mixins to the helpers files and removed the related classes
+3) added the ability to change the font family of both the normal and rtl versions of bootstrap
+4) removed some redundant prefixing from the custom classes as the prefixer takes care of it anyway

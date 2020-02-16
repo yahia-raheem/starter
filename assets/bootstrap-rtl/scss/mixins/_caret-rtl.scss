@@ -29,34 +29,34 @@
   @if $enable-caret {
     &::after {
       display: inline-block;
-      margin-left: $caret-spacing;
+      margin-right: $caret-spacing; //rtl
       vertical-align: $caret-vertical-align;
       content: "";
       @if $direction == down {
         @include caret-down();
       } @else if $direction == up {
         @include caret-up();
-      } @else if $direction == right {
-        @include caret-right();
+      } @else if $direction == left { //rtl
+        @include caret-left(); //rtl
       }
     }
 
-    @if $direction == left {
+    @if $direction == right { //rtl
       &::after {
         display: none;
       }
 
       &::before {
         display: inline-block;
-        margin-right: $caret-spacing;
+        margin-left: $caret-spacing; //rtl
         vertical-align: $caret-vertical-align;
         content: "";
-        @include caret-left();
+        @include caret-right(); //rtl
       }
     }
 
     &:empty::after {
-      margin-left: 0;
+      margin-right: 0; //rtl
     }
   }
 }

@@ -1,13 +1,16 @@
 /*!
- * Bootstrap Grid v4.2.1 (https://getbootstrap.com/)
- * Copyright 2011-2018 The Bootstrap Authors
- * Copyright 2011-2018 Twitter, Inc.
+ * Bootstrap Grid v4.4.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * RTL-ized by Arash Laylazi (https://github.com/PerseusTheGreat)
+ * RTL rev. 1 (https://github.com/PerseusTheGreat/bootstrap-rtl)
  */
 
 html {
   box-sizing: border-box;
   -ms-overflow-style: scrollbar;
+  direction: rtl; //rtl
 }
 
 *,
@@ -17,11 +20,11 @@ html {
 }
 
 @import "functions";
-@import "variables";
+@import "variables-rtl";
 
 @import "mixins/breakpoints";
 @import "mixins/grid-framework";
-@import "mixins/grid";
+@import "mixins/grid-rtl";
 
 @import "grid";
 @import "utilities/display";

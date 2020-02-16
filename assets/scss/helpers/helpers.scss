@@ -149,9 +149,9 @@ section {
       min-width: 100%;
       max-height: 100%;
       @if $inverse {
-        @include appDir(transform, rotatey(180deg), transform, rotatey(0deg));
+        @include appDir(transform, rotatey(180deg), null, null);
       } @else {
-        @include appDir(transform, rotatey(0deg), transform, rotatey(180deg));
+        @include appDir(null, null, transform, rotatey(180deg));
       }
     }
   }
