@@ -5,6 +5,9 @@ all you have to do is clone then run npm install in it then run npm start
 
 change log:
 
+ver 1.1.4:
+1) the form customization file is now a mixin to allow for different customizations to more than one form
+
 ver 1.1.3:
 1) modified the default widths for the container and container fluid
 2) modified some default paddings for the container and sections
