@@ -59,6 +59,7 @@
     width: $field-width;
     height: $field-height !important;
     padding: $field-padding;
+    @include appDir(text-align, left, text-align, right);
     appearance: textfield !important;
     -webkit-appearance: textfield !important;
    -moz-appearance: textfield !important;
@@ -78,6 +79,7 @@
     width: $btns-width;
     height: $btns-height;
     font-size: $btns-txt-size;
+    text-align: center;
   }
 
   .nf-error.field-wrap .nf-field-element:after {
@@ -115,10 +117,10 @@
   .nf-row {
     .nf-cell {
       &:first-of-type:not(:last-of-type) {
-        @include appDir(padding-right, $field-margin-between-cols / 2, padding-left, $field-margin-between-cols / 2);
+        padding-right: $field-margin-between-cols / 2;
       }
       &:last-of-type:not(:first-of-type) {
-        @include appDir(padding-left, $field-margin-between-cols / 2, padding-right, $field-margin-between-cols / 2);
+        padding-left: $field-margin-between-cols / 2;
       }
     }
   }

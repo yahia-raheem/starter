@@ -5,6 +5,13 @@ all you have to do is clone then run npm install in it then run npm start
 
 change log:
 
+ver 1.1.5:
+1) removed the deployed theme javascript and css from the assets folder to a new dist folder for better readability
+2) removed the map files generation as it wasn't accurate anyway and unusable since any change had to be done in the sass files
+3) fixed the cannot inline remote sources warning so the font can now be imported in the scss files again
+4) fixed some problems with the ninja-forms mixin in rtl mode
+5) added an intro index.js for future package configurations (empty for now)
+
 ver 1.1.4:
 1) the form customization file is now a mixin to allow for different customizations to more than one form
 
