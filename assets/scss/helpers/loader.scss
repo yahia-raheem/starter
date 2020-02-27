@@ -1,0 +1,103 @@
+@mixin rings($duration, $delay) {
+  opacity: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -0;
+  left: -0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  height: 100%;
+  width: 100%;
+  border: 8px solid rgba(0, 0, 0, 0.2);
+  border-radius: 100%;
+  animation-name: ripple;
+  animation-duration: $duration;
+  animation-delay: $delay;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.34, 1);
+  z-index: -1;
+}
+
+@mixin my-loader(
+  $pending-animation-duration: null,
+  $bg-color: null,
+  $circle-width: null,
+  $circle-height: null,
+  $circle-bg-color: null,
+  $ring-after-duration: null,
+  $ring-after-delay: null,
+  $ring-before-duration: null,
+  $ring-before-delay: null,
+  $done-animation-duration: null,
+  $pending-animation-name: null,
+  $done-animation-name: null
+) {
+  $pending-animation-duration: 0.5s !default;
+  $bg-color: #fafafa !default;
+  $circle-width: 150px !default;
+  $circle-height: 150px !default;
+  $circle-bg-color: white !default;
+  $ring-after-duration: 1s !default;
+  $ring-after-delay: 0s !default;
+  $ring-before-duration: 1s !default;
+  $ring-before-delay: 0.2s !default;
+  $done-animation-duration: 0.5s !default;
+  $pending-animation-name: fadeIn !default;
+  $done-animation-name: fadeOut !default;
+  &.pending {
+    animation-duration: $pending-animation-duration;
+    animation-fill-mode: both;
+    animation-name: $pending-animation-name;
+  }
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  z-index: 100;
+  justify-content: center;
+  background-color: $bg-color;
+  align-items: center;
+  .request-loader {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: $circle-height;
+    width: $circle-width;
+    border-radius: 100%;
+    background: $circle-bg-color;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+    img {
+      width: 100px;
+    }
+    &::after {
+      @include rings($ring-after-duration, $ring-after-delay);
+    }
+
+    &::before {
+      @include rings($ring-before-duration, $ring-before-delay);
+    }
+  }
+  &.done {
+    animation-duration: $done-animation-duration;
+    animation-fill-mode: both;
+    animation-name: $done-animation-name;
+  }
+}
+
+@keyframes ripple {
+  from {
+    opacity: 1;
+    transform: scale3d(0.75, 0.75, 1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale3d(1.5, 1.5, 1);
+  }
+}

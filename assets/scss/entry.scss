@@ -1,9 +1,15 @@
 @import "helpers/helpers.scss";
 
-
-html, body {
+html,
+body {
   height: 100%;
   @include appDir(direction, ltr, direction, rtl);
+}
+
+body.out {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: slideOutDown;
 }
 
 a {
@@ -30,8 +36,22 @@ h3 {
 section {
   padding: 50px 0;
   background-color: #ffffff;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: slideInUp;
 }
 
-.container-fluid, .container {
+.container-fluid,
+.container {
   padding: 0 4vw;
 }
+
+.loader {
+  @include my-loader();
+}
+
+
+@import "templates/header.scss";
+@import "templates/home.scss";
+@import "templates/internal.scss";
+@import "templates/footer.scss";

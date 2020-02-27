@@ -5,6 +5,14 @@ all you have to do is clone then run npm install in it then run npm start
 
 change log:
 
+ver 1.1.6:
+1) added a loader file with a loader mixin (my-loader()) which takes some arguments with defaults included
+2) added some keyframe animations to the theme
+3) added the loader scripts to the es files
+4) added a new script in the es files wich prevents the normal link action and allows you to make actions before following any navigational action
+5) using any links now generate a footprint that can be traced using window.history and window.history.state
+6) navigating between pages now is alot smoother thanks to the previous two points and the loader
+
 ver 1.1.5:
 1) removed the deployed theme javascript and css from the assets folder to a new dist folder for better readability
 2) removed the map files generation as it wasn't accurate anyway and unusable since any change had to be done in the sass files
