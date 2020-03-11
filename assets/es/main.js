@@ -7,20 +7,36 @@ document.addEventListener("DOMContentLoaded", () => {
   links.forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
-      if (
-        window.location.pathname.replace(/^\//, "") ==
-        link.pathname.replace(/^\//, "").concat("/")
-      ) {
-        var target = $(link.hash);
-        target = target.length
-          ? target
-          : $("[name=" + link.hash.slice(1) + "]");
-        if (target.length) {
-          window.scroll({
-            top: target.offset().top,
-            behavior: "smooth"
-          });
-          return false;
+      if (window.location.host == 'localhost' || window.location.host == 'projects.emarketing-arabia.com') {
+        if (
+          window.location.pathname.replace(/^\//, "") ==
+          link.pathname.replace(/^\//, "").concat("/")
+        ) {
+          var target = $(link.hash);
+          target = target.length
+            ? target
+            : $("[name=" + link.hash.slice(1) + "]");
+          if (target.length) {
+            window.scroll({
+              top: target.offset().top,
+              behavior: 'smooth'
+            });
+            return false;
+          }
+        }
+      } else {
+        if (
+          window.location.pathname.replace(/^\//, "") ==
+          link.pathname.replace(/^\//, "")
+        ) {
+          var target = $(link.hash);
+          if (target.length) {
+            window.scroll({
+              top: target.offset().top,
+              behavior: 'smooth'
+            });
+            return false;
+          }
         }
       }
       window.history.pushState({ usedPush: true }, null, link.href);

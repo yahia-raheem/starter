@@ -5,6 +5,9 @@ all you have to do is clone then run npm install in it then run npm start
 
 change log:
 
+ver 1.1.6.1:
+1) fixed a bug where if the host wasn't a localhost or a subfolder the links behaviour wasn't as desired
+
 ver 1.1.6:
 1) added a loader file with a loader mixin (my-loader()) which takes some arguments with defaults included
 2) added some keyframe animations to the theme
