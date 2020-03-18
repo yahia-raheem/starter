@@ -5,6 +5,11 @@ all you have to do is clone then run npm install in it then run npm start
 
 change log:
 
+ver 1.1.7:
+1) fixed some import bugs in the entry sass file
+2) fixed import bugs in the index html file
+3) removed the loader and navigator abilities (introduced in 1.1.6) to a separate file to be imported if needed to avoid clutter in the main js file and to allow for not importing the file if you don't want to
+
 ver 1.1.6.1:
 1) fixed a bug where if the host wasn't a localhost or a subfolder the links behaviour wasn't as desired
 
