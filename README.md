@@ -6,7 +6,7 @@ all you have to do is clone then run npm install in it then run npm start
 change log:
 
 ver 1.1.8:
-1) added a simple slider that is not jquery dependant (to use it import the js file and use the mixin)
+1) added a simple slider that is not jquery dependant (to use it import the js file and call the myslider function in main.js and use the mixin)
 2) added a navigation bar customization pattern that is used alot in our company
 3) revised some mixins, for example the box ratio mixin now accepts any width to length
 4) added more bootstrap customizations and removed some unwanted bootstrap behaviours such as the margin to headings and paragraphs

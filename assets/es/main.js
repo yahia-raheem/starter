@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  mySlider(5000, 1000);
   var image = document.querySelector(".logo-image");
   image.src = "images/Group 18.webp";
   var navBar = document.querySelector(".nav-container");
