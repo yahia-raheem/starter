@@ -1,0 +1,210 @@
+// ************************************************************* components ****************************************************** 
+
+
+// ------------------------------------------ icon lists ----------------------------------------------------------------
+
+// <div class="icon-list">
+//   <h5 class="list-title">Factory Address:</h5>
+//   <ul class="list-content">
+//     <li><i class="fas fa-map-marker-alt"></i>Lot 36, 4th Industrial Zone, 6th October City, Giza, Egypt</li>
+//   </ul>
+// </div>
+
+@mixin icon-list(
+  $title-color,
+  $icon-color,
+  $list-item-color,
+  $list-padding: 40px,
+  $icon-top: 7px,
+  $title-size: inherit,
+  $list-size: inherit,
+  $icon-size: inherit,
+  $title-margin: 0 0 10px,
+  $list-margin: 0 0 10px
+) {
+  .icon-list {
+    .list-title {
+      color: $title-color;
+      margin: $title-margin;
+    }
+    ul.list-content {
+      list-style: none;
+      margin: $list-margin;
+      li {
+        color: $list-item-color;
+        position: relative;
+        font-size: $list-size;
+        i {
+          font-size: $icon-size;
+          color: $icon-color;
+          position: absolute;
+          top: $icon-top;
+          @include appDir(left, -$list-padding, right, -$list-padding);
+        }
+      }
+    }
+  }
+}
+
+
+// ------------------------------------------------------------- ninja-form --------------------------------------------------------------
+
+@mixin ninja-form-styles(
+  $field-bg: #e3f4fb,
+  $field-placeholder-color: #79acbd,
+  $field-width: 100%,
+  $field-height: 50px,
+  $field-padding: 0 10px,
+  $field-margin-between-rows: 15px,
+  $field-margin-between-cols: 30px,
+  $field-border-radius: 10px,
+  $field-border: transparent,
+  $ta-width: 100%,
+  $ta-height: 120px,
+  $submit-bg: #ed1b24,
+  $submit-txt-color: white,
+  $btns-width: 150px,
+  $btns-height: inherit,
+  $btns-txt-size: 16px
+) {
+
+  div.nf-form-cont {
+    position: relative;
+  }
+
+  div.nf-form-cont *::placeholder,
+  div.nf-form-cont select {
+    color: $field-placeholder-color !important;
+    opacity: 1;
+  }
+  div.nf-form-cont select option {
+    background-color: white;
+  }
+
+  div.nf-form-cont .nf-field-container {
+    margin-bottom: $field-margin-between-rows;
+  }
+
+  div.nf-form-cont .nf-field-element input,
+  div.nf-form-cont .nf-field-element textarea,
+  div.nf-form-cont .nf-field-element select {
+    background-color: $field-bg !important;
+    border-radius: $field-border-radius;
+    border: $field-border;
+    width: $field-width;
+    height: $field-height !important;
+    padding: $field-padding;
+    @include appDir(text-align, left, text-align, right);
+    appearance: textfield !important;
+    -webkit-appearance: textfield !important;
+   -moz-appearance: textfield !important;
+  }
+
+  div.nf-form-cont .nf-field-element textarea {
+    width: $ta-width;
+    height: $ta-height !important;
+  }
+  div.nf-form-cont .textarea-wrap .nf-field-element::after {
+    @include appDir(border-bottom-right-radius, 0!important, border-bottom-left-radius, 0!important);
+  }
+
+  div.nf-form-cont input[type="button"] {
+    background-color: $submit-bg !important;
+    color: $submit-txt-color;
+    width: $btns-width;
+    height: $btns-height;
+    font-size: $btns-txt-size;
+    text-align: center;
+  }
+
+  .nf-error.field-wrap .nf-field-element:after {
+    @include appDir(border-top-right-radius, $field-border-radius, border-top-left-radius, $field-border-radius);
+    @include appDir(border-bottom-right-radius, $field-border-radius, border-bottom-left-radius, $field-border-radius);
+    height: $field-height !important;
+    width: $field-height !important;
+    line-height: $field-height !important;
+    top: 0 !important;
+    @include appDir(right, 0!important, left, 0!important);
+    @include appDir(null, null, right, unset!important);
+    z-index: 10;
+  }
+
+  .nf-pass.field-wrap .nf-field-element:after {
+    line-height: $field-height !important;
+    @include appDir(null, null, left, 16px);
+    @include appDir(null, null, right, unset!important);
+    z-index: 10;
+  }
+
+  .nf-form-content .list-select-wrap .nf-field-element > div,
+  .nf-form-content input:not([type="button"]),
+  .nf-form-content textarea {
+    background: unset !important;
+    border: unset !important;
+    box-shadow: none !important;
+  }
+
+  .nf-field-container.el-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nf-row {
+    .nf-cell {
+      &:first-of-type:not(:last-of-type) {
+        padding-right: $field-margin-between-cols / 2;
+      }
+      &:last-of-type:not(:first-of-type) {
+        padding-left: $field-margin-between-cols / 2;
+      }
+    }
+  }
+}
+
+// -------------------------------------------------------------- slider --------------------------------------------------------------
+
+// <div class="slideshow-container">
+
+//   <div class="mySlides">
+//     <img
+//       data-src="images/Component 1 – 1.webp"
+//       class="lazy slide-image"
+//     />
+//     <div class="slide-inner">
+//       <div class="slide-content">
+//         <small class="slide-hint">Electrical Engineer</small>
+//         <h2 class="slide-title">
+//           Electrial Installation & Maintenance Categories
+//         </h2>
+//         <a href="#" class="btn btn-primary slide-btn"
+//           >View Products</a
+//         >
+//       </div>
+//     </div>
+//   </div>
+
+//   <div class="controls">
+//     <a class="prev">&#10094;</a>
+//     <a class="next">&#10095;</a>
+//   </div>
+
+//   <div style="text-align:center" class="dots-cont">
+//     <span class="dot" data-slide="1"></span>
+//     <span class="dot" data-slide="2"></span>
+//     <span class="dot" data-slide="3"></span>
+//   </div>
+
+// </div>
+
+@import "slider.scss";
+
+
+// ------------------------------------------------------------------- loader ---------------------------------------------------
+
+// <div class="loader">
+//   <div class="request-loader">
+//     <img src="images/Group 16.webp" />
+//   </div>
+// </div>
+
+@import "loader.scss";

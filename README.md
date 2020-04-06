@@ -5,6 +5,12 @@ all you have to do is clone then run npm install in it then run npm start
 
 change log:
 
+ver 1.1.9:
+1) changed the way different components are being loaded from the helpers folder (now there is a components file)
+2) in the components file you can find an html snippet of the component and either a referance to where its mixin or the actual mixin
+3) changed the way non-required variables are used in different mixins to reduce their size while giving more information about what their default values are
+4) added a list component that accepts an icon with various customizable variables
+
 ver 1.1.8:
 1) added a simple slider that is not jquery dependant (to use it import the js file and call the myslider function in main.js and use the mixin)
 2) added a navigation bar customization pattern that is used alot in our company
