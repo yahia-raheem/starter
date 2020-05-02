@@ -7,7 +7,7 @@ enjoy!
 change log:
 
 ver 2.0:
-1) major version bump since the theme is now using gulp
+1) major version pump since the theme is now using gulp
 2) reduced imports to one style and one script (both called either bundle or bundle-rtl)
 3) running npm build produces a folder called bundle with a compressed theme zip that does not contain the node modules
 3.1) the file name is the name in the package.json file followed by a dash and then the version number
