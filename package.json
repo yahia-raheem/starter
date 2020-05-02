@@ -1,7 +1,7 @@
 {
   "name": "starter_with_gulp",
-  "version": "1.0.0",
-  "description": "a starter with gulp",
+  "version": "2.0.0",
+  "description": "my starter with gulp",
   "main": "index.js",
   "scripts": {
     "start": "gulp",
