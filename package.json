@@ -1,40 +1,37 @@
 {
-  "name": "my-starter-theme",
+  "name": "starter_with_gulp",
   "version": "1.0.0",
-  "description": "my starter theme using scss",
+  "description": "a starter with gulp",
   "main": "index.js",
   "scripts": {
-    "css": "node-sass --include-path scss assets/scss/source.scss assets/css/main.css",
-    "css-rtl": "node-sass --include-path scss assets/scss/source-rtl.scss assets/css/main-rtl.css",
-    "watch": "nodemon -e scss -x \"npm run css\"",
-    "watch-rtl": "nodemon -e scss -x \"npm run css-rtl\"",
-    "js-build": "babel assets/es --out-dir dist/js",
-    "js-watch": "npm run js-build -- --watch",
-    "start": "npm-run-all --parallel watch js-watch watch-rtl",
-    "css-postcss": "postcss --use autoprefixer --no-map --output assets/css/main.css assets/css/main.css",
-    "css-rtl-postcss": "postcss --use autoprefixer --no-map --output assets/css/main-rtl.css assets/css/main-rtl.css",
-    "css-deploy": "npm run css && npm run css-postcss && npm run css-minify",
-    "css-rtl-deploy": "npm run css-rtl && npm run css-rtl-postcss && npm run css-rtl-minify",
-    "deploy": "npm run css-deploy && npm run js-build",
-    "deploy-rtl": "npm run css-rtl-deploy && npm run js-build",
-    "css-minify": "cleancss --level 1 --format breaksWith=lf --inline all --output dist/css/main.min.css assets/css/main.css",
-    "css-rtl-minify": "cleancss --level 1 --format breaksWith=lf --inline all --output dist/css/main-rtl.min.css assets/css/main-rtl.css"
+    "start": "gulp",
+    "build": "gulp build --prod"
   },
   "author": "yahia",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^9.7.4",
-    "node-sass": "^4.13.1",
-    "nodemon": "^2.0.2",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015-ie": "^6.7.0",
-    "npm-run-all": "^4.1.5",
-    "clean-css-cli": "^4.3.0",
-    "postcss-cli": "^7.1.0"
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
+    "autoprefixer": "^9.7.6",
+    "babel-loader": "^8.1.0",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-file-include": "^2.2.2",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-webp": "^4.0.1",
+    "gulp-zip": "^5.0.1",
+    "vinyl-named": "^1.1.0",
+    "webpack-stream": "^5.2.1",
+    "yargs": "^15.3.1"
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1"
+    "jquery": "^3.5.0"
   }
 }

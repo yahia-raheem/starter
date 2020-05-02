@@ -1,9 +1,20 @@
 # starter
 my starter theme
-this repo has my html starter theme with sass support 
-all you have to do is clone then run npm install in it then run npm start
+this repo has my html starter theme with sass and gulp
+all you have to do is clone then run npm install in it then run npm start and when its production time run 'npm run build'
+enjoy!
 
 change log:
+
+ver 2.0:
+1) major version bump since the theme is now using gulp
+2) reduced imports to one style and one script (both called either bundle or bundle-rtl)
+3) running npm build produces a folder called bundle with a compressed theme zip that does not contain the node modules
+3.1) the file name is the name in the package.json file followed by a dash and then the version number
+4) images are now automatically compressed and transformed into the webp format 
+5) you can now import inside the js files
+6) reintroduced source maps into both the scss and js files (out side of production ofcourse)
+7) html files can now be included (in example can be found in src/html/index.html) just remember that all parts should not be in the root html folder
 
 ver 1.1.9:
 1) changed the way different components are being loaded from the helpers folder (now there is a components file)

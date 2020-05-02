@@ -1,12 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
   const loader = document.querySelector(".loader");
-  window.addEventListener("load", () => {
-    loader.classList.add("done");
-  });
+  if (loader) {
+    window.addEventListener("load", () => {
+      loader.classList.add("done");
+    });
+  }
   const links = document.querySelectorAll("a");
-  links.forEach(link => {
-    if (link.hasAttribute("href") && link.dataset.toggle == null && !link.href.endsWith('.html')) {
-      link.addEventListener("click", e => {
+  links.forEach((link) => {
+    if (
+      link.hasAttribute("href") &&
+      link.dataset.toggle == null &&
+      !link.href.endsWith(".html")
+    ) {
+      link.addEventListener("click", (e) => {
         e.preventDefault();
         if (
           window.location.host == "localhost" ||
@@ -23,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (target.length) {
               window.scroll({
                 top: target.offset().top,
-                behavior: "smooth"
+                behavior: "smooth",
               });
               return false;
             }
@@ -37,15 +43,17 @@ document.addEventListener("DOMContentLoaded", () => {
             if (target.length) {
               window.scroll({
                 top: target.offset().top,
-                behavior: "smooth"
+                behavior: "smooth",
               });
               return false;
             }
           }
         }
         window.history.pushState({ usedPush: true }, null, link.href);
-        loader.classList.remove("done");
-        loader.classList.add("pending");
+        if (loader) {
+          loader.classList.remove("done");
+          loader.classList.add("pending");
+        }
         window.history.go();
       });
     }

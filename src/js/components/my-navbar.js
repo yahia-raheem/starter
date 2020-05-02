@@ -4,13 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
   var navBar = document.querySelector(".nav-container");
   var mobNav = false;
   navDesktop();
-  document.addEventListener("scroll", function() {
+  document.addEventListener("scroll", function () {
     navDesktop();
   });
 
   document
     .querySelector(".navbar-toggler")
-    .addEventListener("click", function() {
+    .addEventListener("click", function () {
       navMobile();
     });
 
@@ -62,4 +62,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
-$(document).ready(function() {});
