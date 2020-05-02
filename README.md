@@ -7,13 +7,13 @@ enjoy!
 change log:
 
 ver 2.0:
-1) major version pump since the theme is now using gulp
+1) the theme is now using gulp. YAY!
 2) reduced imports to one style and one script (both called either bundle or bundle-rtl)
 3) running npm build produces a folder called bundle with a compressed theme zip that does not contain the node modules
 3.1) the file name is the name in the package.json file followed by a dash and then the version number
 4) images are now automatically compressed and transformed into the webp format 
 5) you can now import inside the js files
-6) reintroduced source maps into both the scss and js files (out side of production ofcourse)
+6) reintroduced source maps into both the scss and js files (not in production ofcourse)
 7) html files can now be included (in example can be found in src/html/index.html) just remember that all parts should not be in the root html folder
 
 ver 1.1.9:
