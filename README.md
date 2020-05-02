@@ -14,7 +14,7 @@ ver 2.0:
 4) images are now automatically compressed and transformed into the webp format 
 5) you can now import inside the js files
 6) reintroduced source maps into both the scss and js files (not in production ofcourse)
-7) html files can now be included (in example can be found in src/html/index.html) just remember that all parts should not be in the root html folder
+7) html files can now be included (an example can be found in src/html/index.html) just remember that all html parts should not be in the root html folder
 
 ver 1.1.9:
 1) changed the way different components are being loaded from the helpers folder (now there is a components file)
