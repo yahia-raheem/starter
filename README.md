@@ -6,6 +6,12 @@ enjoy!
 
 change log:
 
+ver 2.0.1:
+1) changed the html folder location in the production environment so it wouldn't break images src
+2) fixed a bug where converting webp images would distort them 
+3) fixed a bug where stylesheets and scripts werent pointing to the correct files when in production mode
+4) fixed a bug where image tags where still pointing to images (instead of webp files) after production
+
 ver 2.0:
 1) the theme is now using gulp. YAY!
 2) reduced imports to one style and one script (both called either bundle or bundle-rtl)

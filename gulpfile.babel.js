@@ -14,6 +14,8 @@ import named from "vinyl-named";
 import zip from "gulp-zip";
 import info from "./package.json";
 import fileinclude from "gulp-file-include";
+import replace from "gulp-replace";
+import filter from "gulp-filter";
 const PRODUCTION = yargs.argv.prod;
 
 export const styles = () => {
@@ -55,30 +57,36 @@ export const scripts = () => {
 };
 
 export const images = () => {
-  return src("src/images/**/*.{jpg,jpeg,png,svg,gif}")
+  const webpless = filter("**/*.{jpg,jpeg,png,svg,gif}", { restore: true });
+  return src("src/images/**/*.{jpg,jpeg,png,svg,gif,webp}")
     .pipe(gulpif(PRODUCTION, imagemin()))
-    .pipe(webp())
+    .pipe(webpless)
+    .pipe(webp({ quality: 100, method: 6 }))
+    .pipe(webpless.restore)
     .pipe(dest("dist/images"));
 };
 
 export const copy = () => {
   return src([
     "src/**/*",
-    "!src/{images,js,scss}",
-    "!src/{images,js,scss}/**/*",
+    "!src/{images,js,scss,html}",
+    "!src/{images,js,scss,html}/**/*",
   ]).pipe(dest("dist"));
 };
 
 export const html = () => {
-  return src('./src/html/*.html')
-   .pipe(fileinclude({
-	  prefix: '@@',
-	  basepath: '@file'
-	}))
-   .pipe(dest('./'))
+  return src("src/html/*.html")
+    .pipe(
+      fileinclude({
+        prefix: "@@",
+        basepath: "@file",
+      })
+    )
+    .pipe(replace(/.(gif|jpe?g|svg|png)\"/g, ".webp\""))
+    .pipe(dest("dist/html"));
 };
 
-export const clean = () => del(["dist", "./*.html"]);
+export const clean = () => del(["dist"]);
 
 export const compress = () => {
   return src([
@@ -104,7 +112,7 @@ export const watchForChanges = () => {
     copy
   );
   watch("src/js/**/*.js", scripts);
-  watch('./src/*.html', html);
+  watch("./src/html/*.html", html);
 };
 
 export const dev = series(
