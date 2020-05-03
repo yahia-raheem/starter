@@ -112,7 +112,7 @@ export const watchForChanges = () => {
     copy
   );
   watch("src/js/**/*.js", scripts);
-  watch("./src/html/*.html", html);
+  watch("./src/html/**/*.html", html);
 };
 
 export const dev = series(
