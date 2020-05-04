@@ -47,6 +47,7 @@ export const scripts = () => {
           ],
         },
         mode: PRODUCTION ? "production" : "development",
+        devtool: false,
         output: {
           filename: "[name].js",
         },

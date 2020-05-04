@@ -6,6 +6,11 @@ enjoy!
 
 change log:
 
+ver 2.0.3:
+1) apparently not all bugs were squashed but maybe this time ?
+2) a small change in the gulp file in the scripts function (don't ask)
+3) imported the minified jquery slim instead of the normal one (less package size)
+
 ver 2.0.2:
 1) imported bootstrap's js
 2) fixed some import problems in the js files
