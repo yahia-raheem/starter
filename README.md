@@ -6,6 +6,13 @@ enjoy!
 
 change log:
 
+ver 2.0.2:
+1) imported bootstrap's js
+2) fixed some import problems in the js files
+3) removed sourcemaps from js files (it took around 3s for it to compile .. who has the time right?)
+4) reverted to jquery 3.4 because of a bug with bootstrap
+5) i think by now i've squashed all the bugs of 2.0 (maybe?) 
+
 ver 2.0.1:
 1) changed the html folder location in the production environment so it wouldn't break images src
 2) fixed a bug where converting webp images would distort them 
