@@ -51,6 +51,9 @@ export const scripts = () => {
         output: {
           filename: "[name].js",
         },
+        // externals: {
+        //   jquery: 'jQuery'
+        // },
       })
     )
     .pipe(dest("dist/js"));

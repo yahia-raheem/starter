@@ -1,4 +1,4 @@
-import $ from "../../node_modules/jquery/dist/jquery.slim.min";
+import $ from "jquery";
 
 import "../../node_modules/bootstrap/dist/js/bootstrap.bundle.min";
 import "./components/navigator";

@@ -6,6 +6,11 @@ enjoy!
 
 change log:
 
+ver 2.0.4:
+1) fixed the jquery import problem (in navigator)
+2) imported the default jquery file (not the one provided in the node_modules) becasue it would be imported by wp anyway
+3) added a small change in the gulp file to use the jquery of the wordpress if wanted (commented for now to not cause problems before installing wordpress)
+
 ver 2.0.3:
 1) apparently not all bugs were squashed but maybe this time ?
 2) a small change in the gulp file in the scripts function (don't ask)

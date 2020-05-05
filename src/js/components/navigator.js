@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 document.addEventListener("DOMContentLoaded", () => {
   const loader = document.querySelector(".loader");
   if (loader) {
