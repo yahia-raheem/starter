@@ -10,10 +10,6 @@ section {
   flex: 1 1 auto;
 }
 
-.container-fluid {
-  max-width: 1500px;
-}
-
 .vail {
   position: absolute;
   top: 0;
@@ -37,13 +33,6 @@ section {
 .bg-container {
   position: relative;
   overflow: hidden;
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .bold {
@@ -111,12 +100,25 @@ section {
   padding-top: $small/$big * 100%;
 }
 
+@mixin circle($diameter) {
+  width: $diameter;
+  height: $diameter;
+  border-radius: $diameter;
+}
+
 @mixin box-shadow($horizontal, $vertical, $blur, $spread, $color, $inset: null) {
   @if $inset {
     box-shadow: inset $horizontal $vertical $blur $spread $color;
   } @else {
     box-shadow: $horizontal $vertical $blur $spread $color;
   }
+}
+
+@mixin centered-box() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @mixin curve($position, $height, $hideAt: null, $inverse: null) {

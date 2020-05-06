@@ -6,6 +6,10 @@ enjoy!
 
 change log:
 
+ver 2.0.5:
+1) fixed some css bugs
+2) added slick carousel to the theme
+
 ver 2.0.4:
 1) fixed the jquery import problem (in navigator)
 2) imported the default jquery file (not the one provided in the node_modules) becasue it would be imported by wp anyway

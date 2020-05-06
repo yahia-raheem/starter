@@ -19,7 +19,7 @@ a {
 
 p {
   line-height: 1.6;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 h1 {
@@ -46,6 +46,15 @@ section {
   padding: 0 4vw;
 }
 
-// .loader {
-//   @include my-loader();
-// }
+.loader {
+  @include my-loader();
+}
+
+$slick-arrow-color: black;
+$slick-font-path: "../assets/fonts/";
+$slick-loader-path: "../assets/";
+@import "../../node_modules/slick-carousel/slick/slick.scss";
+@import "../../node_modules/slick-carousel/slick/slick-theme.scss";
+
+@import "components/header.scss";
+@import "components/home.scss";

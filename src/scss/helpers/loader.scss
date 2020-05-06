@@ -61,6 +61,8 @@
   justify-content: center;
   background-color: $bg-color;
   align-items: center;
+  top: 0;
+  left: 0;
   .request-loader {
     position: relative;
     display: flex;
