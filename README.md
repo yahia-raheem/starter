@@ -8,6 +8,7 @@ how to use (more specific):
 after doing the three steps above your coding day should go like this (no wordpress):
 1) run npm start then work fully inside the src folder and see your changes in the dist/html folder
 2) run npm run build when you are done with the project (don't forget to delete the php files).
+
 with wordpress:
 1) step one as before
 2) put the theme folder in themes and call it [theme name]_dev
