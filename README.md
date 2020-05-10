@@ -1,10 +1,32 @@
 # starter
 my starter theme
-this repo has my html starter theme with sass and gulp
+this repo has my html starter theme with sass and gulp (and wp support! .. more on that below).
 all you have to do is clone then run npm install in it then run npm start and when its production time run 'npm run build'
 enjoy!
 
+how to use (more specific):
+after doing the three steps above your coding day should go like this (no wordpress):
+1) run npm start then work fully inside the src folder and see your changes in the dist/html folder
+2) run npm run build when you are done with the project (don't forget to delete the php files)
+with wordpress:
+1) step one as before
+2) put the theme folder in themes and call it [theme name]_dev
+3) remove the comment dashes from before the external part in the gulp file in the scripts function
+3) copy html from the dist folder to the header, footer, and pages (this is not a wp guide)
+4) run gulp phpMigrate --file=path to file.php on each php file you copied stuff into (yes this could have been easier but not as fool proof as it is now)
+5) when you're done with your theme development run npm run build and take the zip from the bundle folder and extract it in the themes folder (so now its on the same level as the development theme) and switch themes in the wordpress dashboard
+
+
 change log:
+
+ver 2.1:
+1) added wp files to the theme to facilitate migrating to wordpress if you like
+2) the work flow is still the same ... you develop the theme in the src folder and run build when you are done but now the result is a valid wp theme
+3) updated my instructions on working with the theme to include the wp way of things
+4) added a gulp task to fix the broken image sources in php files when you first copy them
+4.1) the task's command is: gulp phpMigrate --file=path to file.php
+4.2) yes this task is file specific (to make it stupid people proof, but you're more than welcome to edit it if you like)
+5) added a slick theme file to the helpers (import it instead of the one that comes with slick slider ... it has some bug fixes)
 
 ver 2.0.5:
 1) fixed some css bugs

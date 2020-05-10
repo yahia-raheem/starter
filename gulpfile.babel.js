@@ -52,7 +52,7 @@ export const scripts = () => {
           filename: "[name].js",
         },
         // externals: {
-        //   jquery: 'jQuery'
+        //   jquery: "jQuery",
         // },
       })
     )
@@ -85,9 +85,28 @@ export const html = () => {
         basepath: "@file",
       })
     )
-    .pipe(replace(/.(gif|jpe?g|svg|png)\"/g, ".webp\""))
+    .pipe(replace(/.(gif|jpe?g|svg|png)\"/g, '.webp"'))
     .pipe(dest("dist/html"));
 };
+
+export const phpMigrate = (cb) => {
+  let file = yargs.argv.file;
+  if (file) {
+    return src(file)
+    .pipe(
+      fileinclude({
+        prefix: "@@",
+        basepath: "@file",
+      })
+    )
+    .pipe(replace('="../', "=\"<?php bloginfo('template_directory'); ?>/dist/"))
+    .pipe(dest( function(file) { return file.base; } ));
+  } else {
+    console.log('no file provided ... use --file= + file path to use this function');
+    cb();
+  }
+};
+
 
 export const clean = () => del(["dist"]);
 
@@ -103,6 +122,12 @@ export const compress = () => {
     "!package.json",
     "!package-lock.json",
   ])
+    .pipe(
+      gulpif(
+        (file) => file.relative.split(".").pop() !== "zip",
+        replace("_themename", info.name)
+      )
+    )
     .pipe(zip(`${info.name}-${info.version}.zip`))
     .pipe(dest("bundled"));
 };
@@ -130,4 +155,5 @@ export const build = series(
   html,
   compress
 );
+
 export default dev;
