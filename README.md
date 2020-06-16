@@ -7,7 +7,8 @@ enjoy!
 how to use (more specific):
 after doing the three steps above your coding day should go like this (no wordpress):
 1) run npm start then work fully inside the src folder and see your changes in the dist/html folder
-2) run npm run build when you are done with the project (don't forget to delete the php files)
+2) run npm run build when you are done with the project (don't forget to delete the php files).
+
 with wordpress:
 1) step one as before
 2) put the theme folder in themes and call it [theme name]_dev
@@ -18,6 +19,17 @@ with wordpress:
 
 
 change log:
+
+ver 2.2:
+1) added a professional lazy loading script (use the same way as before but the class is not lazy its lazyload)
+2) added a script to remove the old jquery from wordpress and replace it with a newer one
+3) added a responsive image function to determine and echo the srcset of images
+4) added other helper functions to functions.php
+5) reduced the js load of the navigator scripts (at this point if you don't use a site loader don't bother importing the file)
+6) added some helper scripts (add active class to the nav link that matches the current page and added a show dropdown on hover script for bootstrap dropdowns)
+7) added a pagination mixin (among other new mixins) and a new function that handles pagination in wordpress (in functions.php)
+8) removed the webp converter since it had no real life applications
+9) fully integrated slick slider (all of its imports are commented you just need to remove the comment from scss entry and js bundle)
 
 ver 2.1:
 1) added wp files to the theme to facilitate migrating to wordpress if you like

@@ -7,7 +7,6 @@ import postcss from "gulp-postcss";
 import sourcemaps from "gulp-sourcemaps";
 import autoprefixer from "autoprefixer";
 import imagemin from "gulp-imagemin";
-import webp from "gulp-webp";
 import del from "del";
 import webpack from "webpack-stream";
 import named from "vinyl-named";
@@ -15,7 +14,7 @@ import zip from "gulp-zip";
 import info from "./package.json";
 import fileinclude from "gulp-file-include";
 import replace from "gulp-replace";
-import filter from "gulp-filter";
+
 const PRODUCTION = yargs.argv.prod;
 
 export const styles = () => {
@@ -47,25 +46,23 @@ export const scripts = () => {
           ],
         },
         mode: PRODUCTION ? "production" : "development",
-        devtool: false,
+        devtool: !PRODUCTION ? 'inline-source-map' : false,
         output: {
           filename: "[name].js",
         },
-        // externals: {
-        //   jquery: "jQuery",
-        // },
+        externals: {
+          jquery: 'jQuery',
+        },
       })
     )
     .pipe(dest("dist/js"));
 };
 
+
+
 export const images = () => {
-  const webpless = filter("**/*.{jpg,jpeg,png,svg,gif}", { restore: true });
-  return src("src/images/**/*.{jpg,jpeg,png,svg,gif,webp}")
+  return src("src/images/**/*.{jpg,jpeg,png,svg,gif}")
     .pipe(gulpif(PRODUCTION, imagemin()))
-    .pipe(webpless)
-    .pipe(webp({ quality: 100, method: 6 }))
-    .pipe(webpless.restore)
     .pipe(dest("dist/images"));
 };
 
@@ -85,7 +82,6 @@ export const html = () => {
         basepath: "@file",
       })
     )
-    .pipe(replace(/.(gif|jpe?g|svg|png)\"/g, '.webp"'))
     .pipe(dest("dist/html"));
 };
 
@@ -106,7 +102,6 @@ export const phpMigrate = (cb) => {
     cb();
   }
 };
-
 
 export const clean = () => del(["dist"]);
 
@@ -155,5 +150,4 @@ export const build = series(
   html,
   compress
 );
-
 export default dev;

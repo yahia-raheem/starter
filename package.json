@@ -1,7 +1,7 @@
 {
-  "name": "starter_with_gulp",
-  "version": "2.0.0",
-  "description": "my starter with gulp",
+  "name": "riwaq_theme",
+  "version": "1.0.0",
+  "description": "riwaq's front end",
   "main": "index.js",
   "scripts": {
     "start": "gulp",
@@ -19,7 +19,6 @@
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
     "gulp-file-include": "^2.2.2",
-    "gulp-filter": "^6.0.0",
     "gulp-if": "^3.0.0",
     "gulp-imagemin": "^7.1.0",
     "gulp-postcss": "^8.0.0",
@@ -37,7 +36,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "lazysizes": "^5.2.2",
     "slick-carousel": "^1.8.1"
   }
 }

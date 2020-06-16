@@ -1,7 +1,7 @@
-import $ from "jquery";
 
 document.addEventListener("DOMContentLoaded", () => {
   const loader = document.querySelector(".loader");
+  
   if (loader) {
     window.addEventListener("load", () => {
       loader.classList.add("done");
@@ -9,55 +9,35 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   const links = document.querySelectorAll("a");
   links.forEach((link) => {
-    if (
-      link.hasAttribute("href") &&
-      link.dataset.toggle == null &&
-      !link.href.endsWith(".html")
-    ) {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (
-          window.location.host == "localhost" ||
-          window.location.host == "projects.emarketing-arabia.com"
-        ) {
-          if (
-            window.location.pathname.replace(/^\//, "") ==
-            link.pathname.replace(/^\//, "").concat("/")
-          ) {
-            var target = $(link.hash);
-            target = target.length
-              ? target
-              : $("[name=" + link.hash.slice(1) + "]");
-            if (target.length) {
-              window.scroll({
-                top: target.offset().top,
-                behavior: "smooth",
-              });
-              return false;
-            }
-          }
-        } else {
-          if (
-            window.location.pathname.replace(/^\//, "") ==
-            link.pathname.replace(/^\//, "")
-          ) {
-            var target = $(link.hash);
-            if (target.length) {
-              window.scroll({
-                top: target.offset().top,
-                behavior: "smooth",
-              });
-              return false;
-            }
-          }
-        }
-        window.history.pushState({ usedPush: true }, null, link.href);
+    link.addEventListener("click", () => {
+      if (
+        !link.href.includes("tel:") &&
+        !link.href.includes("mailto:") &&
+        getLastPart(link.href) !== "#"
+      ) {
         if (loader) {
           loader.classList.remove("done");
           loader.classList.add("pending");
         }
-        window.history.go();
-      });
+      }
+    });
+  });
+
+  window.addEventListener("popstate", function (e) {
+    if (loader && !getLastPart(e.target.location.href).includes("#")) {
+      loader.classList.remove("done");
+      loader.classList.add("pending");
     }
   });
+
+  
 });
+
+function getLastPart(url) {
+  var parts = url.split("/");
+  return url.lastIndexOf("/") !== url.length - 1
+    ? parts[parts.length - 1]
+    : parts[parts.length - 2];
+}
+
+

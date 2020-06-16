@@ -52,6 +52,7 @@
 @mixin ninja-form-styles(
   $field-bg: #e3f4fb,
   $field-placeholder-color: #79acbd,
+  $field-color: black,
   $field-width: 100%,
   $field-height: 50px,
   $field-padding: 0 10px,
@@ -65,7 +66,9 @@
   $submit-txt-color: white,
   $btns-width: 150px,
   $btns-height: inherit,
-  $btns-txt-size: 16px
+  $btns-txt-size: 16px,
+  $checkbox-list-vertical: false,
+  $checkbox-margin-between-items: 10px,
 ) {
 
   div.nf-form-cont {
@@ -97,7 +100,25 @@
     @include appDir(text-align, left, text-align, right);
     appearance: textfield !important;
     -webkit-appearance: textfield !important;
-   -moz-appearance: textfield !important;
+    -moz-appearance: textfield !important;
+    color: $field-color;
+  }
+
+  div.nf-form-cont .nf-field-element ul {
+    display: flex;
+    @if $checkbox-list-vertical == true {
+      flex-flow: column wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-bottom: $checkbox-margin-between-items!important;
+    } @else {
+      justify-content: start;
+      flex-flow: row wrap;
+      align-items: center;
+      li {
+        @include appDir(margin-right, $checkbox-margin-between-items!important, margin-left, $checkbox-margin-between-items!important);
+      }
+    }
   }
 
   div.nf-form-cont .nf-field-element textarea {
@@ -140,8 +161,8 @@
   .nf-form-content input:not([type="button"]),
   .nf-form-content textarea {
     background: unset !important;
-    border: unset !important;
     box-shadow: none !important;
+    border: none;
   }
 
   .nf-field-container.el-center {
@@ -151,11 +172,13 @@
 
   .nf-row {
     .nf-cell {
-      &:first-of-type:not(:last-of-type) {
-        padding-right: $field-margin-between-cols / 2;
-      }
-      &:last-of-type:not(:first-of-type) {
-        padding-left: $field-margin-between-cols / 2;
+      @include media(">ninja-form-bb") {
+        &:first-of-type:not(:last-of-type) {
+          padding-right: $field-margin-between-cols / 2;
+        }
+        &:last-of-type:not(:first-of-type) {
+          padding-left: $field-margin-between-cols / 2;
+        }
       }
     }
   }
@@ -203,7 +226,7 @@
 
 // <div class="loader">
 //   <div class="request-loader">
-//     <img src="images/Group 16.webp" />
+//     <img data-src="images/Group 16.webp" class="lazyload"/>
 //   </div>
 // </div>
 

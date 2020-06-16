@@ -23,31 +23,19 @@
 }
 
 @mixin my-loader(
-  $pending-animation-duration: null,
-  $bg-color: null,
-  $circle-width: null,
-  $circle-height: null,
-  $circle-bg-color: null,
-  $ring-after-duration: null,
-  $ring-after-delay: null,
-  $ring-before-duration: null,
-  $ring-before-delay: null,
-  $done-animation-duration: null,
-  $pending-animation-name: null,
-  $done-animation-name: null
+  $pending-animation-duration: 0.5s,
+  $bg-color: #fafafa,
+  $circle-width: 150px,
+  $circle-height: 150px,
+  $circle-bg-color: white,
+  $ring-after-duration: 1s,
+  $ring-after-delay: 0s,
+  $ring-before-duration: 1s,
+  $ring-before-delay: 0.2s,
+  $done-animation-duration: 0.5s,
+  $pending-animation-name: fadeIn,
+  $done-animation-name: fadeOut
 ) {
-  $pending-animation-duration: 0.5s !default;
-  $bg-color: #fafafa !default;
-  $circle-width: 150px !default;
-  $circle-height: 150px !default;
-  $circle-bg-color: white !default;
-  $ring-after-duration: 1s !default;
-  $ring-after-delay: 0s !default;
-  $ring-before-duration: 1s !default;
-  $ring-before-delay: 0.2s !default;
-  $done-animation-duration: 0.5s !default;
-  $pending-animation-name: fadeIn !default;
-  $done-animation-name: fadeOut !default;
   &.pending {
     animation-duration: $pending-animation-duration;
     animation-fill-mode: both;

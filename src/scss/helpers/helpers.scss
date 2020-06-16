@@ -93,6 +93,34 @@ section {
   }
 }
 
+@mixin bg-img-mixin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+@mixin appDirLeft() {
+  @if $dir == "ltr" {
+    @content;
+  }
+}
+
+@mixin appDirRight() {
+  @if $dir == "rtl" {
+    @content;
+  }
+}
+
+@mixin apply-everyrow($every) {
+  &:nth-of-type(#{$every}n + 1) {
+    @content;
+  }
+}
+
 @mixin box-ratio($big, $small) {
   position: relative;
   width: 100%;
@@ -150,6 +178,40 @@ section {
       } @else {
         @include appDir(null, null, transform, rotatey(180deg));
       }
+    }
+  }
+}
+
+@mixin my-pagination() {
+  margin: 10px 0;
+  .page-numbers {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s;
+    &.current {
+      color: white;
+      background-color: $primary;
+      border-radius: 100px;
+    }
+    &.next {
+      border: 2px solid lightgray;
+      border-radius: 20px;
+      i {
+        @include appDir(margin-left, 10px, margin-right, 10px);
+        font-size: 0.9rem;
+      }
+    }
+    &.prev {
+      border: 2px solid lightgray;
+      border-radius: 20px;
+      i {
+        @include appDir(margin-right, 10px, margin-left, 10px);
+        font-size: 0.9rem;
+      }
+    }
+    &:hover {
+      text-decoration: none;
+      border-color: $primary;
     }
   }
 }
