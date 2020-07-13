@@ -2,7 +2,6 @@
 
 html,
 body {
-  height: 100%;
   @include appDir(direction, ltr, direction, rtl);
 }
 
@@ -15,6 +14,9 @@ body.out {
 a {
   text-decoration: none;
   color: inherit;
+  &:focus {
+    outline: none;
+  }
 }
 
 section {
@@ -23,16 +25,24 @@ section {
   animation-duration: 0.5s;
   animation-fill-mode: both;
   animation-name: slideInUp;
-  // &:first-of-type {
-  //   padding-top: 140px;
-  // }
+  &:first-of-type {
+    @include media(">nav-collapse") {
+      padding-top: 150px;
+    }
+    @include media("<=nav-collapse", ">tablet") {
+      padding-top: 110px;
+    }
+    @include media("<=tablet") {
+      padding-top: 80px;
+    }
+  }
 }
 
 .container-fluid,
 .container {
   padding: 0 4vw;
 }
-.container-fluid {
+.container-fluid:not(.no-max) {
   max-width: 1600px;
 }
 
@@ -64,6 +74,15 @@ section {
     align-items: center;
     img {
       width: 50px;
+      position: relative;
+      &::after {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        content: "";
+        background: $primary;
+        mix-blend-mode: screen;
+      }
     }
   }
   &.done {
@@ -77,9 +96,35 @@ div.pagination {
   @include my-pagination();
 }
 
-// $slick-arrow-color: #a1a1a1;
-// $slick-font-path: "../assets/fonts/";
-// $slick-loader-path: "../assets/";
-// $slick-dot-size: 10px;
+.slick-prev,
+.slick-next {
+  z-index: 10;
+}
+
+.sec-title {
+  &.marked {
+    position: relative;
+    &::after {
+      position: absolute;
+      bottom: -$headings-margin-bottom;
+      @include appDir(left, 0, right, 0);
+      width: 30px;
+      height: 1px;
+      background-color: black;
+      content: "";
+    }
+  }
+}
+
+.single-title {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 34px;
+}
+.body-vail {
+  z-index: 5;
+}
+
+
 // @import "../../node_modules/slick-carousel/slick/slick.scss";
-// @import "helpers/slick-theme.scss";
+// @import "helpers/slick-theme";

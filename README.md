@@ -20,6 +20,16 @@ with wordpress:
 
 change log:
 
+ver 2.3:
+1) added a function to check string length and trim it as required (add data-trim="number" to trim the string to the same length as that number)
+2) added a replace function to replace strings (add data-replace="character-to-change" and data-replace-with)
+3) added a function to use different images for mobile and desktop depending on screen width (the functions name is det_responsive_images and more instructions can be found in the dunctions.php file)
+4) added a bottom sheet component (similar to google material)
+5) added the bootstrap walker function so now you can use the wp_nav_menu function for navbars 
+6) modified the walker so that now it accepts 2 dropdowns on hover and clicking takes you to the link required
+7) added a box shadow class that acts as a vail to content inside (still .vail has its uses)
+8) fixed a bug where the body tag didnt cover all elements in the screen
+
 ver 2.2:
 1) added a professional lazy loading script (use the same way as before but the class is not lazy its lazyload)
 2) added a script to remove the old jquery from wordpress and replace it with a newer one

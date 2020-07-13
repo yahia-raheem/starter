@@ -18,6 +18,11 @@ function register_menu()
 }
 add_action('init', 'register_menu');
 
+function register_navwalker(){
+	require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+}
+add_action( 'after_setup_theme', 'register_navwalker' );
+
 add_filter( 'mb_settings_pages', function ( $settings_pages ) {
     $settings_pages[] = array(
         'id'               => 'riwaq-sp',
@@ -257,6 +262,52 @@ function responsive_image($attachment_id, $size = 'medium' , $auto_output = fals
         ];
     } else {
         $output =  'data-srcset="' . $img_srcset .'" data-src="' . $image_src . '" data-sizes="auto"';
+        echo $output;
+    }
+
+}
+# recieves an array of id and sizes and outputs some data attributes to change images accordingly
+# example:
+# $imageIds = [
+#     [
+#         'id' => mobile image id,
+#         'size' => 'mobile'
+#     ],
+#     [
+#         'id' => desktop image id,
+#         'size' => 'desktop'
+#     ],
+# ];
+function det_responsive_images($attachment_ids, $size = 'medium' , $auto_output = true) {
+    $output = 'data-sizes="auto"';
+    $outputArray = [];
+    foreach($attachment_ids as $one) {
+        $image = wp_get_attachment_image_src( $one['id'], $size );
+ 
+        if ( ! $image ) {
+            return false;
+        }
+
+        $image_meta = wp_get_attachment_metadata( $one['id'] );
+        $image_src  = $image[0];
+        $size_array = array(
+            absint( $image[1] ),
+            absint( $image[2] ),
+        );
+        $img_srcset = wp_calculate_image_srcset( $size_array, $image_src, $image_meta, $one['id'] );
+
+        if ($auto_output == false) {
+            $outputArray []= [
+                'srcset' => $img_srcset,
+                'src' => $image_src,
+            ];
+        } else {
+            $output .=  'data-srcset-' . $one['size'] . '="' . $img_srcset .'" data-src-' . $one['size'] . '="' . $image_src . '"';
+        }
+    }
+    if ($auto_output == false) {
+        return $outputArray;
+    } else {
         echo $output;
     }
 

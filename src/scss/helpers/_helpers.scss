@@ -19,15 +19,17 @@ section {
   background-color: black;
   opacity: 0.4;
 }
-
+.shadow-vail {
+  box-shadow: 0px 0px 1px 100vmax rgba(0,0,0,0.8)!important;
+}
 .bg-image {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-height: 100%;
-  width: 100%;
   object-fit: cover;
+  min-height: 100%;
+  min-width: 100%;
 }
 
 .bg-container {
@@ -183,7 +185,7 @@ section {
 }
 
 @mixin my-pagination() {
-  margin: 10px 0;
+  margin: 30px 0;
   .page-numbers {
     font-size: 1rem;
     padding: 0.5rem 1rem;
@@ -216,4 +218,20 @@ section {
   }
 }
 
-@import "components.scss";
+@mixin if-direct-parent($parent-selector) {
+  $current-sequences: &;
+  $new-sequences: ();
+
+  @each $sequence in $current-sequences {
+    $current-selector: nth($sequence, -1);
+    $prepended-selector: join($parent-selector, $current-selector);
+    $new-sequence: set-nth($sequence, -1, $prepended-selector);
+    $new-sequences: append($new-sequences, $new-sequence, comma);
+  }
+
+  @at-root #{$new-sequences} {
+    @content;
+  }
+}
+
+@import "components";

@@ -56,6 +56,7 @@
   $field-width: 100%,
   $field-height: 50px,
   $field-padding: 0 10px,
+  $field-font-size: 16px,
   $field-margin-between-rows: 15px,
   $field-margin-between-cols: 30px,
   $field-border-radius: 10px,
@@ -64,6 +65,7 @@
   $ta-height: 120px,
   $submit-bg: #ed1b24,
   $submit-txt-color: white,
+  $submit-font-weight: normal,
   $btns-width: 150px,
   $btns-height: inherit,
   $btns-txt-size: 16px,
@@ -136,6 +138,7 @@
     height: $btns-height;
     font-size: $btns-txt-size;
     text-align: center;
+    font-weight: $submit-font-weight;
   }
 
   .nf-error.field-wrap .nf-field-element:after {
@@ -148,6 +151,10 @@
     @include appDir(right, 0!important, left, 0!important);
     @include appDir(null, null, right, unset!important);
     z-index: 10;
+  }
+
+  .nf-form-content .listselect-wrap .nf-field-element div, .nf-form-content .ninja-forms-field {
+    font-size: $field-font-size;
   }
 
   .nf-pass.field-wrap .nf-field-element:after {
@@ -183,51 +190,3 @@
     }
   }
 }
-
-// -------------------------------------------------------------- slider --------------------------------------------------------------
-
-// <div class="slideshow-container">
-
-//   <div class="mySlides">
-//     <img
-//       data-src="images/Component 1 – 1.webp"
-//       class="lazy slide-image"
-//     />
-//     <div class="slide-inner">
-//       <div class="slide-content">
-//         <small class="slide-hint">Electrical Engineer</small>
-//         <h2 class="slide-title">
-//           Electrial Installation & Maintenance Categories
-//         </h2>
-//         <a href="#" class="btn btn-primary slide-btn"
-//           >View Products</a
-//         >
-//       </div>
-//     </div>
-//   </div>
-
-//   <div class="controls">
-//     <a class="prev">&#10094;</a>
-//     <a class="next">&#10095;</a>
-//   </div>
-
-//   <div style="text-align:center" class="dots-cont">
-//     <span class="dot" data-slide="1"></span>
-//     <span class="dot" data-slide="2"></span>
-//     <span class="dot" data-slide="3"></span>
-//   </div>
-
-// </div>
-
-@import "slider.scss";
-
-
-// ------------------------------------------------------------------- loader ---------------------------------------------------
-
-// <div class="loader">
-//   <div class="request-loader">
-//     <img data-src="images/Group 16.webp" class="lazyload"/>
-//   </div>
-// </div>
-
-@import "loader.scss";
