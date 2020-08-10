@@ -8,23 +8,7 @@ import 'lazysizes/plugins/respimg/ls.respimg';
 import $ from "jquery";
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const menuLinks = document.querySelectorAll(
-    ".nav-container .navbar-nav a.nav-link"
-  );
-  const doTrim = document.querySelectorAll("[data-trim]");
-
-  menuLinks.forEach((one) => {
-    if (window.location.href == one.href) {
-      one.classList.add("active");
-    }
-  });
-
-  doTrim.forEach((one) => {
-    var length = one.getAttribute('data-trim');
-    one.innerHTML = one.innerHTML.length > length ? one.innerHTML.substring(0, length) + "..." : one.innerHTML;
-  });
-});
+document.addEventListener("DOMContentLoaded", () => {});
 
 $(document).ready(function() {
   var windowSize = $(window).width();
