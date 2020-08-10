@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sReplace = document.querySelectorAll("[data-replace]");
   const mobSheet = document.querySelectorAll("[data-mobilesheet]");
   const sWidth = screen.width;
+  const removeChildTag = document.querySelectorAll("[data-removeChildTag]");
 
   // adds 'active' class to menu item when the current pages url is the same as the links href
   if (typeof menuLinks !== "undefined") {
@@ -60,6 +61,21 @@ document.addEventListener("DOMContentLoaded", () => {
         one.innerHTML = one.innerHTML.replace(replaced, replaceWith);
         one.removeAttribute("data-replace");
         one.removeAttribute("data-replace-with");
+      }
+    });
+  }
+
+  // removes an html tag from children of a node.
+  if (typeof removeChildTag !== "undefined") {
+    removeChildTag.forEach((one) => {
+      let tag = one.getAttribute("data-removeChildTag");
+      let b = one.getElementsByTagName(tag);
+      while (b.length) {
+        let parent = b[0].parentNode;
+        while (b[0].firstChild) {
+          parent.insertBefore(b[0].firstChild, b[0]);
+        }
+        parent.removeChild(b[0]);
       }
     });
   }
@@ -184,8 +200,31 @@ const hideOnClickOutside = (element) => {
     }
   };
   document.addEventListener("click", outsideClickListener);
-}
+};
 
 const isVisible = (elem) =>
   !!elem &&
   !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+
+const setCookie = (name, value, days) => {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+const getCookie = (name) => {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+const eraseCookie = (name) => {
+  document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+}

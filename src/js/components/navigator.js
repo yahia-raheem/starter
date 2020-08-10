@@ -13,8 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (
         !link.href.includes("tel:") &&
         !link.href.includes("mailto:") &&
-        getLastPart(link.href) !== "#"
+        getLastPart(link.href) !== "#" &&
+        !link.classList.contains('no-navigator')
       ) {
+
         if (loader) {
           loader.classList.remove("done");
           loader.classList.add("pending");
@@ -39,5 +41,4 @@ function getLastPart(url) {
     ? parts[parts.length - 1]
     : parts[parts.length - 2];
 }
-
 

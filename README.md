@@ -20,6 +20,17 @@ with wordpress:
 
 change log:
 
+ver 2.4:
+1) added woo-commerce templates (almost complete and without a parent theme)
+2) readded the functions folder and imported it in the functions.php file
+3) the woocommerce-related helpers are in a separate file called woo-helpers and by default it's import is commented in the functions.php file
+4) added support for contact-form 7
+4.1) add the 'form-group' and 'form-control' classes in the form builder your self
+4.2) add classes 'row-first' and 'row-last' to fields (same level as 'form-group') for two inputs in the same line
+5) added ability to remove a child element(s) with a certain tag by adding 'data-removeChildTag' to the parent div that you want to remove the tag(s) from (for example remove all a tags etc.)
+6) added cookie control functions (setCookie, getCookie, eraseCookie)
+7) for links that shouldn't trigger the navigation add the 'no-navigator' class to them
+
 ver 2.3:
 1) added a function to check string length and trim it as required (add data-trim="number" to trim the string to the same length as that number)
 2) added a replace function to replace strings (add data-replace="character-to-change" and data-replace-with)
