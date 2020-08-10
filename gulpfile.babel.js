@@ -46,12 +46,12 @@ export const scripts = () => {
           ],
         },
         mode: PRODUCTION ? "production" : "development",
-        devtool: !PRODUCTION ? 'inline-source-map' : false,
+        devtool: false,
         output: {
           filename: "[name].js",
         },
         // externals: {
-        //  jquery: 'jQuery',
+        //   // jquery: 'jQuery',
         // },
       })
     )
@@ -75,7 +75,7 @@ export const copy = () => {
 };
 
 export const html = () => {
-  return src("src/html/*.html")
+  return src(["src/html/*.html", "!src/html/*.part.html"])
     .pipe(
       fileinclude({
         prefix: "@@",
