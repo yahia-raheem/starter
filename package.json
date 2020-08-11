@@ -1,7 +1,7 @@
 {
-  "name": "riwaq_theme",
-  "version": "1.0.0",
-  "description": "riwaq's front end",
+  "name": "starter_theme",
+  "version": "2.5",
+  "description": "my starter theme",
   "main": "index.js",
   "scripts": {
     "start": "gulp",

@@ -1,0 +1,107 @@
+.variations_form.cart {
+    .variable-select {
+        width: 100%;
+        outline: none;
+        border-radius: 0;
+        color: $body-color;
+        background-color: #f9f9f9;
+        border: 1px solid lightgray;
+        height: 40px;
+        margin-right: 0 !important;
+        padding: 5px 10px;
+    }
+    table.variations {
+        margin: 0 !important;
+        width: 100%;
+    }
+}
+
+.woocommerce div.product form.cart .variations td,
+.woocommerce div.product form.cart .variations th {
+    line-height: normal;
+}
+
+.woocommerce-variation-add-to-cart {
+    .single_add_to_cart_button {
+        width: 100%;
+        font-size: 13px;
+        line-height: 40px;
+        height: 40px;
+        border: 0;
+        border-radius: 0 !important;
+        padding: 0 25px;
+        text-transform: uppercase;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $primary !important;
+        color: Black !important;
+        &.disabled {
+            background-color: transparentize($color: $primary, $amount: 0.1) !important;
+        }
+    }
+}
+
+.woocommerce-variation.single_variation {
+    margin-top: 20px;
+}
+
+.woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt {
+    background-color: $primary;
+    transition: all 0.5s;
+    &:hover {
+        background-color: theme-color('theme-red');
+    }
+}
+
+// ***************************************************** woocommerce checkout page ************************************************
+.select2-container .select2-selection--single {
+    height: calc(1.5em + 0.75rem + 2px);
+}
+.select2-container--default .select2-selection--single {
+    border: 1px solid #ced4da;
+}
+
+.form-row {
+    flex-direction: column;
+}
+
+.woocommerce-input-wrapper {
+    input.form-control {
+        @include appDir(text-align, left, text-align, right);
+    }
+}
+
+// **************************************************** woocommerce account page ********************************************************
+
+.col-sep {
+    div {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            background-color: lightgray;
+            transform: translateX(-50%);
+            content: "";
+        }
+    }
+}
+span.required {
+    color: red;
+}
+
+.woocommerce-MyAccount-navigation-link.nav-item {
+    &.is-active {
+        background-color: #f1f1f1;
+    }
+}
+
+.woocommerce-orders-table__cell-order-actions a {
+    @include appDir(margin-right, 5px, margin-left, 5px);
+}

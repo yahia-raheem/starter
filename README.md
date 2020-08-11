@@ -7,7 +7,8 @@ enjoy!
 how to use (more specific):
 after doing the three steps above your coding day should go like this (no wordpress):
 1) run npm start then work fully inside the src folder and see your changes in the dist/html folder
-2) run npm run build when you are done with the project (don't forget to delete the php files).
+2) to import html files inside html files you can use the following function [@@include('path-to-html-file')]
+3) run npm run build when you are done with the project (don't forget to delete the php files).
 
 with wordpress:
 1) step one as before
@@ -19,6 +20,14 @@ with wordpress:
 
 
 change log:
+
+ver 2.5:
+1) removed the arrow font from slick slider ... it was causing some performance problems
+1.1) slick slider css is now a mixin that you need to call as you see fit 
+2) removed wp bootstrap dublicate file
+3) the theme name and version and description have been updated, and the usage guid has been improved (still could be better)
+4) added a scss file with some edits to the woocommerce styles which should be a good starting point
+5) fixed some issues introduced in 2.4 (sorry.)
 
 ver 2.4:
 1) added woo-commerce templates (almost complete and without a parent theme)
