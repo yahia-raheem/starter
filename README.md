@@ -22,7 +22,7 @@ with wordpress:
 change log:
 
 ver 2.6:
-1) good news! ... the infamous white screen problem has been solved for good this time ... i think
+1) good news! ... the infamous navigator function bug has been fixed completely and you no longer need to add a no-navigator to the a tag that should not trigger the function (the function now is triggered on page leave which is also good news since the function no longer needs to query all a tags in the page)
 2) added a very promising elementObserver function that can be called in any js file to detect if the element is in the screen, the function takes two parameters, the callback function to be executed if the element is intersepting and an options document that is passed by default to the callback function
 3) added an aspect ratio script to determine the height based on the width (same as the box-ratio mixin but this one does not use padding but actually determine the height on the fly based on width) to use it put the ratio (width/height) in an html attribute data-aspectRatio
 4) added an animation script file, based on animate.css, and added the appropriate imports. this script checks for data-animate and data-delay and adds animation to elements as they enter the screen, curtesy of the all powerful elementObserver function.
