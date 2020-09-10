@@ -7,26 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
       loader.classList.add("done");
     });
   }
-  const links = document.querySelectorAll("a");
-  links.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (
-        !link.href.includes("tel:") &&
-        !link.href.includes("mailto:") &&
-        getLastPart(link.href) !== "#" &&
-        !link.classList.contains('no-navigator')
-      ) {
 
-        if (loader) {
-          loader.classList.remove("done");
-          loader.classList.add("pending");
-        }
-      }
-    });
-  });
-
-  window.addEventListener("popstate", function (e) {
-    if (loader && !getLastPart(e.target.location.href).includes("#")) {
+  window.addEventListener("beforeunload", (e) => {
+    if (loader) {
       loader.classList.remove("done");
       loader.classList.add("pending");
     }
@@ -34,11 +17,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   
 });
-
-function getLastPart(url) {
-  var parts = url.split("/");
-  return url.lastIndexOf("/") !== url.length - 1
-    ? parts[parts.length - 1]
-    : parts[parts.length - 2];
-}
 

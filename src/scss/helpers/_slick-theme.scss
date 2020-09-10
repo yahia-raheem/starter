@@ -2,12 +2,13 @@
 
 @mixin slick(
     $slick-arrow-color: black,
+    $slick-arrow-shape-color: white,
     $slick-arrow-box-size: 30px,
     $slick-arrow-size: 20px,
     $slick-dot-color: black,
     $slick-dot-color-active: $slick-dot-color,
-    $slick-prev-character: "\02C2",
-    $slick-next-character: "\02C3",
+    $slick-prev-character: "\003C",
+    $slick-next-character: "\003E",
     $slick-dot-size: 6px,
     $slick-dot-box-size: $slick-dot-size,
     $slick-margin-bet-dots: 0 5px,
@@ -82,7 +83,7 @@
                 outline: none;
                 opacity: $slick-opacity-default;
                 &::after {
-                    color: invert($color: $slick-arrow-color);
+                    color: $slick-arrow-shape-color;
                     font-size: $slick-arrow-size;
                     display: flex;
                     justify-content: center;
@@ -96,13 +97,13 @@
                 }
                 &.slick-prev {
                     &::after {
-                        @include appDir(content, $slick-prev-character, content, $slick-next-character);
+                        content: $slick-prev-character;
                     }
                     @include appDir(left, 0, right, 0);
                 }
                 &.slick-next {
                     &::after {
-                        @include appDir(content, $slick-next-character, content, $slick-prev-character);
+                        content: $slick-next-character;
                     }
                     @include appDir(right, 0, left, 0);
                 }

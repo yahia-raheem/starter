@@ -1,4 +1,6 @@
 <?php
+add_theme_support('post-thumbnails');
+add_theme_support( 'custom-logo' );
 function _themename_customization($wp_customize) {
     $wp_customize->add_section('social_media_section', array('title' => 'Social Media', ));
     $wp_customize->add_setting('facebook', array('default' => '', ));
@@ -36,7 +38,7 @@ function _themename_customization($wp_customize) {
             'section' => 'social_media_section',
             'settings' => 'youtube',
         )));
-
+    
     $wp_customize->add_setting('site_loader', array(
         'default' => '',
         'type' => 'theme_mod',
@@ -48,6 +50,7 @@ function _themename_customization($wp_customize) {
             'section' => 'title_tagline',
             'settings' => 'site_loader',
         )));
+    
 }
 add_action('customize_register', '_themename_customization');
 
@@ -221,17 +224,13 @@ function my_pagination($max_num_of_pages) {
 function theme_lang_switcher(){
 	$languages = icl_get_languages('skip_missing=1');
 	if(1 < count($languages)){
-        $menu = '<div class="dropdown lang_switcher">';
-        $menu .= '<button class="btn btn-secondary dropdown-toggle" type="button" id="langswitchermenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-        $menu .= __('Language');
-        $menu .= '</button>';
-        $menu .= '<div class="dropdown-menu" aria-labelledby="langswitchermenu">';
+        $menu = '<div class="dropdown-menu" aria-labelledby="dropdownLang">';
 	    foreach($languages as $l){
 	    	if(!$l['active']) {
               $menu .= '<a class="dropdown-item" href="'.$l['url'].'"><img src="'.$l['country_flag_url'].'" height="12" alt="'.$l['language_code'].'" width="18" class="lang-flag flag-desktop" />' . $l['translated_name'].'</a>';
             }
         }
-        $menu .= '</div></div>';
+        $menu .= '</div>';
         echo $menu;
 	}
 }

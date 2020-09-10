@@ -1,6 +1,6 @@
 {
   "name": "starter_theme",
-  "version": "2.5",
+  "version": "2.6",
   "description": "my starter theme",
   "main": "index.js",
   "scripts": {
@@ -35,8 +35,15 @@
     "yargs": "^15.3.1"
   },
   "dependencies": {
+    "animate.css": "^4.1.0",
     "bootstrap": "^4.4.1",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^8.0.0",
+    "jquery": "^3.5.1",
     "lazysizes": "^5.2.2",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "tiny-slider": "^2.9.2"
   }
 }

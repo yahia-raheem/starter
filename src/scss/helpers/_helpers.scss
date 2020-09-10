@@ -20,7 +20,7 @@ section {
   opacity: 0.4;
 }
 .shadow-vail {
-  box-shadow: 0px 0px 1px 100vmax rgba(0,0,0,0.8)!important;
+  box-shadow: 0px 0px 1px 100vmax rgba(0, 0, 0, 0.8) !important;
 }
 .bg-image {
   position: absolute;
@@ -66,6 +66,56 @@ section {
   height: 3px;
 }
 
+.sidebar__inner {
+  position: sticky;
+  top: 90px;
+}
+
+@mixin arrow($direction, $color, $size, $thikness: $size, $solidState: "hollow") {
+  @if $solidState == "solid" {
+    width: 0;
+    height: 0;
+    @if $direction == "up" {
+      border-left: #{$size} solid transparent;
+      border-right: #{$size} solid transparent;
+      border-bottom: #{$size} solid #{$color};
+    }
+    @if $direction == "down" {
+      border-left: #{$size} solid transparent;
+      border-right: #{$size} solid transparent;
+      border-top: #{$size} solid #{$color};
+    }
+    @if $direction == "right" {
+      border-top: #{$size} solid transparent;
+      border-bottom: #{$size} solid transparent;
+      border-left: #{$size} solid #{$color};
+    }
+    @if $direction == "left" {
+      border-top: #{$size} solid transparent;
+      border-bottom: #{$size} solid transparent;
+      border-right: #{$size} solid #{$color};
+    }
+  }
+  @if $solidState == "hollow" {
+    border: solid #{$color};
+    border-width: 0 #{$thikness} #{$thikness} 0;
+    display: inline-block;
+    padding: #{$size};
+    @if $direction == "up" {
+      transform: rotate(-135deg);
+    }
+    @if $direction == "down" {
+      transform: rotate(45deg);
+    }
+    @if $direction == "right" {
+      transform: rotate(-45deg);
+    }
+    @if $direction == "left" {
+      transform: rotate(135deg);
+    }
+  }
+}
+
 @mixin scrollbar($color) {
   /* width */
   ::-webkit-scrollbar {
@@ -105,20 +155,14 @@ section {
   object-fit: cover;
 }
 
-@mixin appDirLeft() {
-  @if $dir == "ltr" {
-    @content;
-  }
-}
-
-@mixin appDirRight() {
+@mixin appDirRtl() {
   @if $dir == "rtl" {
     @content;
   }
 }
 
-@mixin apply-everyrow($every) {
-  &:nth-of-type(#{$every}n + 1) {
+@mixin appDirLtr() {
+  @if $dir == "ltr" {
     @content;
   }
 }
@@ -151,7 +195,7 @@ section {
   transform: translate(-50%, -50%);
 }
 
-@mixin curve($position, $height, $hideAt: null, $inverse: null) {
+@mixin curve($position, $height, $hideAt: null, $inverse: null, $inset: null) {
   .curve {
     position: absolute;
     width: 100%;
@@ -162,10 +206,18 @@ section {
     justify-content: center;
     @include appDir(left, 0, right, 0);
     @if $position == "top" {
-      top: #{-$height + 1px};
+      @if $inset != null {
+        top: 0;
+      } @else {
+        top: #{-$height + 1px};
+      }
     }
     @if $position == "bottom" {
-      bottom: #{$height - 1px};
+      @if $inset != null {
+        bottom: 0;
+      } @else {
+        bottom: #{$height - 1px};
+      }
     }
     @if $hideAt {
       @include media("<=" + $hideAt) {
@@ -218,6 +270,37 @@ section {
   }
 }
 
+@mixin insetBorder() {
+  @include appDirLtr() {
+    &:nth-child(-n + 3) {
+      border-bottom: $col-border;
+    }
+    &:nth-child(3n + 1) {
+      border-right: $col-border;
+    }
+    &:nth-child(3n) {
+      border-left: $col-border;
+    }
+    &:nth-child(n + 7) {
+      border-top: $col-border;
+    }
+  }
+  @include appDirRtl() {
+    &:nth-child(-n + 3) {
+      border-bottom: $col-border;
+    }
+    &:nth-child(3n + 1) {
+      border-left: $col-border;
+    }
+    &:nth-child(3n) {
+      border-right: $col-border;
+    }
+    &:nth-child(n + 7) {
+      border-top: $col-border;
+    }
+  }
+}
+
 @mixin if-direct-parent($parent-selector) {
   $current-sequences: &;
   $new-sequences: ();
@@ -236,3 +319,5 @@ section {
 
 @import "components.scss";
 @import "contact-form-7";
+@import "loader";
+@import "slider";

@@ -15,24 +15,25 @@
     $submit-bg: #ed1b24,
     $submit-txt-color: white,
     $submit-font-weight: normal,
-    $submit-padding: 10px 25px,
+    $btns-padding: 10px 25px,
     $btns-width: 150px,
     $btns-height: inherit,
     $btns-txt-size: 16px,
+    $btns-border-radius: $field-border-radius,
 ) {
     .wpcf7-form {
         .form-group {
             margin-bottom: $field-margin-between-rows;
             @include media('>bootstrap-sm') {
                 &.row-first, &.row-last {
-                    width: calc(50% - #{$field-margin-between-cols / 2 + 2 * $field-border-width});
+                    width: calc(50% - #{($field-margin-between-cols / 2) + (2 * $field-border-width) + 1});
                     
                     display: inline-block;
                     min-width: 200px;
                 }
                 @include media('>=big-phone') {
                     &.row-first {
-                        @include appDir(margin-right, $field-margin-between-cols, margin-left, $field-margin-between-cols);
+                        @include appDir(margin-right, #{$field-margin-between-cols - (2 * $field-border-width)}, margin-left, $field-margin-between-cols);
                     }
                 }
             }
@@ -44,7 +45,6 @@
                     border-color: $field-border-color;
                     border-style: solid;
                     border-radius: $field-border-radius;
-                    box-shadow: none;
                     min-height: $field-min-height;
                     padding: $field-padding;
                     font-weight: 400;
@@ -61,11 +61,10 @@
                     }
                 }
                 &[type=submit] {
-                    border-radius: 0;
-                    padding: 10px 25px;
+                    border-radius: $btns-border-radius;
+                    padding: $btns-padding;
                     font-size: $btns-txt-size;
                     font-weight: $submit-font-weight;
-                    text-transform: uppercase;
                     border: 0;
                     width: $btns-width;
                     color: $submit-txt-color;
@@ -78,4 +77,5 @@
             }
         }
     }
+    @content;
 }

@@ -21,6 +21,23 @@ with wordpress:
 
 change log:
 
+ver 2.6:
+1) good news! ... the infamous white screen problem has been solved for good this time ... i think
+2) added a very promising elementObserver function that can be called in any js file to detect if the element is in the screen, the function takes two parameters, the callback function to be executed if the element is intersepting and an options document that is passed by default to the callback function
+3) added an aspect ratio script to determine the height based on the width (same as the box-ratio mixin but this one does not use padding but actually determine the height on the fly based on width) to use it put the ratio (width/height) in an html attribute data-aspectRatio
+4) added an animation script file, based on animate.css, and added the appropriate imports. this script checks for data-animate and data-delay and adds animation to elements as they enter the screen, curtesy of the all powerful elementObserver function.
+5) you can now customize the img width and height of the loader from the loader mixin
+6) added a sidebar__inner class that takes care of sticky sidebars by defaut (put is as the direct child of the side bar)
+7) added a mixin called arrow that creates arrows without the use of characters or fonts (next update is going to emplement those in the slick slider theme)
+8) added the inset option to the curve mixin for inset curves
+9) added a very primitive insetborder mixin ... will be expanded in later releases
+10) optimized the checking of functions in the helpers file to save some performance
+11) fixed some issues with the contact form 7 mixin
+12) fixed some issues with the slick slider mixin (lets hope this is really the last time we will edit this mixin again)
+13) fixed the appDirRtl and appDirLtr being the opposite of what the name indicates
+14) updated dependencies to solve some vulnerabilities, and did some code cleanup and some performance optimizations (this has been a very big release)
+
+
 ver 2.5:
 1) removed the arrow font from slick slider ... it was causing some performance problems
 1.1) slick slider css is now a mixin that you need to call as you see fit 

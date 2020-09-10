@@ -9,9 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobSheet = document.querySelectorAll("[data-mobilesheet]");
   const sWidth = screen.width;
   const removeChildTag = document.querySelectorAll("[data-removeChildTag]");
+  const aspectRatio = document.querySelectorAll('[data-aspectRatio]');
+
 
   // adds 'active' class to menu item when the current pages url is the same as the links href
-  if (typeof menuLinks !== "undefined") {
+  if (menuLinks.length > 0) {
     menuLinks.forEach((one) => {
       if (window.location.href == one.href) {
         one.classList.add("active");
@@ -20,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // trims strings to be as long as the provided length in the 'data-trim' attribute
-  if (typeof doTrim !== "undefined") {
+  if (doTrim.length > 0) {
     doTrim.forEach((one) => {
       var length = one.getAttribute("data-trim");
       one.innerHTML =
@@ -32,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // determine the appropriate image to use when different images are used on mobile and desktop
-  if (typeof detImages !== "undefined") {
+  if (detImages.length > 0) {
     detImages.forEach((one) => {
       if (sWidth >= 768) {
         one.setAttribute(
@@ -53,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // replaces a character with another based on both 'data-replace' and 'data-replaced-with' and removes the attributes after its done
-  if (typeof sReplace !== "undefined") {
+  if (sReplace.length > 0) {
     sReplace.forEach((one) => {
       var replaced = one.getAttribute("data-replace");
       var replaceWith = one.getAttribute("data-replace-with");
@@ -66,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // removes an html tag from children of a node.
-  if (typeof removeChildTag !== "undefined") {
+  if (removeChildTag.length > 0) {
     removeChildTag.forEach((one) => {
       let tag = one.getAttribute("data-removeChildTag");
       let b = one.getElementsByTagName(tag);
@@ -104,13 +106,13 @@ document.addEventListener("DOMContentLoaded", () => {
   //     },
   //   ]
   // };
-  if (typeof mobSheet !== "undefined") {
+  if (mobSheet.length > 0) {
     mobSheet.forEach((one) => {
       dict = one.getAttribute("data-mobilesheet");
       data = JSON.parse(dict);
       one.style.transition = "height 0.5s, box-shadow 0.2s";
       let buttons = one.querySelectorAll("[data-open]");
-      if (typeof buttons !== "undefined") {
+      if (buttons) {
         buttons.forEach((button) => {
           button.addEventListener("click", () => {
             if (!one.classList.contains("open")) {
@@ -123,7 +125,33 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // determine height based on width (aspect ratio)
+  if (aspectRatio.length > 0) {
+    aspectRatio.forEach((one) => {
+      let width = one.offsetWidth
+      let aspectRatio = one.getAttribute('data-aspectRatio');
+      let height = detHeight(aspectRatio, width);
+      one.style.height = `${height}px`;
+    });
+    window.addEventListener('resize', () => {
+      aspectRatio.forEach((one) => {
+        let width = one.offsetWidth
+        let aspectRatio = one.getAttribute('data-aspectRatio');
+        let height = detHeight(aspectRatio, width);
+        one.style.height = `${height}px`;
+      });
+    });
+  }
 });
+
+const detHeight = (aspectRatio, width) => {
+  let data = aspectRatio.split('/');
+  aspectWidth = data[0];
+  aspectHeight = data[1];
+  let height = parseInt(width) * parseInt(aspectHeight) / parseInt(aspectWidth);
+  return height;
+}
 
 const openSheet = (element) => {
   let buttons = element.querySelectorAll("[data-open]");
@@ -131,29 +159,29 @@ const openSheet = (element) => {
   element.style.height = data.expandedHeight;
   buttons.forEach((button) => {
     button.setAttribute("data-open", "true");
-    typeof data.removedClasses !== "undefined"
+    data.removedClasses
       ? data.removedClasses.forEach((rclass) => {
-          element
-            .querySelector(`.${rclass.divClass}`)
-            .classList.remove(rclass.toRemove);
-        })
+        element
+          .querySelector(`.${rclass.divClass}`)
+          .classList.remove(rclass.toRemove);
+      })
       : null;
-    typeof data.addedClasses !== "undefined"
+    data.addedClasses
       ? data.addedClasses.forEach((aclass) => {
-          element
-            .querySelector(`.${aclass.divClass}`)
-            .classList.add(aclass.toAdd);
-        })
+        element
+          .querySelector(`.${aclass.divClass}`)
+          .classList.add(aclass.toAdd);
+      })
       : null;
-    typeof data.changedClasses !== "undefined"
+    data.changedClasses
       ? data.changedClasses.forEach((cclass) => {
-          element
-            .querySelector(`.${cclass.divClass}`)
-            .classList.remove(cclass.toChange);
-          element
-            .querySelector(`.${cclass.divClass}`)
-            .classList.add(cclass.changeWith);
-        })
+        element
+          .querySelector(`.${cclass.divClass}`)
+          .classList.remove(cclass.toChange);
+        element
+          .querySelector(`.${cclass.divClass}`)
+          .classList.add(cclass.changeWith);
+      })
       : null;
   });
   hideOnClickOutside(element);
@@ -165,29 +193,29 @@ const closeSheet = (element) => {
   element.style.height = data.normalHeight;
   buttons.forEach((button) => {
     button.setAttribute("data-open", "false");
-    typeof data.removedClasses !== "undefined"
+    data.removedClasses
       ? data.removedClasses.forEach((rclass) => {
-          element
-            .querySelector(`.${rclass.divClass}`)
-            .classList.add(rclass.toRemove);
-        })
+        element
+          .querySelector(`.${rclass.divClass}`)
+          .classList.add(rclass.toRemove);
+      })
       : null;
-    typeof data.addedClasses !== "undefined"
+    data.addedClasses
       ? data.addedClasses.forEach((aclass) => {
-          element
-            .querySelector(`.${aclass.divClass}`)
-            .classList.remove(aclass.toAdd);
-        })
+        element
+          .querySelector(`.${aclass.divClass}`)
+          .classList.remove(aclass.toAdd);
+      })
       : null;
-    typeof data.changedClasses !== "undefined"
+    data.changedClasses
       ? data.changedClasses.forEach((cclass) => {
-          element
-            .querySelector(`.${cclass.divClass}`)
-            .classList.add(cclass.toChange);
-          element
-            .querySelector(`.${cclass.divClass}`)
-            .classList.remove(cclass.changeWith);
-        })
+        element
+          .querySelector(`.${cclass.divClass}`)
+          .classList.add(cclass.toChange);
+        element
+          .querySelector(`.${cclass.divClass}`)
+          .classList.remove(cclass.changeWith);
+      })
       : null;
   });
 };
@@ -206,7 +234,7 @@ const isVisible = (elem) =>
   !!elem &&
   !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
 
-const setCookie = (name, value, days) => {
+export const setCookie = (name, value, days) => {
   var expires = "";
   if (days) {
     var date = new Date();
@@ -215,7 +243,7 @@ const setCookie = (name, value, days) => {
   }
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
-const getCookie = (name) => {
+export const getCookie = (name) => {
   var nameEQ = name + "=";
   var ca = document.cookie.split(";");
   for (var i = 0; i < ca.length; i++) {
@@ -225,6 +253,20 @@ const getCookie = (name) => {
   }
   return null;
 }
-const eraseCookie = (name) => {
+export const eraseCookie = (name) => {
   document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 }
+
+export const elementObserver = (callback, options) => new IntersectionObserver(
+  (entries, observer) => {
+      entries.forEach(entry => {
+          let target = entry.target;
+          if (entry.isIntersecting) {
+              callback(options);
+          }
+      });
+  },
+  {
+      threshold: 0.25
+  }
+).observe(options.element);
