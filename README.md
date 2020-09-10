@@ -20,6 +20,7 @@ with wordpress:
 
 
 change log:
+(these change notes are here for checking old versions since i'm now using releases for changelogs)
 
 ver 2.6:
 1) good news! ... the infamous navigator function bug has been fixed completely and you no longer need to add a no-navigator to the a tag that should not trigger the function (the function now is triggered on page leave which is also good news since the function no longer needs to query all a tags in the page)
