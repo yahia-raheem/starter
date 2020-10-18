@@ -3,7 +3,6 @@ add_theme_support('post-thumbnails');
 add_theme_support( 'custom-logo' );
 
 function _themename_assets() {
-    wp_enqueue_style( 'font-awesome', get_stylesheet_directory_uri() . '/dist/assets/fontawesome/css/all.min.css', array(), '1.0.0', 'all' );
     if ( apply_filters( 'wpml_is_rtl', NULL) ) {
         wp_enqueue_style( '_themename-stylesheet-rtl', get_stylesheet_directory_uri() . '/dist/css/bundle-rtl.css', array(), '1.0.0', 'all' );
         wp_enqueue_script( '_themename-scripts-rtl', get_stylesheet_directory_uri() . '/dist/js/bundle-rtl.js', array('jquery'), '1.0.0', true );

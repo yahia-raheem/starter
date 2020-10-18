@@ -1,6 +1,6 @@
 {
   "name": "starter_theme",
-  "version": "2.6",
+  "version": "2.6.5",
   "description": "my starter theme",
   "main": "index.js",
   "scripts": {
@@ -37,7 +37,6 @@
   "dependencies": {
     "animate.css": "^4.1.0",
     "bootstrap": "^4.4.1",
-    "imagemin-gifsicle": "^7.0.0",
     "imagemin-jpegtran": "^7.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^8.0.0",
