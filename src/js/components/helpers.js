@@ -147,8 +147,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const detHeight = (aspectRatio, width) => {
   let data = aspectRatio.split('/');
-  aspectWidth = data[0];
-  aspectHeight = data[1];
+  let aspectWidth = data[0];
+  let aspectHeight = data[1];
   let height = parseInt(width) * parseInt(aspectHeight) / parseInt(aspectWidth);
   return height;
 }

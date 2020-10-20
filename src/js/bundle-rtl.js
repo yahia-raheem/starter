@@ -1,6 +1,7 @@
 import "../../node_modules/bootstrap/dist/js/bootstrap.bundle.min";
 // import "../../node_modules/slick-carousel/slick/slick.min";
-import "./components/my-navbar";
+// import "./components/my-navbar";
+import "./components/helpers";
 import "./components/navigator";
 import 'lazysizes';
 import 'lazysizes/plugins/respimg/ls.respimg';
