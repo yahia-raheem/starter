@@ -5,6 +5,7 @@
     $slick-arrow-shape-color: white,
     $slick-arrow-box-size: 30px,
     $slick-arrow-size: 20px,
+    $slick-arrow-font-family: $font-family-base,
     $slick-dot-color: black,
     $slick-dot-color-active: $slick-dot-color,
     $slick-prev-character: "\003C",
@@ -50,12 +51,14 @@
                 }
                 &.slick-prev {
                     &::after {
+                        font-family: $slick-arrow-font-family;
                         @include appDir(content, $slick-prev-character, content, $slick-next-character);
                     }
                     @include appDir(right, 40px, left, 40px);
                 }
                 &.slick-next {
                     &::after {
+                        font-family: $slick-arrow-font-family;
                         @include appDir(content, $slick-next-character, content, $slick-prev-character);
                     }
                     @include appDir(right, 0, left, 0);
@@ -97,12 +100,14 @@
                 }
                 &.slick-prev {
                     &::after {
+                        font-family: $slick-arrow-font-family;
                         content: $slick-prev-character;
                     }
                     @include appDir(left, 0, right, 0);
                 }
                 &.slick-next {
                     &::after {
+                        font-family: $slick-arrow-font-family;
                         content: $slick-next-character;
                     }
                     @include appDir(right, 0, left, 0);

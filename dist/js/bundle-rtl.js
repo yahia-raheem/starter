@@ -13495,8 +13495,7 @@ module.exports = function (module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_bootstrap_dist_js_bootstrap_bundle_min__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/bootstrap/dist/js/bootstrap.bundle.min */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js");
 /* harmony import */ var _node_modules_bootstrap_dist_js_bootstrap_bundle_min__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_bootstrap_dist_js_bootstrap_bundle_min__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_my_navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/my-navbar */ "./src/js/components/my-navbar.js");
-/* harmony import */ var _components_my_navbar__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_my_navbar__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/helpers */ "./src/js/components/helpers.js");
 /* harmony import */ var _components_navigator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/navigator */ "./src/js/components/navigator.js");
 /* harmony import */ var _components_navigator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_navigator__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var lazysizes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lazysizes */ "./node_modules/lazysizes/lazysizes.js");
@@ -13506,6 +13505,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
  // import "../../node_modules/slick-carousel/slick/slick.min";
+// import "./components/my-navbar";
 
 
 
@@ -13529,54 +13529,267 @@ jquery__WEBPACK_IMPORTED_MODULE_5___default()(document).ready(function () {
 
 /***/ }),
 
-/***/ "./src/js/components/my-navbar.js":
-/*!****************************************!*\
-  !*** ./src/js/components/my-navbar.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./src/js/components/helpers.js":
+/*!**************************************!*\
+  !*** ./src/js/components/helpers.js ***!
+  \**************************************/
+/*! exports provided: setCookie, getCookie, eraseCookie, elementObserver */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCookie", function() { return setCookie; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCookie", function() { return getCookie; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eraseCookie", function() { return eraseCookie; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "elementObserver", function() { return elementObserver; });
 document.addEventListener("DOMContentLoaded", function () {
-  var navBar = document.querySelector(".nav-container");
-  var mobNav = false;
-  navDesktop();
-  document.addEventListener("scroll", function () {
-    navDesktop();
-  });
-  document.querySelector(".navbar-toggler").addEventListener("click", function () {
-    navMobile();
-  });
+  // constants for various functions explained below (just comment the constant and the script is no longer excuted)
+  var menuLinks = document.querySelectorAll(".navigation-bar .navbar-nav a.nav-link");
+  var doTrim = document.querySelectorAll("[data-trim]");
+  var detImages = document.querySelectorAll(".det-res-img");
+  var sReplace = document.querySelectorAll("[data-replace]");
+  var mobSheet = document.querySelectorAll("[data-mobilesheet]");
+  var sWidth = screen.width;
+  var removeChildTag = document.querySelectorAll("[data-removeChildTag]");
+  var aspectRatio = document.querySelectorAll('[data-aspectRatio]'); // adds 'active' class to menu item when the current pages url is the same as the links href
 
-  function navDesktop() {
-    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-
-    if (scrollTop > 80) {
-      navBar.querySelector('.nav-bar').classList.add('fixed', 'shadow');
-    } else {
-      if (mobNav == false) {
-        navBar.querySelector('.nav-bar').classList.remove('fixed', 'shadow');
+  if (menuLinks.length > 0) {
+    menuLinks.forEach(function (one) {
+      if (window.location.href == one.href) {
+        one.classList.add("active");
       }
-    }
-  }
+    });
+  } // trims strings to be as long as the provided length in the 'data-trim' attribute
 
-  function navMobile() {
-    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 
-    if (mobNav == false) {
-      if (scrollTop <= 80) {
-        navBar.querySelector('.nav-bar').classList.add('fixed', 'shadow');
+  if (doTrim.length > 0) {
+    doTrim.forEach(function (one) {
+      var length = one.getAttribute("data-trim");
+      one.innerHTML = one.innerHTML.length > length ? one.innerHTML.substring(0, length) + "..." : one.innerHTML;
+      one.removeAttribute("data-trim");
+    });
+  } // determine the appropriate image to use when different images are used on mobile and desktop
+
+
+  if (detImages.length > 0) {
+    detImages.forEach(function (one) {
+      if (sWidth >= 768) {
+        one.setAttribute("data-srcset", one.getAttribute("data-srcset-desktop"));
+        one.setAttribute("data-src", one.getAttribute("data-src-desktop"));
+      } else {
+        one.setAttribute("data-srcset", one.getAttribute("data-srcset-mobile"));
+        one.setAttribute("data-src", one.getAttribute("data-src-mobile"));
       }
 
-      mobNav = true;
-    } else {
-      if (scrollTop <= 80) {
-        navBar.querySelector('.nav-bar').classList.remove('fixed', 'shadow');
-      }
+      one.removeAttribute("data-srcset-desktop");
+      one.removeAttribute("data-srcset-mobile");
+      one.removeAttribute("data-src-desktop");
+      one.removeAttribute("data-src-mobile");
+      one.classList.add("lazyload");
+    });
+  } // replaces a character with another based on both 'data-replace' and 'data-replaced-with' and removes the attributes after its done
 
-      mobNav = false;
-    }
+
+  if (sReplace.length > 0) {
+    sReplace.forEach(function (one) {
+      var replaced = one.getAttribute("data-replace");
+      var replaceWith = one.getAttribute("data-replace-with");
+
+      if (replaced && replaceWith) {
+        one.innerHTML = one.innerHTML.replace(replaced, replaceWith);
+        one.removeAttribute("data-replace");
+        one.removeAttribute("data-replace-with");
+      }
+    });
+  } // removes an html tag from children of a node.
+
+
+  if (removeChildTag.length > 0) {
+    removeChildTag.forEach(function (one) {
+      var tag = one.getAttribute("data-removeChildTag");
+      var b = one.getElementsByTagName(tag);
+
+      while (b.length) {
+        var parent = b[0].parentNode;
+
+        while (b[0].firstChild) {
+          parent.insertBefore(b[0].firstChild, b[0]);
+        }
+
+        parent.removeChild(b[0]);
+      }
+    });
+  } // open bottom sheet (similar to the material bottom sheet) you should pass the following dictionary to it
+  // var dict = {
+  //   normalHeight: 'normal div height when the sheet is collapsed',
+  //   expandedHeight: 'expanded div height',
+  //   removedClasses: [
+  //     {
+  //       divClass: 'a class that always exists on the div that u want to remove a class from',
+  //       toRemove: 'a class to remove',
+  //     },
+  //   ],
+  //   addedClasses: [
+  //     {
+  //       divClass: 'a class that always exists on the div that u want to add a class to',
+  //       toAdd: 'a class to add',
+  //     },
+  //   ],
+  //   changedClasses: [
+  //     {
+  //       divClass: 'a class that always exists on the div that u want to add or remove a class to',
+  //       toChange: 'a class to change',
+  //       changeWith: 'the class to replace "to change" class with'
+  //     },
+  //   ]
+  // };
+
+
+  if (mobSheet.length > 0) {
+    mobSheet.forEach(function (one) {
+      dict = one.getAttribute("data-mobilesheet");
+      data = JSON.parse(dict);
+      one.style.transition = "height 0.5s, box-shadow 0.2s";
+      var buttons = one.querySelectorAll("[data-open]");
+
+      if (buttons) {
+        buttons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            if (!one.classList.contains("open")) {
+              openSheet(one);
+            } else {
+              closeSheet(one);
+            }
+          });
+        });
+      }
+    });
+  } // determine height based on width (aspect ratio)
+
+
+  if (aspectRatio.length > 0) {
+    aspectRatio.forEach(function (one) {
+      var width = one.offsetWidth;
+      var aspectRatio = one.getAttribute('data-aspectRatio');
+      var height = detHeight(aspectRatio, width);
+      one.style.height = "".concat(height, "px");
+    });
+    window.addEventListener('resize', function () {
+      aspectRatio.forEach(function (one) {
+        var width = one.offsetWidth;
+        var aspectRatio = one.getAttribute('data-aspectRatio');
+        var height = detHeight(aspectRatio, width);
+        one.style.height = "".concat(height, "px");
+      });
+    });
   }
 });
+
+var detHeight = function detHeight(aspectRatio, width) {
+  var data = aspectRatio.split('/');
+  var aspectWidth = data[0];
+  var aspectHeight = data[1];
+  var height = parseInt(width) * parseInt(aspectHeight) / parseInt(aspectWidth);
+  return height;
+};
+
+var openSheet = function openSheet(element) {
+  var buttons = element.querySelectorAll("[data-open]");
+  element.classList.add("shadow-vail", "open");
+  element.style.height = data.expandedHeight;
+  buttons.forEach(function (button) {
+    button.setAttribute("data-open", "true");
+    data.removedClasses ? data.removedClasses.forEach(function (rclass) {
+      element.querySelector(".".concat(rclass.divClass)).classList.remove(rclass.toRemove);
+    }) : null;
+    data.addedClasses ? data.addedClasses.forEach(function (aclass) {
+      element.querySelector(".".concat(aclass.divClass)).classList.add(aclass.toAdd);
+    }) : null;
+    data.changedClasses ? data.changedClasses.forEach(function (cclass) {
+      element.querySelector(".".concat(cclass.divClass)).classList.remove(cclass.toChange);
+      element.querySelector(".".concat(cclass.divClass)).classList.add(cclass.changeWith);
+    }) : null;
+  });
+  hideOnClickOutside(element);
+};
+
+var closeSheet = function closeSheet(element) {
+  var buttons = element.querySelectorAll("[data-open]");
+  element.classList.remove("shadow-vail", "open");
+  element.style.height = data.normalHeight;
+  buttons.forEach(function (button) {
+    button.setAttribute("data-open", "false");
+    data.removedClasses ? data.removedClasses.forEach(function (rclass) {
+      element.querySelector(".".concat(rclass.divClass)).classList.add(rclass.toRemove);
+    }) : null;
+    data.addedClasses ? data.addedClasses.forEach(function (aclass) {
+      element.querySelector(".".concat(aclass.divClass)).classList.remove(aclass.toAdd);
+    }) : null;
+    data.changedClasses ? data.changedClasses.forEach(function (cclass) {
+      element.querySelector(".".concat(cclass.divClass)).classList.add(cclass.toChange);
+      element.querySelector(".".concat(cclass.divClass)).classList.remove(cclass.changeWith);
+    }) : null;
+  });
+};
+
+var hideOnClickOutside = function hideOnClickOutside(element) {
+  var outsideClickListener = function outsideClickListener(event) {
+    if (!element.contains(event.target) && isVisible(element)) {
+      closeSheet(element);
+      document.removeEventListener("click", outsideClickListener);
+    }
+  };
+
+  document.addEventListener("click", outsideClickListener);
+};
+
+var isVisible = function isVisible(elem) {
+  return !!elem && !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+};
+
+var setCookie = function setCookie(name, value, days) {
+  var expires = "";
+
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+};
+var getCookie = function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(";");
+
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+
+    while (c.charAt(0) == " ") {
+      c = c.substring(1, c.length);
+    }
+
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+
+  return null;
+};
+var eraseCookie = function eraseCookie(name) {
+  document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+};
+var elementObserver = function elementObserver(callback, options) {
+  return new IntersectionObserver(function (entries, observer) {
+    entries.forEach(function (entry) {
+      var target = entry.target;
+
+      if (entry.isIntersecting) {
+        callback(options);
+      }
+    });
+  }, {
+    threshold: 0.25
+  }).observe(options.element);
+};
 
 /***/ }),
 

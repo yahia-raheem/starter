@@ -1,9 +1,46 @@
 @import "queries";
 @import "animations";
+@import "mixins";
+@import "components.scss";
+@import "contact-form-7";
+@import "loader";
+@import "slider";
+
+html,
+body {
+  @include appDir(direction, ltr, direction, rtl);
+}
+
+body.out {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: slideOutDown;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  &:focus {
+    outline: none;
+  }
+}
 
 section {
+  padding: 50px 0;
+  background-color: #ffffff;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: slideInUp;
   position: relative;
   box-sizing: border-box;
+}
+
+.container-fluid,
+.container {
+  padding: 0 4vw;
+}
+.container-fluid:not(.no-max) {
+  max-width: 1600px;
 }
 
 .spacer {
@@ -72,253 +109,21 @@ section {
   top: 90px;
 }
 
-@mixin arrow($direction, $color, $size, $thikness: $size, $solidState: "hollow") {
-  @if $solidState == "solid" {
-    width: 0;
-    height: 0;
-    @if $direction == "up" {
-      border-left: #{$size} solid transparent;
-      border-right: #{$size} solid transparent;
-      border-bottom: #{$size} solid #{$color};
-    }
-    @if $direction == "down" {
-      border-left: #{$size} solid transparent;
-      border-right: #{$size} solid transparent;
-      border-top: #{$size} solid #{$color};
-    }
-    @if $direction == "right" {
-      border-top: #{$size} solid transparent;
-      border-bottom: #{$size} solid transparent;
-      border-left: #{$size} solid #{$color};
-    }
-    @if $direction == "left" {
-      border-top: #{$size} solid transparent;
-      border-bottom: #{$size} solid transparent;
-      border-right: #{$size} solid #{$color};
-    }
-  }
-  @if $solidState == "hollow" {
-    border: solid #{$color};
-    border-width: 0 #{$thikness} #{$thikness} 0;
-    display: inline-block;
-    padding: #{$size};
-    @if $direction == "up" {
-      transform: rotate(-135deg);
-    }
-    @if $direction == "down" {
-      transform: rotate(45deg);
-    }
-    @if $direction == "right" {
-      transform: rotate(-45deg);
-    }
-    @if $direction == "left" {
-      transform: rotate(135deg);
-    }
-  }
+
+
+.slick-slide:focus {
+  outline: none;
 }
 
-@mixin scrollbar($color) {
-  /* width */
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 5px;
-  }
-
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: $color;
-    border-radius: 5px;
-  }
+.loader {
+  @include my-loader();
 }
 
-@mixin appDir($ltr_property, $ltr_value, $rtl_property, $rtl_value) {
-  @if $dir == "ltr" {
-    #{$ltr_property}: $ltr_value;
-  }
-  @if $dir == "rtl" {
-    #{$rtl_property}: $rtl_value;
-  }
+div.pagination {
+  @include my-pagination();
 }
 
-@mixin bg-img-mixin {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-height: 100%;
-  width: 100%;
-  object-fit: cover;
+.slick-prev,
+.slick-next {
+  z-index: 10;
 }
-
-@mixin appDirRtl() {
-  @if $dir == "rtl" {
-    @content;
-  }
-}
-
-@mixin appDirLtr() {
-  @if $dir == "ltr" {
-    @content;
-  }
-}
-
-@mixin box-ratio($big, $small) {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding-top: $small/$big * 100%;
-}
-
-@mixin circle($diameter) {
-  width: $diameter;
-  height: $diameter;
-  border-radius: $diameter;
-}
-
-@mixin box-shadow($horizontal, $vertical, $blur, $spread, $color, $inset: null) {
-  @if $inset {
-    box-shadow: inset $horizontal $vertical $blur $spread $color;
-  } @else {
-    box-shadow: $horizontal $vertical $blur $spread $color;
-  }
-}
-
-@mixin centered-box() {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@mixin curve($position, $height, $hideAt: null, $inverse: null, $inset: null) {
-  .curve {
-    position: absolute;
-    width: 100%;
-    height: $height;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    @include appDir(left, 0, right, 0);
-    @if $position == "top" {
-      @if $inset != null {
-        top: 0;
-      } @else {
-        top: #{-$height + 1px};
-      }
-    }
-    @if $position == "bottom" {
-      @if $inset != null {
-        bottom: 0;
-      } @else {
-        bottom: #{$height - 1px};
-      }
-    }
-    @if $hideAt {
-      @include media("<=" + $hideAt) {
-        display: none;
-      }
-    }
-    img {
-      min-width: 100%;
-      max-height: 100%;
-      @if $inverse {
-        @include appDir(transform, rotatey(180deg), null, null);
-      } @else {
-        @include appDir(null, null, transform, rotatey(180deg));
-      }
-    }
-  }
-}
-
-@mixin my-pagination() {
-  margin: 30px 0;
-  .page-numbers {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    transition: all 0.3s;
-    &.current {
-      color: white;
-      background-color: $primary;
-      border-radius: 100px;
-    }
-    &.next {
-      border: 2px solid lightgray;
-      border-radius: 20px;
-      i {
-        @include appDir(margin-left, 10px, margin-right, 10px);
-        font-size: 0.9rem;
-      }
-    }
-    &.prev {
-      border: 2px solid lightgray;
-      border-radius: 20px;
-      i {
-        @include appDir(margin-right, 10px, margin-left, 10px);
-        font-size: 0.9rem;
-      }
-    }
-    &:hover {
-      text-decoration: none;
-      border-color: $primary;
-    }
-  }
-}
-
-@mixin insetBorder() {
-  @include appDirLtr() {
-    &:nth-child(-n + 3) {
-      border-bottom: $col-border;
-    }
-    &:nth-child(3n + 1) {
-      border-right: $col-border;
-    }
-    &:nth-child(3n) {
-      border-left: $col-border;
-    }
-    &:nth-child(n + 7) {
-      border-top: $col-border;
-    }
-  }
-  @include appDirRtl() {
-    &:nth-child(-n + 3) {
-      border-bottom: $col-border;
-    }
-    &:nth-child(3n + 1) {
-      border-left: $col-border;
-    }
-    &:nth-child(3n) {
-      border-right: $col-border;
-    }
-    &:nth-child(n + 7) {
-      border-top: $col-border;
-    }
-  }
-}
-
-@mixin if-direct-parent($parent-selector) {
-  $current-sequences: &;
-  $new-sequences: ();
-
-  @each $sequence in $current-sequences {
-    $current-selector: nth($sequence, -1);
-    $prepended-selector: join($parent-selector, $current-selector);
-    $new-sequence: set-nth($sequence, -1, $prepended-selector);
-    $new-sequences: append($new-sequences, $new-sequence, comma);
-  }
-
-  @at-root #{$new-sequences} {
-    @content;
-  }
-}
-
-@import "components.scss";
-@import "contact-form-7";
-@import "loader";
-@import "slider";

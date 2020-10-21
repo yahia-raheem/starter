@@ -1,129 +1,19 @@
 @import "helpers/helpers.scss";
 
-html,
-body {
-  @include appDir(direction, ltr, direction, rtl);
-}
-
-body.out {
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
-  animation-name: slideOutDown;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  &:focus {
-    outline: none;
-  }
-}
-
-section {
-  padding: 50px 0;
-  background-color: #ffffff;
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
-  animation-name: slideInUp;
-  &:first-of-type {
-    @include media(">nav-collapse") {
-      padding-top: 150px;
-    }
-    @include media("<=nav-collapse", ">tablet") {
-      padding-top: 110px;
-    }
-    @include media("<=tablet") {
-      padding-top: 80px;
-    }
-  }
-}
-
-.container-fluid,
-.container {
-  padding: 0 4vw;
-}
-.container-fluid:not(.no-max) {
-  max-width: 1600px;
-}
-
-.slick-slide:focus {
-  outline: none;
-}
-
-.loader {
-  &.pending {
-    animation-duration: 0.5s;
-    animation-fill-mode: both;
-    animation-name: fadeIn;
-  }
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  display: flex;
-  z-index: 100;
-  justify-content: center;
-  background-color: #fafafa;
-  align-items: center;
-  top: 0;
-  left: 0;
-  .request-loader {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    img {
-      width: 50px;
-      position: relative;
-      &::after {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        content: "";
-        background: $primary;
-        mix-blend-mode: screen;
-      }
-    }
-  }
-  &.done {
-    animation-duration: 0.5s;
-    animation-fill-mode: both;
-    animation-name: fadeOut;
-  }
-}
-
-div.pagination {
-  @include my-pagination();
-}
-
-.slick-prev,
-.slick-next {
-  z-index: 10;
-}
-
-.sec-title {
-  &.marked {
-    position: relative;
-    &::after {
-      position: absolute;
-      bottom: -$headings-margin-bottom;
-      @include appDir(left, 0, right, 0);
-      width: 30px;
-      height: 1px;
-      background-color: black;
-      content: "";
-    }
-  }
-}
-
-.single-title {
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 34px;
-}
-.body-vail {
-  z-index: 5;
-}
+// .sec-title {
+//   &.marked {
+//     position: relative;
+//     &::after {
+//       position: absolute;
+//       bottom: -$headings-margin-bottom;
+//       @include appDir(left, 0, right, 0);
+//       width: 30px;
+//       height: 1px;
+//       background-color: black;
+//       content: "";
+//     }
+//   }
+// }
 
 
 // @import "../../node_modules/slick-carousel/slick/slick.scss";
