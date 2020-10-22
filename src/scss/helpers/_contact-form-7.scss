@@ -22,6 +22,7 @@
     $btns-border-radius: $field-border-radius
 ) {
     .wpcf7-form {
+        @include appDir(direction, ltr, direction, rtl);
         .form-group {
             margin-bottom: $field-margin-between-rows;
             @include media(">bootstrap-sm") {
