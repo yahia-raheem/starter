@@ -115,11 +115,21 @@
     }
 }
 
-@mixin centered-box() {
+@mixin center($dir: "both") {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    @if $dir == "h" {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    @if $dir == "v" {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    @if $dir == "both" {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 @mixin curve($position, $height, $hideAt: null, $inverse: null, $inset: null) {
