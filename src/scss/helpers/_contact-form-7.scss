@@ -19,7 +19,8 @@
     $btns-width: 150px,
     $btns-height: inherit,
     $btns-txt-size: 16px,
-    $btns-border-radius: $field-border-radius
+    $btns-border-radius: $field-border-radius,
+    $checkbox-width: 20px
 ) {
     .wpcf7-form {
         @include appDir(direction, ltr, direction, rtl);
@@ -48,7 +49,9 @@
             textarea,
             select {
                 &:not([type="submit"]) {
-                    width: $field-width;
+                    &:not([type="checkbox"]) {
+                        width: $field-width;
+                    }
                     background: $field-bg;
                     border-width: $field-border-width;
                     border-color: $field-border-color;
@@ -109,6 +112,42 @@
                 }
                 select {
                     border: none;
+                }
+            }
+
+            .wpcf7-list-item {
+                @include appDirLeft() {
+                    margin-left: 0;
+                    margin-right: $field-margin-between-cols;
+                }
+                @include appDirRight() {
+                    margin-right: 0;
+                    margin-left: $field-margin-between-cols;
+                }
+                label {
+                    display: flex;
+                    flex-direction: column;
+                }
+                input {
+                    width: $checkbox-width;
+                }
+            }
+            .wpcf7-acceptance {
+                .wpcf7-list-item {
+                    label {
+                        display: flex;
+                        flex-flow: row wrap;
+                        justify-content: flex-start;
+                        align-items: center;
+                        input {
+                            @include appDir(margin-right, 20px, margin-left, 20px);
+                        }
+                        span {
+                            @include media(">768px") {
+                                width: 90%;
+                            }
+                        }
+                    }
                 }
             }
         }
