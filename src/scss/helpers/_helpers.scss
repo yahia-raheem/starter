@@ -98,12 +98,6 @@ section {
   z-index: 10;
 }
 
-.line-wv-dashes {
-  background: repeating-linear-gradient(-45deg, gray 0px, white 1px, white 8px, gray 9px);
-  width: 100%;
-  height: 7px;
-}
-
 .sidebar__inner {
   position: sticky;
   top: 90px;

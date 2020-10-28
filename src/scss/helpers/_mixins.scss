@@ -253,3 +253,9 @@
         @content;
     }
 }
+
+@mixin line-wv-dashes($height: 7px, $color: lightgray) {
+    background: repeating-linear-gradient(-55deg, $color 0px, white 1px, white 7px, $color 8px);
+    width: 100%;
+    height: $height;
+  }
