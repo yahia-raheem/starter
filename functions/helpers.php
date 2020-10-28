@@ -69,19 +69,21 @@ function footer_custom_menu($theme_location)
 
             $link = $menu_item->url;
             $title = $menu_item->title;
-
             if (!$menu_item->menu_item_parent) {
                 $parent_id = $menu_item->ID;
-                if ($parent_id == $menu_items[$count + 1]->menu_item_parent) {
-                    $menu_list .= '<div class="col-lg-2 col-md-4 col-sm-6 col-12 mb-4 mb-md-0">' . "\n";
-                    $menu_list .= '<h5 class="sec-title">' . $title . '</h5>' . "\n";
-                    $menu_list .= '<nav class="nav flex-column">' . "\n";
+                if (isset($menu_items[$count + 1]) && $parent_id == $menu_items[$count + 1]->menu_item_parent) {
+                    $menu_list .= '<div class="col-lg-3 col-md-6 col-sm-12">' . "\n";
+                    $menu_list .= '<h5 class="col-title">' . $title . '</h5>' . "\n";
+                    $menu_list .= '<ul class="footer-nav">' . "\n";
                 } else {
-                    $menu_list .= '<div class="col-lg-2 col-md-4 col-sm-6 col-12 mb-4 mb-md-0">' . "\n";
-                    $menu_list .= '<h5 class="sec-title">No Title</h5>' . "\n";
-                    $menu_list .= '<nav class="nav flex-column">' . "\n";
-                    $menu_list .= '<a class="nav-link active" href="' . $link . '">' . $title . '</a>' . "\n";
-                    $menu_list .= '</nav>' . "\n";
+                    $menu_list .= '<div class="col-lg-3 col-md-6 col-sm-12">' . "\n";
+                    $menu_list .= '<h5 class="col-title">No Title</h5>' . "\n";
+                    $menu_list .= '<ul class="footer-nav">' . "\n";
+                    $menu_list .= '<li>';
+                    $menu_list .= '<i class="fas fa-less-than"></i>';
+                    $menu_list .= '<a class="nav-link" href="' . $link . '">' . $title . '</a>' . "\n";
+                    $menu_list .= '</li>';
+                    $menu_list .= '</ul>' . "\n";
                 }
             }
 
@@ -90,26 +92,26 @@ function footer_custom_menu($theme_location)
                 if (!$submenu) {
                     $submenu = true;
                 }
-
-                $menu_list .= '<a class="nav-link active" href="'. $link .'">'. $title .'</a>' . "\n";
+                $menu_list .= '<li>';
+                $menu_list .= '<i class="fas fa-less-than"></i>';
+                $menu_list .= '<a class="nav-link" href="' . $link . '">' . $title . '</a>' . "\n";
+                $menu_list .= '</li>';
 
 
                 if ($menu_items[$count + 1]->menu_item_parent != $parent_id && $submenu) {
-                    $menu_list .= '</nav>' . "\n";
+                    $menu_list .= '</ul>' . "\n";
                     $submenu = false;
                 } else {
                 }
-
             }
 
-            if ($menu_items[$count + 1]->menu_item_parent != $parent_id) {
+            if ((isset($menu_items[$count + 1]) && $menu_items[$count + 1]->menu_item_parent != $parent_id) || !isset($menu_items[$count + 1])) {
                 $menu_list .= '</div>' . "\n";
                 $submenu = false;
             }
 
             $count++;
         }
-
     } else {
         $menu_list = '<!-- no menu defined in location "' . $theme_location . '" -->';
     }
