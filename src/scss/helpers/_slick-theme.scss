@@ -52,14 +52,14 @@
                 &.slick-prev {
                     &::after {
                         font-family: $slick-arrow-font-family;
-                        @include appDir(content, $slick-prev-character, content, $slick-next-character);
+                        content: $slick-prev-character;
                     }
                     @include appDir(right, 40px, left, 40px);
                 }
                 &.slick-next {
                     &::after {
                         font-family: $slick-arrow-font-family;
-                        @include appDir(content, $slick-next-character, content, $slick-prev-character);
+                        content: $slick-next-character;
                     }
                     @include appDir(right, 0, left, 0);
                 }
