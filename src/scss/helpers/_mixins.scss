@@ -1,4 +1,4 @@
-@mixin arrow($direction, $color, $size, $thikness: $size, $solidState: "hollow") {
+@mixin arrow($direction, $color, $size, $thickness: $size, $solidState: "hollow") {
     @if $solidState == "solid" {
         width: 0;
         height: 0;
@@ -25,7 +25,7 @@
     }
     @if $solidState == "hollow" {
         border: solid #{$color};
-        border-width: 0 #{$thikness} #{$thikness} 0;
+        border-width: 0 #{$thickness} #{$thickness} 0;
         display: inline-block;
         padding: #{$size};
         @if $direction == "up" {
