@@ -1,6 +1,4 @@
 <?php
-add_theme_support('post-thumbnails');
-add_theme_support( 'custom-logo' );
 
 function _themename_assets() {
     if ( apply_filters( 'wpml_is_rtl', NULL) ) {
