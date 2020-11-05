@@ -116,6 +116,7 @@
                 }
                 @include hover-focus-active() {
                     opacity: $slick-opacity-on-hover;
+                    border-color: $primary;
                     &::after {
                         color: $primary;
                     }
