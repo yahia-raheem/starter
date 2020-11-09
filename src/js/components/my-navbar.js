@@ -1,16 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   var navBar = document.querySelector(".nav-container");
-  var mobNav = false;
+  var mobNav = document.querySelector('.nav-container.mobile');
   navDesktop();
+  navMobile();
   document.addEventListener("scroll", function () {
     navDesktop();
+    navMobile();
   });
-
-  document
-    .querySelector(".navbar-toggler")
-    .addEventListener("click", function () {
-      navMobile();
-    });
 
   function navDesktop() {
     var scrollTop =
@@ -18,25 +14,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (scrollTop > 80) {
       navBar.querySelector('.nav-bar').classList.add('fixed', 'shadow');
     } else {
-      if (mobNav == false) {
         navBar.querySelector('.nav-bar').classList.remove('fixed', 'shadow');
-      }
     }
   }
 
   function navMobile() {
     var scrollTop =
       document.documentElement.scrollTop || document.body.scrollTop;
-    if (mobNav == false) {
-      if (scrollTop <= 80) {
-        navBar.querySelector('.nav-bar').classList.add('fixed', 'shadow');
-      }
-      mobNav = true;
+    if (scrollTop > 80) {
+      mobNav.querySelector('.caption').classList.add('hide');
+      mobNav.querySelector('.navbar-brand').classList.remove('hide');
     } else {
-      if (scrollTop <= 80) {
-        navBar.querySelector('.nav-bar').classList.remove('fixed', 'shadow');
-      }
-      mobNav = false;
+      mobNav.querySelector('.caption').classList.remove('hide');
+      mobNav.querySelector('.navbar-brand').classList.add('hide');
     }
   }
 });

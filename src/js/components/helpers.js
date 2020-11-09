@@ -1,19 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
   // constants for various functions explained below (just comment the constant and the script is no longer excuted)
-  const menuLinks = document.querySelectorAll(
-    ".navigation-bar .navbar-nav a.nav-link"
-  );
-  const doTrim = document.querySelectorAll("[data-trim]");
-  const detImages = document.querySelectorAll(".det-res-img");
-  const sReplace = document.querySelectorAll("[data-replace]");
-  const mobSheet = document.querySelectorAll("[data-mobilesheet]");
-  const sWidth = screen.width;
-  const removeChildTag = document.querySelectorAll("[data-removeChildTag]");
-  const aspectRatio = document.querySelectorAll('[data-aspectRatio]');
-
+  // const menuLinks = document.querySelectorAll(
+  //   ".navigation-bar .navbar-nav a.nav-link"
+  // );
+  // const doTrim = document.querySelectorAll("[data-trim]");
+  // const detImages = document.querySelectorAll(".det-res-img");
+  // const sReplace = document.querySelectorAll("[data-replace]");
+  // const mobSheet = document.querySelectorAll("[data-mobilesheet]");
+  // const sWidth = screen.width;
+  // const removeChildTag = document.querySelectorAll("[data-removeChildTag]");
+  // const aspectRatio = document.querySelectorAll('[data-aspectRatio]');
 
   // adds 'active' class to menu item when the current pages url is the same as the links href
-  if (menuLinks.length > 0) {
+  if (typeof menuLinks !== 'undefined' && menuLinks.length > 0) {
     menuLinks.forEach((one) => {
       if (window.location.href == one.href) {
         one.classList.add("active");
@@ -22,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // trims strings to be as long as the provided length in the 'data-trim' attribute
-  if (doTrim.length > 0) {
+  if (typeof doTrim !== 'undefined' && doTrim.length > 0) {
     doTrim.forEach((one) => {
       var length = one.getAttribute("data-trim");
       one.innerHTML =
@@ -34,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // determine the appropriate image to use when different images are used on mobile and desktop
-  if (detImages.length > 0) {
+  if (typeof detImages !== 'undefined' && detImages.length > 0) {
     detImages.forEach((one) => {
       if (sWidth >= 768) {
         one.setAttribute(
@@ -55,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // replaces a character with another based on both 'data-replace' and 'data-replaced-with' and removes the attributes after its done
-  if (sReplace.length > 0) {
+  if (typeof sReplace !== 'undefined' && sReplace.length > 0) {
     sReplace.forEach((one) => {
       var replaced = one.getAttribute("data-replace");
       var replaceWith = one.getAttribute("data-replace-with");
@@ -68,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // removes an html tag from children of a node.
-  if (removeChildTag.length > 0) {
+  if (typeof removeChildTag !== 'undefined' && removeChildTag.length > 0) {
     removeChildTag.forEach((one) => {
       let tag = one.getAttribute("data-removeChildTag");
       let b = one.getElementsByTagName(tag);
@@ -106,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //     },
   //   ]
   // };
-  if (mobSheet.length > 0) {
+  if (typeof mobSheet !== 'undefined' && mobSheet.length > 0) {
     mobSheet.forEach((one) => {
       dict = one.getAttribute("data-mobilesheet");
       data = JSON.parse(dict);
@@ -127,16 +126,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // determine height based on width (aspect ratio)
-  if (aspectRatio.length > 0) {
+  if (typeof aspectRatio !== 'undefined'&& aspectRatio.length > 0) {
     aspectRatio.forEach((one) => {
-      let width = one.offsetWidth
+      let width = one.offsetWidth;
       let aspectRatio = one.getAttribute('data-aspectRatio');
       let height = detHeight(aspectRatio, width);
       one.style.height = `${height}px`;
     });
     window.addEventListener('resize', () => {
       aspectRatio.forEach((one) => {
-        let width = one.offsetWidth
+        let width = one.offsetWidth;
         let aspectRatio = one.getAttribute('data-aspectRatio');
         let height = detHeight(aspectRatio, width);
         one.style.height = `${height}px`;
@@ -234,39 +233,3 @@ const isVisible = (elem) =>
   !!elem &&
   !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
 
-export const setCookie = (name, value, days) => {
-  var expires = "";
-  if (days) {
-    var date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    expires = "; expires=" + date.toUTCString();
-  }
-  document.cookie = name + "=" + (value || "") + expires + "; path=/";
-}
-export const getCookie = (name) => {
-  var nameEQ = name + "=";
-  var ca = document.cookie.split(";");
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == " ") c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-  }
-  return null;
-}
-export const eraseCookie = (name) => {
-  document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-}
-
-export const elementObserver = (callback, options) => new IntersectionObserver(
-  (entries, observer) => {
-      entries.forEach(entry => {
-          let target = entry.target;
-          if (entry.isIntersecting) {
-              callback(options);
-          }
-      });
-  },
-  {
-      threshold: 0.25
-  }
-).observe(options.element);

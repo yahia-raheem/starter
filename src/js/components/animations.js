@@ -1,4 +1,4 @@
-import {elementObserver} from './helpers';
+import { elementObserver } from './helpers';
 
 const animateCSS = (node, animation, prefix = 'animate__', delay = null) =>
     // We create a Promise and return it
@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const elanimations = document.querySelectorAll('[data-animate]');
     elanimations.forEach(element => {
         let animation = element.getAttribute('data-animate');
+        if (document.getElementsByTagName("html")[0].getAttribute("dir") == 'ltr' && (animation.includes('Left') || animation.includes('Right'))) {
+            animation = animation.includes('Left') ? animation.replace('Left', 'Right') : animation.replace('Right', 'Left');
+        }
         let delay = element.getAttribute('data-delay');
         elementObserver(doAnimation, { "animation": animation, "element": element, "delay": delay });
     });
