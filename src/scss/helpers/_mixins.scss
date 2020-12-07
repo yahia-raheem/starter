@@ -190,6 +190,9 @@
             i {
                 @include appDir(margin-left, 10px, margin-right, 10px);
                 font-size: 0.9rem;
+                &::before {
+                    @include appDir(content, "\f061", content, "\f060");
+                }
             }
         }
         &.prev {
@@ -198,6 +201,9 @@
             i {
                 @include appDir(margin-right, 10px, margin-left, 10px);
                 font-size: 0.9rem;
+                &::before {
+                    @include appDir(content, "\f060", content, "\f061");
+                }
             }
         }
         &:hover {
