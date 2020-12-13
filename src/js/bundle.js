@@ -1,6 +1,7 @@
-import "../../node_modules/bootstrap/dist/js/bootstrap.bundle.min";
+import "./components/bootstrap-imports";
 // import "../../node_modules/slick-carousel/slick/slick.min";
 // import "./components/my-navbar";
+// import './components/shared';
 import "./components/helpers";
 import "./components/navigator";
 import 'lazysizes';
@@ -9,9 +10,9 @@ import 'lazysizes/plugins/respimg/ls.respimg';
 import $ from "jquery";
 
 
-document.addEventListener("DOMContentLoaded", () => {});
+document.addEventListener("DOMContentLoaded", () => { });
 
-$(document).ready(function() {
+$(document).ready(function () {
   var windowSize = $(window).width();
   if (windowSize > 1200) {
     $("ul.navbar-nav li.dropdown").hover(
