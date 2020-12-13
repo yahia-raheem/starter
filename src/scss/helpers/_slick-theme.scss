@@ -53,14 +53,24 @@
                 &.slick-prev {
                     &::after {
                         font-family: $slick-arrow-font-family;
-                        content: $slick-prev-character;
+                        @if ($slick-arrow-font-family == "FontAwesome") {
+                            line-height: 1;
+                            @include appDir(content, $slick-prev-character, content, $slick-next-character);
+                        } @else {
+                            content: $slick-prev-character;
+                        }
                     }
                     @include appDir(right, 40px, left, 40px);
                 }
                 &.slick-next {
                     &::after {
                         font-family: $slick-arrow-font-family;
-                        content: $slick-next-character;
+                        @if ($slick-arrow-font-family == "FontAwesome") {
+                            line-height: 1;
+                            @include appDir(content, $slick-next-character, content, $slick-prev-character);
+                        } @else {
+                            content: $slick-next-character;
+                        }
                     }
                     @include appDir(right, 0, left, 0);
                 }
@@ -103,14 +113,22 @@
                 &.slick-prev {
                     &::after {
                         font-family: $slick-arrow-font-family;
-                        content: $slick-prev-character;
+                        @if ($slick-arrow-font-family == "FontAwesome") {
+                            @include appDir(content, $slick-prev-character, content, $slick-next-character);
+                        } @else {
+                            content: $slick-prev-character;
+                        }
                     }
                     @include appDir(left, 0, right, 0);
                 }
                 &.slick-next {
                     &::after {
                         font-family: $slick-arrow-font-family;
-                        content: $slick-next-character;
+                        @if ($slick-arrow-font-family == "FontAwesome") {
+                            @include appDir(content, $slick-next-character, content, $slick-prev-character);
+                        } @else {
+                            content: $slick-next-character;
+                        }
                     }
                     @include appDir(right, 0, left, 0);
                 }
