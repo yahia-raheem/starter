@@ -1,6 +1,6 @@
 {
   "name": "starter_theme",
-  "version": "2.9.0",
+  "version": "2.9.1",
   "description": "my starter theme",
   "main": "index.js",
   "scripts": {
