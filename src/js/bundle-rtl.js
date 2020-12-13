@@ -12,7 +12,7 @@ import $ from "jquery";
 
 document.addEventListener("DOMContentLoaded", () => { });
 
-$(document).ready(function () {
+$(function () {
   var windowSize = $(window).width();
   if (windowSize > 1200) {
     $("ul.navbar-nav li.dropdown").hover(
