@@ -1,5 +1,5 @@
 import "./components/bootstrap-imports";
-// import "../../node_modules/slick-carousel/slick/slick.min";
+// import "slick-carousel";
 // import "./components/my-navbar";
 // import './components/shared';
 import "./components/helpers";
