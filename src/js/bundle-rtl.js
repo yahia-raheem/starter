@@ -4,8 +4,6 @@ import "./components/bootstrap-imports";
 // import './components/shared';
 import "./components/helpers";
 import "./components/navigator";
-import 'lazysizes';
-import 'lazysizes/plugins/respimg/ls.respimg';
 
 import $ from "jquery";
 

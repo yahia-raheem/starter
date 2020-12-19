@@ -41,7 +41,6 @@
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^8.0.0",
     "jquery": "^3.5.1",
-    "lazysizes": "^5.2.2",
     "popper.js": "^1.14.3",
     "slick-carousel": "^1.8.1",
     "tiny-slider": "^2.9.2"
