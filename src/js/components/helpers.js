@@ -10,6 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // const sWidth = screen.width;
   // const removeChildTag = document.querySelectorAll("[data-removeChildTag]");
   // const aspectRatio = document.querySelectorAll('[data-aspectRatio]');
+  const colorDivs = document.querySelectorAll('[data-color]');
+
+  // finds all occurances of data-color and makes a css variable named --elm-color available to the div for it and all of its decendants
+  if (typeof colorDivs !== 'undefined' && colorDivs.length > 0) {
+    colorDivs.forEach((one) => {
+      const color = one.getAttribute('data-color');
+      one.style.setProperty("--elm-color", color);
+    });
+  }
 
   // adds 'active' class to menu item when the current pages url is the same as the links href
   if (typeof menuLinks !== 'undefined' && menuLinks.length > 0) {
@@ -126,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // determine height based on width (aspect ratio)
-  if (typeof aspectRatio !== 'undefined'&& aspectRatio.length > 0) {
+  if (typeof aspectRatio !== 'undefined' && aspectRatio.length > 0) {
     aspectRatio.forEach((one) => {
       let width = one.offsetWidth;
       let aspectRatio = one.getAttribute('data-aspectRatio');
