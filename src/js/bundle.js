@@ -11,9 +11,13 @@ import $ from "jquery";
 document.addEventListener("DOMContentLoaded", () => { });
 
 $(function () {
+  $(document).on('click', '.dropdown-menu', function (e) {
+    e.stopPropagation();
+  });
+  matchHeight('.match');
   var windowSize = $(window).width();
   if (windowSize > 1200) {
-    $("ul.navbar-nav li.dropdown").hover(
+    $("ul.navbar-nav li.dropdown:not(.megamenu)").hover(
       function () {
         $(this).find(">.dropdown-menu").stop(true, true).delay(50).fadeIn(200);
       },
@@ -28,6 +32,3 @@ $(function () {
       .removeAttr("data-hover");
   }
 });
-
-
-
