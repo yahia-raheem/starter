@@ -1,7 +1,7 @@
 # starter
 my starter theme
 this repo has my html starter theme with sass and gulp (and wp support! .. more on that below).
-all you have to do is clone then run npm install in it then run npm start and when its production time run 'npm run build'
+all you have to do is download the latest version from releases then run npm install in it then run npm start and when its production time run 'npm run build'
 enjoy!
 
 how to use (more specific):
