@@ -22,7 +22,7 @@ export const styles = () => {
     .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
     .pipe(sass().on("error", sass.logError))
     .pipe(gulpif(PRODUCTION, postcss([autoprefixer])))
-    .pipe(gulpif(PRODUCTION, cleanCss({ compatibility: "ie8" })))
+    .pipe(gulpif(PRODUCTION, cleanCss({ level: 2 })))
     .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
     .pipe(dest("dist/css"));
 };
@@ -89,14 +89,14 @@ export const phpMigrate = (cb) => {
   let file = yargs.argv.file;
   if (file) {
     return src(file)
-    .pipe(
-      fileinclude({
-        prefix: "@@",
-        basepath: "@file",
-      })
-    )
-    .pipe(replace('="../', "=\"<?php bloginfo('template_directory'); ?>/dist/"))
-    .pipe(dest( function(file) { return file.base; } ));
+      .pipe(
+        fileinclude({
+          prefix: "@@",
+          basepath: "@file",
+        })
+      )
+      .pipe(replace('="../', "=\"<?php bloginfo('template_directory'); ?>/dist/"))
+      .pipe(dest(function (file) { return file.base; }));
   } else {
     console.log('no file provided ... use --file= + file path to use this function');
     cb();
