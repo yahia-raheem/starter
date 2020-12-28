@@ -113,16 +113,18 @@ function _themename_customization($wp_customize)
 
     $wp_customize->add_setting('show_love', array(
         'default'    => true,
-        'type'       => 'option',
         'capability' => 'edit_theme_options'
     ));
-    $wp_customize->add_control('show_love', array(
-        'label'      => 'Show Love',
-        'section'    => 'title_tagline',
-        'settings'   => 'show_love',
-        'type'       => 'checkbox',
-        'std'        => '1',
-        'description' => 'Check this box to show us, at cloudmaize, your love. and on behalf of us here, thank you for being a valued customer.'
+    $wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        'show_love',
+        array(
+            'label'      => 'Show Love',
+            'section'    => 'title_tagline',
+            'settings'   => 'show_love',
+            'type'       => 'checkbox',
+            'description' => 'Check this box to show us, at cloudmaize, your love. and on behalf of us here, thank you for being a valued customer.'
+        )
     ));
 }
 add_action('customize_register', '_themename_customization');
