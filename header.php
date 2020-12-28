@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8" />
@@ -9,13 +9,13 @@
 </head>
 
 <body <?php body_class(); ?>>
-    <?php 
-    $custom_logo_id = get_theme_mod( 'custom_logo' );
-    $logo = wp_get_attachment_image_src( $custom_logo_id , 'medium' );
+    <?php
+    $custom_logo_id = get_theme_mod('custom_logo');
+    $custom_loader_id = get_theme_mod('site_loader');
     ?>
     <div class="loader">
         <div class="request-loader">
-            <img data-src="" class="lazyload" />
+            <?php echo wp_get_attachment_image($custom_loader_id, ['120', '120'], true); ?>
         </div>
     </div>
     <!-- ----------------------------------------------------- nav start ------------------------------------------------------------ -->

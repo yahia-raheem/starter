@@ -101,7 +101,7 @@ function _themename_customization($wp_customize)
         'type' => 'theme_mod',
         'capability' => 'edit_theme_options'
     ));
-    $wp_customize->add_control(new WP_Customize_Image_Control(
+    $wp_customize->add_control(new WP_Customize_Media_Control(
         $wp_customize,
         'site_loader',
         array(
