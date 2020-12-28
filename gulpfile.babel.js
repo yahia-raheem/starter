@@ -14,6 +14,7 @@ import zip from "gulp-zip";
 import info from "./package.json";
 import fileinclude from "gulp-file-include";
 import replace from "gulp-replace";
+import cssnano from "cssnano";
 
 const PRODUCTION = yargs.argv.prod;
 
@@ -21,8 +22,8 @@ export const styles = () => {
   return src(["src/scss/bundle.scss", "src/scss/bundle-rtl.scss"])
     .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
     .pipe(sass().on("error", sass.logError))
-    .pipe(gulpif(PRODUCTION, postcss([autoprefixer])))
-    .pipe(gulpif(PRODUCTION, cleanCss({ level: 2 })))
+    .pipe(gulpif(PRODUCTION, cleanCss({ level: 0 })))
+    .pipe(gulpif(PRODUCTION, postcss([cssnano({ preset: 'advanced' })])))
     .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
     .pipe(dest("dist/css"));
 };
