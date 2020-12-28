@@ -14,7 +14,6 @@ $(function () {
   $(document).on('click', '.dropdown-menu', function (e) {
     e.stopPropagation();
   });
-  matchHeight('.match');
   var windowSize = $(window).width();
   if (windowSize > 1200) {
     $("ul.navbar-nav li.dropdown:not(.megamenu)").hover(

@@ -38,3 +38,34 @@ add_action('init', 'register_menu');
 # 	}
 # }
 # add_action("pre_get_posts", "blog_archive_query");
+
+
+# function sidebar_widgets_init()
+# {
+# 
+#     register_sidebar(array(
+#         'name'          => 'Footer Widget Area',
+#         'id'            => 'footer_widget_area',
+#         'before_widget' => '<div id="%1$s" class="col-lg-3 col-md-6 col-sm-12 %2$s" >',
+#         'after_widget'  => '</div>',
+#         'before_title'  => '<h5 class="sec-title marked">',
+#         'after_title'   => '</h5>',
+#     ));
+# }
+# add_action('widgets_init', 'sidebar_widgets_init');
+
+# add_filter('mb_settings_pages', function ($settings_pages) {
+#     $settings_pages[] = array(
+#         'id'               => 'theme-sp',
+#         'option_name'      => 'theme_mods_theme',
+#         'menu_title'       => 'Theme Settings',
+#         'position'         => 2,
+#         'style'            => 'no-boxes',
+#         'columns'          => 1,
+#         'tabs'             => [
+#             'general_settings' => 'General Settings',
+#         ],
+#         'tab_style'        => 'left'
+#     );
+#     return $settings_pages;
+# });
