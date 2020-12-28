@@ -34,7 +34,7 @@
   $done-animation-duration: 0.5s,
   $pending-animation-name: fadeIn,
   $done-animation-name: fadeOut,
-  $custom-img-width: null,
+  $custom-img-width: $circle-diameter
 ) {
   &.pending {
     animation-duration: $pending-animation-duration;
@@ -62,12 +62,15 @@
     border-radius: 100%;
     background: $circle-bg-color;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
-    img {
-      @if ($custom-img-width == null) {
-        width: calc(#{$circle-diameter} * 75/100);
-      }
-      @else {
-        width: $custom-img-width;
+    .img-container {
+      @include circle($circle-diameter);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: calc(#{$custom-img-width} * 75 / 100);
+        height: auto;
       }
     }
     &::after {

@@ -15,7 +15,9 @@
     ?>
     <div class="loader">
         <div class="request-loader">
-            <?php echo wp_get_attachment_image($custom_loader_id, ['120', '120'], true); ?>
+            <div class="img-container">
+                <?php echo wp_get_attachment_image($custom_loader_id, ['120', '120'], true); ?>
+            </div>
         </div>
     </div>
     <!-- ----------------------------------------------------- nav start ------------------------------------------------------------ -->
