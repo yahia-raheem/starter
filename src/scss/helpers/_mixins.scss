@@ -259,8 +259,14 @@
     }
 }
 
-@mixin line-wv-dashes($height: 7px, $color: lightgray) {
-    background: repeating-linear-gradient(-55deg, $color 0px, white 1px, white 7px, $color 8px);
+@mixin line-wv-dashes($height: 7px, $color: lightgray, $spacing: 7px, $vertical-angle: -55deg) {
+    background: repeating-linear-gradient(
+        $vertical-angle,
+        $color 0px,
+        white 1px,
+        white #{1px + $spacing},
+        $color #{2px + $spacing}
+    );
     width: 100%;
     height: $height;
 }
