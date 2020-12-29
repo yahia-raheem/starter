@@ -116,11 +116,11 @@
             }
 
             .wpcf7-list-item {
-                @include appDirLeft() {
+                @include appDirLtr() {
                     margin-left: 0;
                     margin-right: $field-margin-between-cols;
                 }
-                @include appDirRight() {
+                @include appDirRtl() {
                     margin-right: 0;
                     margin-left: $field-margin-between-cols;
                 }
