@@ -253,3 +253,12 @@ function theme_lang_switcher()
         echo $menu;
     }
 }
+
+
+add_action('widgets_init', '_themename_register_widgets');
+
+function _themename_register_widgets()
+{
+    require_once get_template_directory() . '/widgets/class-wp-widget-custom-categories.php';
+    register_widget('My_Widget_Custom_Categories');
+}
