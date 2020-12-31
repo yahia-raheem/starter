@@ -4,6 +4,7 @@ import "./components/bootstrap-imports";
 // import './components/shared';
 import "./components/helpers";
 import "./components/navigator";
+import "./components/widgets";
 
 import $ from "jquery";
 

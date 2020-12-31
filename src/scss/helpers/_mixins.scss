@@ -270,3 +270,72 @@
     width: 100%;
     height: $height;
 }
+
+@mixin widget_custom_categories(
+    $indentation: 20px,
+    $icon-family: "FontAwesome",
+    $parent-icon-content: "\f02b",
+    $closed-list-content: "\f077",
+    $open-list-content: "\f078",
+    $border-bet-items: 1px solid #eceef0
+) {
+    .title {
+        font-weight: 700;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        li {
+            position: relative;
+            padding-top: 10px;
+            @include appDir(padding-left, $indentation, padding-right, $indentation);
+            padding-bottom: 10px;
+            .children {
+                display: none;
+            }
+            &:not(:last-of-type) {
+                border-bottom: $border-bet-items;
+            }
+            &::before {
+                position: absolute;
+                font-family: $icon-family;
+                content: $parent-icon-content;
+                font-size: 0.8rem;
+                top: 15px;
+                @include appDir(left, 0, right, 0);
+            }
+            &.current-cat,
+            &.current-cat-ancestor {
+                &::before {
+                    color: $primary;
+                }
+                & > .children {
+                    display: block;
+                    border: none;
+                    li:not(.has-children) {
+                        &::before {
+                            content: "";
+                        }
+                    }
+                }
+            }
+            &.current-cat > a {
+                color: $primary;
+                font-weight: 600;
+            }
+            &.has-children {
+                &:not(.current-cat):before,
+                &:not(.current-cat-ancestor):before {
+                    content: $closed-list-content;
+                }
+                &.current-cat,
+                &.current-cat-ancestor {
+                    &::before {
+                        content: $open-list-content;
+                    }
+                }
+            }
+        }
+    }
+    @content;
+}
