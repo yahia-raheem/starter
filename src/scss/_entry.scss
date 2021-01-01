@@ -1,5 +1,8 @@
 @use "sass:meta";
-@import "helpers/helpers.scss";
+@use "helpers" as h with (
+    $dir: $dir,
+    $primary: $primary,
+);
 
 // .sec-title {
 //   &.marked {
@@ -17,5 +20,4 @@
 // }
 
 // @import "../../node_modules/slick-carousel/slick/slick.scss";
-// @import "helpers/slick-theme";
 // @import "../../node_modules/animate.css/animate.min.css";
