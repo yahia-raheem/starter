@@ -1,6 +1,6 @@
 {
   "name": "starter_theme",
-  "version": "2.9.4",
+  "version": "2.9.5",
   "description": "my starter theme",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,9 @@
     "through2": "^3.0.1",
     "vinyl-named": "^1.1.0",
     "webpack-stream": "^5.2.1",
-    "yargs": "^15.3.1"
+    "yargs": "^15.3.1",
+    "sass": "^1.32.0",
+    "fibers": "^5.0.0"
   },
   "dependencies": {
     "animate.css": "^4.1.0",

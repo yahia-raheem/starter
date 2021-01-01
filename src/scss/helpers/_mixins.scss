@@ -71,6 +71,21 @@
     }
 }
 
+@mixin appDirAuto($args...) {
+    @each $property, $value in meta.keywords($args) {
+        @if $dir == "ltr" {
+            $prop: str-replace($property, "start", "left");
+            $propClean: str-replace($prop, "end", "right");
+            #{$propClean}: $value;
+        }
+        @if $dir == "rtl" {
+            $prop: str-replace($property, "start", "right");
+            $propClean: str-replace($prop, "end", "left");
+            #{$propClean}: $value;
+        }
+    }
+}
+
 @mixin bg-img-mixin {
     position: absolute;
     top: 50%;

@@ -17,11 +17,13 @@ import replace from "gulp-replace";
 import cssnano from "cssnano";
 
 const PRODUCTION = yargs.argv.prod;
+sass.compiler = require('sass');
+
 
 export const styles = () => {
   return src(["src/scss/bundle.scss", "src/scss/bundle-rtl.scss"])
     .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
-    .pipe(sass().on("error", sass.logError))
+    .pipe(sass({ fiber: Fiber }).on("error", sass.logError))
     .pipe(gulpif(PRODUCTION, cleanCss({ level: 0 })))
     .pipe(gulpif(PRODUCTION, postcss([cssnano({ preset: 'advanced' })])))
     .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
