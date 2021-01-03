@@ -2,6 +2,7 @@
 @use "queries" as *;
 $dir: "ltr" !default;
 $primary: blue !default;
+$font-family-base: inherit !default;
 @mixin arrow($direction, $color, $size, $thickness: $size, $solidState: "hollow") {
     @if $solidState == "solid" {
         width: 0;

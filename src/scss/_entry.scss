@@ -2,6 +2,7 @@
 @use "helpers" as h with (
     $dir: $dir,
     $primary: $primary,
+    $font-family-base: $font-family-base,
 );
 
 // .sec-title {
