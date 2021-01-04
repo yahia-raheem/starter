@@ -15,11 +15,24 @@ import info from "./package.json";
 import fileinclude from "gulp-file-include";
 import replace from "gulp-replace";
 import cssnano from "cssnano";
-import Fiber from "fibers"
+import Fiber from "fibers";
+import scrape from 'website-scraper';
+import purgecss from 'gulp-purgecss';
 
 const PRODUCTION = yargs.argv.prod;
 sass.compiler = require('sass');
 
+export const extractHtml = (c) => {
+  return scrape({
+    urls: [`${info.link}`],
+    directory: 'dist/extracted',
+    recursive: true,
+    maxRecursiveDepth: 2,
+    sources: [
+      {}
+    ]
+  }, c);
+};
 
 export const styles = () => {
   return src(["src/scss/bundle.scss", "src/scss/bundle-rtl.scss"])
@@ -27,6 +40,9 @@ export const styles = () => {
     .pipe(sass({ fiber: Fiber }).on("error", sass.logError))
     .pipe(gulpif(PRODUCTION, cleanCss({ level: 0 })))
     .pipe(gulpif(PRODUCTION, postcss([cssnano({ preset: 'advanced' })])))
+    .pipe(gulpif(PRODUCTION, purgecss({
+      content: ['dist/extracted/**/*.html', 'dist/js/**/*.js']
+    })))
     .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
     .pipe(dest("dist/css"));
 };
@@ -54,9 +70,9 @@ export const scripts = () => {
         output: {
           filename: "[name].js",
         },
-        // externals: {
-        //   // jquery: 'jQuery',
-        // },
+        externals: {
+          jquery: 'jQuery',
+        },
       })
     )
     .pipe(dest("dist/js"));
@@ -108,6 +124,7 @@ export const phpMigrate = (cb) => {
 };
 
 export const clean = () => del(["dist"]);
+export const extractClean = () => del(["dist/extracted"]);
 
 export const compress = () => {
   return src([
@@ -150,8 +167,11 @@ export const dev = series(
 );
 export const build = series(
   clean,
-  parallel(styles, images, copy, scripts),
+  extractHtml,
+  scripts,
+  parallel(styles, images, copy),
   html,
+  extractClean,
   compress
 );
 export default dev;
