@@ -954,13 +954,15 @@ $font-family-base: inherit !default;
                     border-right: 7px solid transparent;
                     border-top: 7px solid $field-placeholder-color;
                     position: absolute;
-                    top: 44%;
+                    top: $field-min-height / 2;
                     @include appDir(right, 1px, left, 1px);
                     content: "";
                     z-index: 6;
                 }
                 select {
                     border: none;
+                    appearance: none;
+                    position: relative;
                 }
             }
 
