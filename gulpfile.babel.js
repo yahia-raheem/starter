@@ -18,6 +18,7 @@ import cssnano from "cssnano";
 import Fiber from "fibers";
 import scrape from 'website-scraper';
 import purgecss from 'gulp-purgecss';
+import safelist from './purgecss.safelist'
 
 const PRODUCTION = yargs.argv.prod;
 sass.compiler = require('sass');
@@ -40,12 +41,21 @@ export const styles = () => {
     .pipe(sass({ fiber: Fiber }).on("error", sass.logError))
     .pipe(gulpif(PRODUCTION, cleanCss({ level: 0 })))
     .pipe(gulpif(PRODUCTION, postcss([cssnano({ preset: 'advanced' })])))
-    .pipe(gulpif(PRODUCTION, purgecss({
-      content: ['dist/extracted/**/*.html', 'dist/js/**/*.js']
-    })))
     .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
     .pipe(dest("dist/css"));
 };
+
+export const stylePurge = () => {
+  return src(['dist/css/**/*.css'])
+    .pipe(gulpif(PRODUCTION, purgecss({
+      content: ['dist/extracted/**/*.html', 'dist/js/**/*.js'],
+      safelist: {
+        standard: [...safelist.whitelist],
+        deep: [...safelist.whitelistPatterns]
+      }
+    })))
+    .pipe(dest("dist/css"))
+}
 
 export const scripts = () => {
   return src(["src/js/bundle.js", "src/js/bundle-rtl.js"])
@@ -170,6 +180,7 @@ export const build = series(
   extractHtml,
   scripts,
   parallel(styles, images, copy),
+  stylePurge,
   html,
   extractClean,
   compress

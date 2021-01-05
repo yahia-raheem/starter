@@ -2,6 +2,11 @@
 html,
 body {
   @include appDir(direction, ltr, direction, rtl);
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 }
 
 body.out {
