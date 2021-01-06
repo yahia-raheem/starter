@@ -359,12 +359,16 @@ $font-family-base: inherit !default;
         @if $dir == "ltr" {
             $prop: str-replace($property, "start", "left");
             $propClean: str-replace($prop, "end", "right");
-            #{$propClean}: $value;
+            $val: str-replace(#{$value}, "start", "left");
+            $valClean: str-replace($val, "end", "right");
+            #{$propClean}: #{$valClean};
         }
         @if $dir == "rtl" {
             $prop: str-replace($property, "start", "right");
             $propClean: str-replace($prop, "end", "left");
-            #{$propClean}: $value;
+            $val: str-replace(#{$value}, "start", "right");
+            $valClean: str-replace($val, "end", "left");
+            #{$propClean}: #{$valClean};
         }
     }
 }
