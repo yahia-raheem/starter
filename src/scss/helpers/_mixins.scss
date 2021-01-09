@@ -373,6 +373,15 @@ $font-family-base: inherit !default;
     }
 }
 
+@mixin appDirValue($property, $ltr_value, $rtl_value) {
+    @if $dir == "ltr" {
+        #{$property}: $ltr_value;
+    }
+    @if $dir == "rtl" {
+        #{$property}: $rtl_value;
+    }
+}
+
 @mixin slick(
     $slick-arrow-color: black,
     $slick-arrow-shape-color: white,
