@@ -14,5 +14,6 @@ export default {
         /^columns-/,
         /^select2-/,
         /^price_slider/,
+        /^pagination/
     ]
 }
