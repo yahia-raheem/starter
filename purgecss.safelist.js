@@ -5,6 +5,7 @@ export default {
         'related',
         'button',
         'variable_product_options',
+        'path'
     ],
     whitelistPatterns: [
         /^woocommerce-/,
@@ -14,6 +15,7 @@ export default {
         /^columns-/,
         /^select2-/,
         /^price_slider/,
-        /^pagination/
+        /^pagination/,
+        /^path/
     ]
 }
