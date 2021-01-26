@@ -98,11 +98,11 @@ $font-family-base: inherit !default;
     }
 }
 
-@mixin box-ratio($big, $small) {
+@mixin box-ratio($width, $height) {
     position: relative;
     width: 100%;
     overflow: hidden;
-    padding-top: $small/$big * 100%;
+    padding-top: $height/$width * 100%;
 }
 
 @mixin circle($diameter) {
