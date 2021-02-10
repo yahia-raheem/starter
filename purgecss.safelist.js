@@ -16,6 +16,8 @@ export default {
         /^select2-/,
         /^price_slider/,
         /^pagination/,
-        /^path/
+        /^path/,
+        /^dropdown/,
+        /^splide/
     ]
 }

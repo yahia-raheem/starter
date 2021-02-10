@@ -104,9 +104,9 @@ section {
   outline: none;
 }
 
-.loader {
-  @include my-loader();
-}
+// .loader {
+//   @include my-loader();
+// }
 
 div.pagination {
   @include my-pagination();

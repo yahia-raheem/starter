@@ -193,27 +193,32 @@ function footer_custom_menu($theme_location)
     echo $menu_list;
 }
 
-function determine_the_title()
+function determine_the_title($echo=true)
 {
+    $result = '';
     if (is_single()) {
         $post = get_queried_object();
         $postType = get_post_type_object(get_post_type($post));
         if (is_tax($post->taxonomy, $post->term_id) && !property_exists($post, 'post_title')) {
-            echo esc_html($post->name);
+            $result = esc_html($post->name);
         } elseif (property_exists($post, 'post_title')) {
-            echo esc_html($post->post_title);
+            $result = esc_html($post->post_title);
         } elseif ($postType) {
-            print_r($postType->labels->name);
-            echo esc_html($postType->labels->name);
+            $result = esc_html($postType->labels->name);
         }
     } elseif (is_tax()) {
         $postType = get_queried_object();
-        echo esc_html($postType->name);
+        $result = esc_html($postType->name);
     } elseif (is_archive()) {
         $postType = get_queried_object();
-        echo esc_html($postType->labels->name);
+        $result = esc_html($postType->labels->name);
     } elseif (is_page()) {
-        the_title();
+        $result = get_the_title();
+    }
+    if ($echo) {
+        echo $result;
+    } else {
+        return $result;
     }
 }
 

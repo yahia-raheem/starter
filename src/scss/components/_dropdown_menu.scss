@@ -1,0 +1,92 @@
+$menu-border-radius: 5px;
+.dropdown-toggle {
+  cursor: pointer;
+}
+.dropdown-menu {
+  background-color: white;
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
+  list-style: none;
+  padding: 0;
+  color: $body-color;
+  display: none;
+  border-radius: $menu-border-radius;
+  &::after {
+    @include h.arrow('up', white, 5px, 5px, 'solid');
+    content: "";
+    @include h.center('h');
+    top: -5px;
+  }
+  @include box-shadow($box-shadow-sm);
+  .dropdown {
+    &::after {
+      top: 10px;
+      content: "\002B";
+    }
+  }
+  .menu-item {
+    margin: 0!important;
+    &:first-of-type {
+      border-top-left-radius: $menu-border-radius;
+      border-top-right-radius: $menu-border-radius;
+    }
+    &:last-of-type {
+      border-bottom-left-radius: $menu-border-radius;
+      border-bottom-right-radius: $menu-border-radius;
+    }
+    @include hover-focus-active() {
+      background-color: #f1f1f1;
+    }
+  }
+  .dropdown-menu {
+    @include h.appDirAuto($start: 160px);
+    top: 0;
+    box-shadow: none;
+    &::after {
+      top: 0;
+      z-index: -1;
+    }
+  }
+  a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  @include h.appDirAuto($padding-end: 15px);
+  &::after {
+    position: absolute;
+    top: 10px;
+    @include h.appDirAuto($end: 5px);
+    content: "\002B";
+    color: $secondary;
+  }
+  .menu-item-has-children {
+    width: 100%;
+  }
+  @include hover-focus-active() {
+    & > .dropdown-menu {
+      display: block;
+      animation-name: slideDown;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+    }
+    &::after {
+      content: "\002D";
+    }
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    display: block;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

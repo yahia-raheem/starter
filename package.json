@@ -1,6 +1,6 @@
 {
   "name": "starter_theme",
-  "version": "2.9.75",
+  "version": "3.0.0",
   "description": "my starter theme",
   "main": "index.js",
   "link": "http://gac.local/",
@@ -41,6 +41,7 @@
     "yargs": "^15.3.1"
   },
   "dependencies": {
+    "@splidejs/splide": "^2.4.21",
     "animate.css": "^4.1.0",
     "bootstrap": "^4.4.1",
     "imagemin-jpegtran": "^7.0.0",
