@@ -100,7 +100,7 @@ export const imgTosvg = (options) => {
       const resPure = this.responseText.trim();
       const parentDiv = document.createElement("div");
       parentDiv.innerHTML = resPure;
-      const svg = parentDiv.firstChild;
+      const svg = parentDiv.querySelector('svg');
       if (imgID != null) {
         svg.setAttribute("id", imgID);
       } else {
