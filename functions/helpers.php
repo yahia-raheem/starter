@@ -267,3 +267,26 @@ function _themename_register_widgets()
     require_once get_template_directory() . '/widgets/class-wp-widget-custom-categories.php';
     register_widget('My_Widget_Custom_Categories');
 }
+
+# ------------------------------------------------------------------------ api ------------------------------------------------
+add_action('rest_api_init', function () {
+    register_rest_route('generaldata/v1', '/getimage/(?P<id>\d+)', array(
+        'methods' => 'GET',
+        'callback' => 'get_image',
+        'args' => array(
+            'id' => array(
+                'validate_callback' => function ($param, $request, $key) {
+                    return is_numeric($param);
+                }
+            ),
+        ),
+        'permission_callback' => '__return_true'
+    ));
+});
+
+function get_image($data)
+{
+    $imageId = $data['id'];
+    $image = wp_get_attachment_image($imageId, 'full');
+    return $image;
+}

@@ -3,27 +3,38 @@
     $dir: $dir,
     $primary: $primary,
     $font-family-base: $font-family-base,
+    $body-color: $body-color,
+    $secondary: $secondary,
 );
 
 // .sec-title {
 //   &.marked {
 //     position: relative;
 //     &::after {
-//       position: absolute;
 //       bottom: -$headings-margin-bottom;
-//       @include appDir(left, 0, right, 0);
-//       width: 30px;
-//       height: 1px;
-//       background-color: black;
+//       @include h.center("h");
+//       width: 70px;
+//       height: 6px;
+//       border-radius: 10px;
+//       background-color: $secondary;
 //       content: "";
+//     }
+//     &.side::after {
+//       @include h.appDirAuto($start: 0);
+//       transform: none;
 //     }
 //   }
 // }
-
 // @import "../../node_modules/slick-carousel/slick/slick.scss";
-// @import "../../node_modules/@splidejs/splide/dist/css/splide-core.min.css";
 // @import "../../node_modules/animate.css/animate.min.css";
 
 // components
-@import "./components/dropdown_menu";
-@import "./components/sidenav";
+@import "./components/header";
+@import "./components/service_archive_block";
+@import "./components/blog_archive_block";
+@import "./components/footer";
+@import "./components/innercover";
+
+//pages
+@import "./pages/home";
+@import "./pages/contact_us";

@@ -1,3 +1,7 @@
+@use 'mixins' as *;
+$body-color: black !default;
+$secondary: $secondary !default;
+
 $menu-border-radius: 5px;
 .dropdown-toggle {
   cursor: pointer;
@@ -13,12 +17,12 @@ $menu-border-radius: 5px;
   display: none;
   border-radius: $menu-border-radius;
   &::after {
-    @include h.arrow('up', white, 5px, 5px, 'solid');
+    @include arrow('up', white, 5px, 5px, 'solid');
     content: "";
-    @include h.center('h');
+    @include center('h');
     top: -5px;
   }
-  @include box-shadow($box-shadow-sm);
+  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
   .dropdown {
     &::after {
       top: 10px;
@@ -27,6 +31,15 @@ $menu-border-radius: 5px;
   }
   .menu-item {
     margin: 0!important;
+    display: flex;
+    padding: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    img {
+      width: 30px;
+      height: auto;
+      @include appDirAuto($margin-end: 10px);
+    }
     &:first-of-type {
       border-top-left-radius: $menu-border-radius;
       border-top-right-radius: $menu-border-radius;
@@ -35,12 +48,12 @@ $menu-border-radius: 5px;
       border-bottom-left-radius: $menu-border-radius;
       border-bottom-right-radius: $menu-border-radius;
     }
-    @include hover-focus-active() {
+    &:hover, &:focus, &:active {
       background-color: #f1f1f1;
     }
   }
   .dropdown-menu {
-    @include h.appDirAuto($start: 160px);
+    @include appDirAuto($start: 160px);
     top: 0;
     box-shadow: none;
     &::after {
@@ -57,18 +70,18 @@ $menu-border-radius: 5px;
 .dropdown {
   position: relative;
   display: inline-block;
-  @include h.appDirAuto($padding-end: 15px);
+  @include appDirAuto($padding-end: 15px);
   &::after {
     position: absolute;
     top: 10px;
-    @include h.appDirAuto($end: 5px);
+    @include appDirAuto($end: 5px);
     content: "\002B";
     color: $secondary;
   }
   .menu-item-has-children {
     width: 100%;
   }
-  @include hover-focus-active() {
+  &:hover, &:focus, &:active {
     & > .dropdown-menu {
       display: block;
       animation-name: slideDown;

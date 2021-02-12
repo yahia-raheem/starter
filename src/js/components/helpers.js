@@ -11,6 +11,34 @@ document.addEventListener("DOMContentLoaded", () => {
   // const removeChildTag = document.querySelectorAll("[data-removeChildTag]");
   // const aspectRatio = document.querySelectorAll('[data-aspectRatio]');
   const colorDivs = document.querySelectorAll('[data-color]');
+  const menuIcons = document.querySelectorAll(".menu-icon");
+
+  // adds icons to the navigation menu item if both ".menu-icon" and "icon-[image id]" classes exist in extra classes (this depends on an api endpoint)
+  if (typeof menuIcons !== "undefined" && menuIcons.length > 0) {
+    menuIcons.forEach((one) => {
+      const iconId = Array.from(one.classList).find((single) =>
+        /^icon-/.test(single)
+      );
+      if (iconId) {
+        const requestUrl = `${
+          document.location.origin
+        }/wp-json/generaldata/v1/getimage/${iconId.split("-")[1]}`;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            const resPure = JSON.parse(this.responseText).trim();
+            const parentDiv = document.createElement("div");
+            parentDiv.innerHTML = resPure;
+            const img = parentDiv.querySelector("img");
+            one.prepend(img);
+            one.classList.remove(iconId)
+          }
+        };
+        xhttp.open("GET", requestUrl, true);
+        xhttp.send();
+      }
+    });
+  }
 
   // finds all occurances of data-color and makes a css variable named --elm-color available to the div for it and all of its decendants
   if (typeof colorDivs !== 'undefined' && colorDivs.length > 0) {
