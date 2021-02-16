@@ -1,0 +1,26 @@
+@use '../mixins' as *;
+@use '../helpers' as *;
+
+$admin: false !default;
+
+.pwb-block {
+  .block-container {
+    width: 100%;
+    margin-bottom: 50px;
+    .img-container {
+      @include box-ratio(16, 9);
+      border-radius: 5px;
+      margin-bottom: 20px;
+      @include admin-only() {
+        img {
+          height: 100% !important;
+        }
+      }
+    }
+    .data-container {
+      * {
+        margin: 0;
+      }
+    }
+  }
+}

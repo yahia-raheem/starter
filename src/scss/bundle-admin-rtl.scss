@@ -1,0 +1,9 @@
+$dir: "rtl";
+$admin: true;
+// minimal bootstrap
+@import "./bootstrap-rtl/scss/functions";
+@import "./bootstrap-rtl/scss/variables-rtl";
+@import "./bootstrap-rtl/scss/mixins-rtl";
+@import "./bootstrap-rtl/scss/grid";
+
+@import "entry-admin";

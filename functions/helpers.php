@@ -199,12 +199,10 @@ function determine_the_title($echo=true)
     if (is_single()) {
         $post = get_queried_object();
         $postType = get_post_type_object(get_post_type($post));
-        if (is_tax($post->taxonomy, $post->term_id) && !property_exists($post, 'post_title')) {
-            $result = esc_html($post->name);
-        } elseif (property_exists($post, 'post_title')) {
-            $result = esc_html($post->post_title);
-        } elseif ($postType) {
+        if ($postType) {
             $result = esc_html($postType->labels->name);
+        } else {
+            $result = get_the_title($post);
         }
     } elseif (is_tax()) {
         $postType = get_queried_object();
@@ -244,20 +242,20 @@ function my_pagination($max_num_of_pages)
     return $pagination;
 }
 
-function theme_lang_switcher()
-{
-    $languages = icl_get_languages('skip_missing=1');
-    if (1 < count($languages)) {
-        $menu = '<div class="dropdown-menu" aria-labelledby="dropdownLang">';
-        foreach ($languages as $l) {
-            if (!$l['active']) {
-                $menu .= '<a class="dropdown-item" href="' . $l['url'] . '"><img src="' . $l['country_flag_url'] . '" height="12" alt="' . $l['language_code'] . '" width="18" class="lang-flag flag-desktop" />' . $l['translated_name'] . '</a>';
-            }
-        }
-        $menu .= '</div>';
-        echo $menu;
-    }
-}
+# function theme_lang_switcher()
+# {
+#     $languages = icl_get_languages('skip_missing=1');
+#     if (1 < count($languages)) {
+#         $menu = '<div class="dropdown-menu" aria-labelledby="dropdownLang">';
+#         foreach ($languages as $l) {
+#             if (!$l['active']) {
+#                 $menu .= '<a class="dropdown-item" href="' . $l['url'] . '"><img src="' . $l['country_flag_url'] . '" height="12" alt="' . $l['language_code'] . '" width="18" class="lang-flag flag-desktop" />' . $l['translated_name'] . '</a>';
+#             }
+#         }
+#         $menu .= '</div>';
+#         echo $menu;
+#     }
+# }
 
 
 add_action('widgets_init', '_themename_register_widgets');
@@ -268,6 +266,94 @@ function _themename_register_widgets()
     register_widget('My_Widget_Custom_Categories');
 }
 
+# ------------------------------------------------------ gutenberg blocks -----------------------------------------------
+
+add_filter( 'rwmb_meta_boxes', 'itc_block_init' );
+
+function itc_block_init( $meta_boxes ) {
+    $prefix = '';
+
+    $meta_boxes[] = [
+        'title'           => __( 'Icon-Ttile-content', 'gutenberg_blocks' ),
+        'id'              => 'icon-ttile-content',
+        'category'        => 'media',
+        'supports'        => [
+            'align'           => '',
+            'customClassName' => true,
+        ],
+        'render_template' => get_template_directory() . '/templates/blocks/icon-title-content-block.php',
+        'type'            => 'block',
+        'context'         => 'side',
+        'fields'          => [
+            [
+                'name' => __( 'logo', 'gutenberg_blocks' ),
+                'id'   => $prefix . 'logo',
+                'type' => 'single_image',
+            ],
+            [
+                'name' => __( 'Title', 'gutenberg_blocks' ),
+                'id'   => $prefix . 'title',
+                'type' => 'text',
+            ],
+            [
+                'name' => __( 'Content', 'gutenberg_blocks' ),
+                'id'   => $prefix . 'content',
+                'type' => 'textarea',
+            ],
+        ],
+    ];
+
+    return $meta_boxes;
+}
+
+add_filter( 'rwmb_meta_boxes', 'Previous_works_block' );
+
+function Previous_works_block( $meta_boxes ) {
+    $prefix = '';
+
+    $meta_boxes[] = [
+        'title'       => __( 'Previous Works Block', 'gutenberg_blocks' ),
+        'id'          => 'previous-works-block',
+        'description' => 'a 16 by 9 picture with a title and subtitle under the picture',
+        'category'    => 'media',
+        'type'        => 'block',
+        'context'     => 'side',
+        'render_template' => get_template_directory() . '/templates/blocks/previous-work-block.php',
+        'fields'      => [
+            [
+                'name'       => __( 'Block', 'gutenberg_blocks' ),
+                'id'         => $prefix . 'block',
+                'type'       => 'group',
+                'clone'      => true,
+                'sort_clone' => true,
+                'fields'     => [
+                    [
+                        'name' => __( 'Image', 'gutenberg_blocks' ),
+                        'id'   => $prefix . 'image',
+                        'type' => 'single_image',
+                    ],
+                    [
+                        'name' => __( 'Title', 'gutenberg_blocks' ),
+                        'id'   => $prefix . 'title',
+                        'type' => 'text',
+                    ],
+                    [
+                        'name' => __( 'subtitle', 'gutenberg_blocks' ),
+                        'id'   => $prefix . 'subtitle',
+                        'type' => 'textarea',
+                    ],
+                    [
+                        'name' => __( 'Url', 'your-text-domain' ),
+                        'id'   => $prefix . 'url',
+                        'type' => 'url',
+                    ],
+                ],
+            ],
+        ],
+    ];
+
+    return $meta_boxes;
+}
 # ------------------------------------------------------------------------ api ------------------------------------------------
 add_action('rest_api_init', function () {
     register_rest_route('generaldata/v1', '/getimage/(?P<id>\d+)', array(
@@ -287,6 +373,6 @@ add_action('rest_api_init', function () {
 function get_image($data)
 {
     $imageId = $data['id'];
-    $image = wp_get_attachment_image($imageId, 'full');
+    $image = wp_get_attachment_image($imageId, 'full', true);
     return $image;
 }

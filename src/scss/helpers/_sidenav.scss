@@ -40,11 +40,11 @@
       position: relative;
       &.menu-icon {
         display: grid;
-        grid-template-columns: auto;
+        grid-template-columns: 70px auto;
         grid-auto-flow: column dense;
         img {
-          width: 30px;
-          height: auto;
+          max-width: 30px;
+          max-height: 30px;
           align-self: center;
           justify-self: flex-start;
           @include appDirAuto($margin-start: 40px);

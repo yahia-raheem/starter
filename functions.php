@@ -13,6 +13,12 @@ function _themename_assets()
 }
 add_action('wp_enqueue_scripts', '_themename_assets');
 
+function load_admin_styles()
+{
+    wp_enqueue_style('_themename-admin-stylesheet', get_template_directory_uri() . '/dist/css/bundle-admin.css', array(), '1.0.0', 'all');
+}
+add_action('admin_enqueue_scripts', 'load_admin_styles');
+
 function _themename_functions()
 {
     require_once get_template_directory() . '/functions/class-wp-bootstrap-navwalker.php';

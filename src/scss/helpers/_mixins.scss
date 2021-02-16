@@ -3,6 +3,14 @@
 $dir: "ltr" !default;
 $primary: blue !default;
 $font-family-base: inherit !default;
+$admin: false !default;
+
+@mixin admin-only() {
+  @if ($admin) {
+    @content;
+  }
+}
+
 @mixin arrow(
   $direction,
   $color,

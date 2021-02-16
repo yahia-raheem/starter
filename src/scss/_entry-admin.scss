@@ -1,0 +1,12 @@
+@use "helpers/blocks/itc-block" with (
+    $admin: $admin
+);
+@use "helpers/blocks/pwb-block" with (
+    $admin: $admin
+);
+
+.wp-block {
+    max-width: 1920px;
+    margin-top: 0;
+    margin-bottom: 0;
+}

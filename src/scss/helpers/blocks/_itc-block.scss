@@ -1,0 +1,26 @@
+@use '../mixins' as *;
+
+$admin: false !default;
+
+
+.itc-block {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    img {
+        max-width: 50px;
+        max-height: 50px;
+    }
+    .img-container {
+        @include appDirAuto($margin-end: 30px)
+    }
+    .title {
+        color: #4d4d4d;
+        margin: 0 0 10px;
+    }
+    .content {
+        line-height: 1.7;
+        margin: 0;
+    }
+}

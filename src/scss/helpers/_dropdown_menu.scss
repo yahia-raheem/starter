@@ -7,9 +7,10 @@ $menu-border-radius: 5px;
   cursor: pointer;
 }
 .dropdown-menu {
+  @include center('h');
   background-color: white;
   position: absolute;
-  min-width: 160px;
+  min-width: 260px;
   z-index: 1;
   list-style: none;
   padding: 0;
@@ -36,9 +37,9 @@ $menu-border-radius: 5px;
     justify-content: flex-start;
     align-items: center;
     img {
-      width: 30px;
-      height: auto;
-      @include appDirAuto($margin-end: 10px);
+      max-height: 50px;
+      max-width: 30px;
+      @include appDirAuto($margin-end: 10px, $margin-start: 15px);
     }
     &:first-of-type {
       border-top-left-radius: $menu-border-radius;

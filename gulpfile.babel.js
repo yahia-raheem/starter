@@ -36,7 +36,7 @@ export const extractHtml = (c) => {
 };
 
 export const styles = () => {
-  return src(["src/scss/bundle.scss", "src/scss/bundle-rtl.scss"])
+  return src(["src/scss/bundle.scss", "src/scss/bundle-rtl.scss", "src/scss/bundle-admin.scss", "src/scss/bundle-admin-rtl.scss"])
     .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
     .pipe(sass({ fiber: Fiber }).on("error", sass.logError))
     .pipe(gulpif(PRODUCTION, cleanCss({ level: 0 })))
@@ -46,7 +46,7 @@ export const styles = () => {
 };
 
 export const stylePurge = () => {
-  return src(['dist/css/**/*.css'])
+  return src(['dist/css/bundle.css', 'dist/css/bundle-rtl.css'])
     .pipe(gulpif(PRODUCTION, purgecss({
       content: ['dist/extracted/**/*.html', 'dist/js/**/*.js'],
       safelist: {
