@@ -1,4 +1,4 @@
-import { elementObserver } from './helpers';
+import { elementObserver } from './helper-funcs';
 
 const animateCSS = (node, animation, prefix = 'animate__', delay = null) =>
     // We create a Promise and return it

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const openNav = () => {
-  sideBar.style.width = "85vw";
+  sideBar.style.width = "100vw";
 };
 
 const closeNav = () => {

@@ -1,28 +1,30 @@
+import {imgTosvg} from "./helper-funcs";
 document.addEventListener("DOMContentLoaded", () => {
   // constants for various functions explained below (just comment the constant and the script is no longer excuted)
-  // const menuLinks = document.querySelectorAll(
-  //   ".navigation-bar .navbar-nav a.nav-link"
-  // );
-  // const doTrim = document.querySelectorAll("[data-trim]");
-  // const detImages = document.querySelectorAll(".det-res-img");
-  // const sReplace = document.querySelectorAll("[data-replace]");
-  // const mobSheet = document.querySelectorAll("[data-mobilesheet]");
-  // const sWidth = screen.width;
-  // const removeChildTag = document.querySelectorAll("[data-removeChildTag]");
-  // const aspectRatio = document.querySelectorAll('[data-aspectRatio]');
+  
+  const doTrim = document.querySelectorAll("[data-trim]");
+  const detImages = document.querySelectorAll(".det-res-img");
+  const sReplace = document.querySelectorAll("[data-replace]");
+  const mobSheet = document.querySelectorAll("[data-mobilesheet]");
+  const sWidth = screen.width;
+  const removeChildTag = document.querySelectorAll("[data-removeChildTag]");
+  const aspectRatio = document.querySelectorAll('[data-aspectRatio]');
   const colorDivs = document.querySelectorAll('[data-color]');
   const menuIcons = document.querySelectorAll(".menu-icon");
 
   // adds icons to the navigation menu item if both ".menu-icon" and "icon-[image id]" classes exist in extra classes (this depends on an api endpoint)
   if (typeof menuIcons !== "undefined" && menuIcons.length > 0) {
-    menuIcons.forEach((one) => {
+    const getUrl = window.location;
+    const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    menuIcons.forEach((one, i) => {
       const iconId = Array.from(one.classList).find((single) =>
         /^icon-/.test(single)
       );
       if (iconId) {
         const requestUrl = `${
-          document.location.origin
+          baseUrl
         }/wp-json/generaldata/v1/getimage/${iconId.split("-")[1]}`;
+        
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
@@ -32,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const img = parentDiv.querySelector("img");
             one.prepend(img);
             one.classList.remove(iconId)
+            // imgTosvg({'element': img, 'index': i});
           }
         };
         xhttp.open("GET", requestUrl, true);
@@ -48,15 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // adds 'active' class to menu item when the current pages url is the same as the links href
-  if (typeof menuLinks !== 'undefined' && menuLinks.length > 0) {
-    menuLinks.forEach((one) => {
-      if (window.location.href == one.href) {
-        one.classList.add("active");
-      }
-    });
-  }
-
   // trims strings to be as long as the provided length in the 'data-trim' attribute
   if (typeof doTrim !== 'undefined' && doTrim.length > 0) {
     doTrim.forEach((one) => {
@@ -70,53 +64,53 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // determine the appropriate image to use when different images are used on mobile and desktop
-  if (typeof detImages !== 'undefined' && detImages.length > 0) {
-    detImages.forEach((one) => {
-      if (sWidth >= 768) {
-        one.setAttribute(
-          "data-srcset",
-          one.getAttribute("data-srcset-desktop")
-        );
-        one.setAttribute("data-src", one.getAttribute("data-src-desktop"));
-      } else {
-        one.setAttribute("data-srcset", one.getAttribute("data-srcset-mobile"));
-        one.setAttribute("data-src", one.getAttribute("data-src-mobile"));
-      }
-      one.removeAttribute("data-srcset-desktop");
-      one.removeAttribute("data-srcset-mobile");
-      one.removeAttribute("data-src-desktop");
-      one.removeAttribute("data-src-mobile");
-      one.classList.add("lazyload");
-    });
-  }
+  // if (typeof detImages !== 'undefined' && detImages.length > 0) {
+  //   detImages.forEach((one) => {
+  //     if (sWidth >= 768) {
+  //       one.setAttribute(
+  //         "data-srcset",
+  //         one.getAttribute("data-srcset-desktop")
+  //       );
+  //       one.setAttribute("data-src", one.getAttribute("data-src-desktop"));
+  //     } else {
+  //       one.setAttribute("data-srcset", one.getAttribute("data-srcset-mobile"));
+  //       one.setAttribute("data-src", one.getAttribute("data-src-mobile"));
+  //     }
+  //     one.removeAttribute("data-srcset-desktop");
+  //     one.removeAttribute("data-srcset-mobile");
+  //     one.removeAttribute("data-src-desktop");
+  //     one.removeAttribute("data-src-mobile");
+  //     one.classList.add("lazyload");
+  //   });
+  // }
 
   // replaces a character with another based on both 'data-replace' and 'data-replaced-with' and removes the attributes after its done
-  if (typeof sReplace !== 'undefined' && sReplace.length > 0) {
-    sReplace.forEach((one) => {
-      var replaced = one.getAttribute("data-replace");
-      var replaceWith = one.getAttribute("data-replace-with");
-      if (replaced && replaceWith) {
-        one.innerHTML = one.innerHTML.replace(replaced, replaceWith);
-        one.removeAttribute("data-replace");
-        one.removeAttribute("data-replace-with");
-      }
-    });
-  }
+  // if (typeof sReplace !== 'undefined' && sReplace.length > 0) {
+  //   sReplace.forEach((one) => {
+  //     var replaced = one.getAttribute("data-replace");
+  //     var replaceWith = one.getAttribute("data-replace-with");
+  //     if (replaced && replaceWith) {
+  //       one.innerHTML = one.innerHTML.replace(replaced, replaceWith);
+  //       one.removeAttribute("data-replace");
+  //       one.removeAttribute("data-replace-with");
+  //     }
+  //   });
+  // }
 
   // removes an html tag from children of a node.
-  if (typeof removeChildTag !== 'undefined' && removeChildTag.length > 0) {
-    removeChildTag.forEach((one) => {
-      let tag = one.getAttribute("data-removeChildTag");
-      let b = one.getElementsByTagName(tag);
-      while (b.length) {
-        let parent = b[0].parentNode;
-        while (b[0].firstChild) {
-          parent.insertBefore(b[0].firstChild, b[0]);
-        }
-        parent.removeChild(b[0]);
-      }
-    });
-  }
+  // if (typeof removeChildTag !== 'undefined' && removeChildTag.length > 0) {
+  //   removeChildTag.forEach((one) => {
+  //     let tag = one.getAttribute("data-removeChildTag");
+  //     let b = one.getElementsByTagName(tag);
+  //     while (b.length) {
+  //       let parent = b[0].parentNode;
+  //       while (b[0].firstChild) {
+  //         parent.insertBefore(b[0].firstChild, b[0]);
+  //       }
+  //       parent.removeChild(b[0]);
+  //     }
+  //   });
+  // }
 
   // open bottom sheet (similar to the material bottom sheet) you should pass the following dictionary to it
   // var dict = {
@@ -142,25 +136,25 @@ document.addEventListener("DOMContentLoaded", () => {
   //     },
   //   ]
   // };
-  if (typeof mobSheet !== 'undefined' && mobSheet.length > 0) {
-    mobSheet.forEach((one) => {
-      dict = one.getAttribute("data-mobilesheet");
-      data = JSON.parse(dict);
-      one.style.transition = "height 0.5s, box-shadow 0.2s";
-      let buttons = one.querySelectorAll("[data-open]");
-      if (buttons) {
-        buttons.forEach((button) => {
-          button.addEventListener("click", () => {
-            if (!one.classList.contains("open")) {
-              openSheet(one);
-            } else {
-              closeSheet(one);
-            }
-          });
-        });
-      }
-    });
-  }
+  // if (typeof mobSheet !== 'undefined' && mobSheet.length > 0) {
+  //   mobSheet.forEach((one) => {
+  //     dict = one.getAttribute("data-mobilesheet");
+  //     data = JSON.parse(dict);
+  //     one.style.transition = "height 0.5s, box-shadow 0.2s";
+  //     let buttons = one.querySelectorAll("[data-open]");
+  //     if (buttons) {
+  //       buttons.forEach((button) => {
+  //         button.addEventListener("click", () => {
+  //           if (!one.classList.contains("open")) {
+  //             openSheet(one);
+  //           } else {
+  //             closeSheet(one);
+  //           }
+  //         });
+  //       });
+  //     }
+  //   });
+  // }
 
   // determine height based on width (aspect ratio)
   if (typeof aspectRatio !== 'undefined' && aspectRatio.length > 0) {
