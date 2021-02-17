@@ -11,6 +11,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const aspectRatio = document.querySelectorAll('[data-aspectRatio]');
   const colorDivs = document.querySelectorAll('[data-color]');
   const menuIcons = document.querySelectorAll(".menu-icon");
+  const selectInputs = document.querySelectorAll(".wpcf7 select");
+
+  // colors the select field with the placeholder color until the first option is changed (first options's value has to be empty and the cf7 mixin has to be used)
+  if (typeof selectInputs != "undefined" && selectInputs.length > 0) {
+    selectInputs.forEach((select) => {
+      if (select.value == "") {
+        select.classList.add("untouched");
+      }
+      const changeEvent = (e) => {
+        console.log('fired')
+        select.classList.remove("untouched");
+        removeChangeEvent();
+      };
+      const removeChangeEvent = () => {
+        select.removeEventListener("change", changeEvent);
+      };
+      select.addEventListener("change", changeEvent);
+    });
+  }
 
   // adds icons to the navigation menu item if both ".menu-icon" and "icon-[image id]" classes exist in extra classes (this depends on an api endpoint)
   if (typeof menuIcons !== "undefined" && menuIcons.length > 0) {
