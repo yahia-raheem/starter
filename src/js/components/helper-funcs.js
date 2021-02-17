@@ -93,6 +93,8 @@ export const imgTosvg = (options) => {
   const index = options["index"];
   const imgURL = img.getAttribute("src");
   const imgID = img.getAttribute("id");
+  const imgWidth = img.getAttribute("width");
+  const imgHeight = img.getAttribute("height");
   const imgClasses = img.getAttribute("class");
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -109,6 +111,8 @@ export const imgTosvg = (options) => {
         }
         svg.removeAttribute("xmlns:a");
         svg.setAttribute("class", imgClasses);
+        svg.setAttribute("width", imgWidth);
+        svg.setAttribute("height", imgHeight);
         img.parentNode.replaceChild(svg, img);
       }
     }
