@@ -100,15 +100,17 @@ export const imgTosvg = (options) => {
       const resPure = this.responseText.trim();
       const parentDiv = document.createElement("div");
       parentDiv.innerHTML = resPure;
-      const svg = parentDiv.querySelector('svg');
-      if (imgID != null) {
-        svg.setAttribute("id", imgID);
-      } else {
-        svg.setAttribute("id", `replaced-svg-${index}`);
+      const svg = parentDiv.querySelector("svg");
+      if (svg != null) {
+        if (imgID != null) {
+          svg.setAttribute("id", imgID);
+        } else {
+          svg.setAttribute("id", `replaced-svg-${index}`);
+        }
+        svg.removeAttribute("xmlns:a");
+        svg.setAttribute("class", imgClasses);
+        img.parentNode.replaceChild(svg, img);
       }
-      svg.removeAttribute("xmlns:a");
-      svg.setAttribute("class", imgClasses)
-      img.parentNode.replaceChild(svg, img);
     }
   };
   xhttp.open("GET", imgURL, true);
