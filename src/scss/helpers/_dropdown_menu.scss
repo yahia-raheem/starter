@@ -3,6 +3,45 @@ $body-color: black !default;
 $secondary: $secondary !default;
 
 $menu-border-radius: 5px;
+
+.navbar .has-megamenu {
+  position: static !important;
+  .active {
+    background-color: white !important;
+  }
+}
+.navbar .has-megamenu .dropdown-menu {
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 20px;
+  flex-flow: row wrap;
+  .dropdown-menu {
+    position: static !important;
+    display: flex !important;
+    flex-flow: column;
+  }
+  .megamenu {
+    width: fit-content;
+    display: inline-flex;
+    flex-flow: column;
+    margin-left: 30px;
+    & > .dropdown-item {
+      font-weight: 600;
+    }
+    .dropdown-menu {
+      box-shadow: none;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      margin-top: 5px;
+      .nav-item {
+        padding: 0;
+      }
+    }
+  }
+}
+
 .dropdown-toggle {
   cursor: pointer;
 }
