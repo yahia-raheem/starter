@@ -1,4 +1,6 @@
 @use 'mixins' as *;
+@use "../bootvars" as *;
+
 html,
 body {
   @include appDir(direction, ltr, direction, rtl);

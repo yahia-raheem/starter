@@ -1,8 +1,8 @@
 @use "sass:meta";
 @use "queries" as *;
 $dir: "ltr" !default;
-$primary: blue !default;
-$font-family-base: inherit !default;
+@use "../bootvars" as *;
+
 $admin: false !default;
 
 @mixin admin-only() {

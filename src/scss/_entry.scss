@@ -1,10 +1,6 @@
 @use "sass:meta";
 @use "helpers" as h with (
     $dir: $dir,
-    $primary: $primary,
-    $font-family-base: $font-family-base,
-    $body-color: $body-color,
-    $secondary: $secondary,
 );
 
 // .sec-title {

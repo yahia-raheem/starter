@@ -1,6 +1,5 @@
 @use 'mixins' as *;
-$body-color: black !default;
-$secondary: $secondary !default;
+@use "../bootvars" as *;
 
 $menu-border-radius: 5px;
 
