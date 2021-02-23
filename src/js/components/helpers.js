@@ -33,8 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // adds icons to the navigation menu item if both ".menu-icon" and "icon-[image id]" classes exist in extra classes (this depends on an api endpoint)
   if (typeof menuIcons !== "undefined" && menuIcons.length > 0) {
-    const getUrl = window.location;
-    const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    const baseUrl = window.location.origin;
     menuIcons.forEach((one, i) => {
       const iconId = Array.from(one.classList).find((single) =>
         /^icon-/.test(single)
