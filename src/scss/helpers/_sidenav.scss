@@ -1,13 +1,10 @@
-@use 'mixins' as *;
-@use "../bootvars" as *;
-
 .sidenav {
   height: 100%;
   width: 0;
   position: fixed;
   z-index: 5;
   top: 0;
-  @include appDirAuto($start: 0);
+  @include h.appDirAuto($start: 0);
   background-color: #3c4b54;
   overflow-x: hidden;
   transition: 0.5s;
@@ -33,7 +30,7 @@
     }
   }
   ul {
-    @include appDirAuto($padding-start: 0);
+    @include h.appDirAuto($padding-start: 0);
     list-style: none;
     li {
       overflow: hidden;
@@ -48,10 +45,10 @@
           max-height: 30px;
           align-self: center;
           justify-self: flex-start;
-          @include appDirAuto($margin-start: 40px);
+          @include h.appDirAuto($margin-start: 40px);
         }
         a {
-          @include appDirAuto($padding-start: 10px);
+          @include h.appDirAuto($padding-start: 10px);
           align-self: center;
           justify-self: flex-start;
         }
@@ -63,7 +60,7 @@
           color: white;
           font-size: 1.7rem;
           content: "\002B";
-          @include appDirAuto($end: 40px);
+          @include h.appDirAuto($end: 40px);
         }
         &.child-menu-opened {
           &::after {
@@ -78,7 +75,7 @@
         font-weight: 500;
         padding-top: 15px;
         padding-bottom: 15px;
-        @include appDirAuto($padding-start: 40px);
+        @include h.appDirAuto($padding-start: 40px);
       }
     }
     &.sub-menu {
@@ -93,7 +90,7 @@
         height: 100%;
         content: "";
         background-color: white;
-        @include appDirAuto($start: 0);
+        @include h.appDirAuto($start: 0);
         top: 0;
       }
     }

@@ -1,8 +1,6 @@
-@use "helpers/blocks/itc-block" with (
-    $admin: $admin
-);
-@use "helpers/blocks/pwb-block" with (
-    $admin: $admin
+@use "sass:meta";
+@use "helpers" as h with (
+    $dir: $dir,
 );
 
 .wp-block {

@@ -1,9 +1,6 @@
-@use 'mixins' as *;
-@use "../bootvars" as *;
-
 html,
 body {
-  @include appDir(direction, ltr, direction, rtl);
+  @include h.appDir(direction, ltr, direction, rtl);
   *,
   *::before,
   *::after {
@@ -104,7 +101,7 @@ section {
 }
 
 div.pagination {
-  @include my-pagination();
+  @include h.my-pagination();
 }
 
 .slick-prev,
