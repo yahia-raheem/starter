@@ -21,20 +21,23 @@ export const eraseCookie = (name) => {
   document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 };
 
-export const elementObserver = (callback, options) =>
-  new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        let target = entry.target;
-        if (entry.isIntersecting) {
-          callback(options);
-        }
-      });
-    },
-    {
-      threshold: 0.25,
-    }
-  ).observe(options.element);
+export const elementObserver = (callback, options) => {
+  if (typeof options.element != "undefined") {
+    return new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          let target = entry.target;
+          if (entry.isIntersecting) {
+            callback(options);
+          }
+        });
+      },
+      {
+        threshold: 0.5
+      }
+    ).observe(options.element);
+  }
+}
 
 export const matchHeight = (selector) => {
   let objects = document.querySelectorAll(selector);
